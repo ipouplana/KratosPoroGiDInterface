@@ -1,0 +1,5 @@
+*.komodoproject
+*.lnk
+
+*.orig
+.vscode/
