@@ -3,3 +3,5 @@
 
 *.orig
 .vscode/
+
+*.DS_Store
