@@ -65,6 +65,8 @@ HELP: Parameter controlling the residual strength of the damage evolution law.
 QUESTION: Softening_Slope
 VALUE: 9000.0
 HELP: Parameter controlling the slope of the softening branch of the damage evolution law.
+QUESTION: Biot_coefficient
+VALUE: 0.6
 END CONDITION
 
 CONDITION: Interface_Part
@@ -135,6 +137,8 @@ HELP: Units in IS: N·m/m2
 QUESTION: State_Variable
 VALUE: 1.0e-12
 HELP: Initial value for the internal state variable of exponential cohesive law. A high value implies that the joint is initially damaged (e.g. 1.0e12).
+QUESTION: Biot_coefficient
+VALUE: 0.6
 END CONDITION
 
 
