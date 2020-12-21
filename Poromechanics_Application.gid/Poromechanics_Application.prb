@@ -143,6 +143,7 @@ QUESTION: Write_Strain#CB#(true,false)
 VALUE: false
 QUESTION: Write_Effective_Stress#CB#(true,false)
 VALUE: true
+HELP: In GiD, this corresponds to the CAUCHY_STRESS_TENSOR results
 QUESTION: Write_Total_Stress#CB#(true,false)
 VALUE: false
 QUESTION: Write_Initial_Stress#CB#(true,false)
