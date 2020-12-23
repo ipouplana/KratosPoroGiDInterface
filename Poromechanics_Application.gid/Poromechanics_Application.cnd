@@ -310,7 +310,7 @@ CONDITION: Normal_Load
 CONDTYPE: over groups
 CONDMESHTYPE: over face elements
 GROUPALLOW: lines surfaces nodes faces
-QUESTION: NORMAL_LOAD#CB#(true,false)
+QUESTION: NORMAL_LOAD_(TOTAL_STRESS_TENSOR)#CB#(true,false)
 VALUE: true
 DEPENDENCIES: (false,HIDE,Normal_Load_Distribution,Uniform,HIDE,Normal_Pressure_Value,0.0,HIDE,Imposed_Normal_Load,Constant)(true,RESTORE,Normal_Load_Distribution,#CURRENT#,RESTORE,Normal_Pressure_Value,#CURRENT#,RESTORE,Imposed_Normal_Load,#CURRENT#)
 QUESTION: Normal_Load_Distribution#CB#(Uniform,Hydrostatic)
@@ -318,7 +318,7 @@ VALUE: Uniform
 DEPENDENCIES: (Uniform,RESTORE,Normal_Pressure_Value,#CURRENT#,HIDE,Gravity_Direction,#CURRENT#,HIDE,Reference_Coordinate,#CURRENT#,HIDE,Specific_Weight,#CURRENT#)(Hydrostatic,HIDE,Normal_Pressure_Value,#CURRENT#,RESTORE,Gravity_Direction,#CURRENT#,RESTORE,Reference_Coordinate,#CURRENT#,RESTORE,Specific_Weight,#CURRENT#)
 QUESTION: Normal_Pressure_Value
 VALUE: 0.0
-HELP: Units in IS for 2D cases: N/m. Units in IS for 3D cases: N/m2. A positive value corresponds to a compressive load.
+HELP: Units in IS for 2D are N/m, while in 3D N/m2. Positive means compression, even though the value will be negative in the code.
 QUESTION: Gravity_Direction#CB#(X,Y,Z)
 VALUE: Z
 QUESTION: Reference_Coordinate
