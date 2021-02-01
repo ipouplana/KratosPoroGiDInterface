@@ -75,9 +75,9 @@ VALUE: 0.5
 QUESTION: Newmark_Theta
 VALUE: 0.5
 HELP: 0: Forward Euler, 1: Backward Euler, 0.5: Crank-Nicolson
-QUESTION: Rayleigh_Mass
+QUESTION: Rayleigh_Alpha
 VALUE: 0.0
-QUESTION: Rayleigh_Stiffness
+QUESTION: Rayleigh_Beta
 VALUE: 0.0
 QUESTION: Strategy_Type#CB#(newton_raphson,arc_length)
 VALUE: newton_raphson
