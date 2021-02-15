@@ -64,10 +64,12 @@ HELP: Working mode: save initial stresses at the end of the calculation or load 
 
 
 TITLE:Solver_Settings
-QUESTION: Solution_Type#CB#(quasi_static,Dynamic)
-VALUE: quasi_static
-QUESTION: Scheme_Type#CB#(Newmark)
+QUESTION: Solution_Type#CB#(implicit_quasi_static,implicit_dynamic,explicit)
+VALUE: implicit_quasi_static
+DEPENDENCIES: (implicit_quasi_static,RESTORE,Max_Iterations,#CURRENT#,RESTORE,Strategy_Type,#CURRENT#,RESTORE,Convergence_Criterion,#CURRENT#,RESTORE,Block_Builder,#CURRENT#,RESTORE,Solver_Type,#CURRENT#,RESTORE,Scaling,#CURRENT#,RESTORE,Verbosity,#CURRENT#)(implicit_dynamic,RESTORE,Max_Iterations,#CURRENT#,RESTORE,Strategy_Type,#CURRENT#,RESTORE,Convergence_Criterion,#CURRENT#,RESTORE,Block_Builder,#CURRENT#,RESTORE,Solver_Type,#CURRENT#,RESTORE,Scaling,#CURRENT#,RESTORE,Verbosity,#CURRENT#)(explicit,HIDE,Max_Iterations,#CURRENT#,HIDE,Strategy_Type,#CURRENT#,HIDE,Convergence_Criterion,#CURRENT#,HIDE,Block_Builder,#CURRENT#,HIDE,Solver_Type,#CURRENT#,HIDE,Scaling,#CURRENT#,HIDE,Verbosity,#CURRENT#)
+QUESTION: Scheme_Type#CB#(Newmark,cd,ocd,vv,ovv)
 VALUE: Newmark
+DEPENDENCIES: (Newmark,RESTORE,Newmark_Beta,#CURRENT#,RESTORE,Newmark_Gamma,#CURRENT#,RESTORE,Newmark_Theta,#CURRENT#,HIDE,Theta_1,#CURRENT#,HIDE,Theta_3,#CURRENT#,HIDE,Delta,#CURRENT#)(cd,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,Theta_1,#CURRENT#,RESTORE,Theta_3,#CURRENT#,RESTORE,Delta,#CURRENT#)(ocd,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,Theta_1,#CURRENT#,RESTORE,Theta_3,#CURRENT#,RESTORE,Delta,#CURRENT#)(vv,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,Theta_1,#CURRENT#,RESTORE,Theta_3,#CURRENT#,RESTORE,Delta,#CURRENT#)(ovv,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,Theta_1,#CURRENT#,RESTORE,Theta_3,#CURRENT#,RESTORE,Delta,#CURRENT#)
 QUESTION: Newmark_Beta
 VALUE: 0.25
 QUESTION: Newmark_Gamma
@@ -75,6 +77,12 @@ VALUE: 0.5
 QUESTION: Newmark_Theta
 VALUE: 0.5
 HELP: 0: Forward Euler, 1: Backward Euler, 0.5: Crank-Nicolson
+QUESTION: Theta_1
+VALUE: 0.5
+QUESTION: Theta_3
+VALUE: 100.0
+QUESTION: Delta
+VALUE: 1.0
 QUESTION: Rayleigh_Alpha
 VALUE: 0.0
 QUESTION: Rayleigh_Beta
