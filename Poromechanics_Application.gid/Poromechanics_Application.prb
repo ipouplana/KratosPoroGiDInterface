@@ -190,7 +190,7 @@ QUESTION: File_label#CB#(step,time)
 VALUE: step
 QUESTION: Output_control_type#CB#(step,time)
 VALUE: step
-QUESTION: Output_frequency
+QUESTION: Output_interval
 VALUE: 1
 QUESTION: Body_output#CB#(true,false)
 VALUE: true
