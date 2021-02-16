@@ -69,9 +69,11 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     puts $FileVar "        \"newmark_beta\":                       [GiD_AccessValue get gendata Newmark_Beta],"
     puts $FileVar "        \"newmark_gamma\":                      [GiD_AccessValue get gendata Newmark_Gamma],"
     puts $FileVar "        \"newmark_theta\":                      [GiD_AccessValue get gendata Newmark_Theta],"
-    puts $FileVar "        \"theta_1\":                      [GiD_AccessValue get gendata Theta_1],"
-    puts $FileVar "        \"theta_3\":                      [GiD_AccessValue get gendata Theta_3],"
-    puts $FileVar "        \"delta\":                      [GiD_AccessValue get gendata Delta],"
+    if {[GiD_AccessValue get gendata Solution_Type] eq "explicit"} {
+        puts $FileVar "        \"theta_1\":                      [GiD_AccessValue get gendata Theta_1],"
+        puts $FileVar "        \"theta_3\":                      [GiD_AccessValue get gendata Theta_3],"
+        puts $FileVar "        \"delta\":                      [GiD_AccessValue get gendata Delta],"
+    }
     puts $FileVar "        \"rayleigh_alpha\":                         [GiD_AccessValue get gendata Rayleigh_Alpha],"
     puts $FileVar "        \"rayleigh_beta\":                         [GiD_AccessValue get gendata Rayleigh_Beta],"
     puts $FileVar "        \"strategy_type\":                      \"[GiD_AccessValue get gendata Strategy_Type]\","
