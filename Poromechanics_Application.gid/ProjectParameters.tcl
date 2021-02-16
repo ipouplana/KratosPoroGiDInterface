@@ -48,7 +48,11 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     puts $FileVar "        \"material_import_settings\": \{"
     puts $FileVar "            \"materials_filename\":    \"PoroMaterials.json\""
     puts $FileVar "        \},"
-    puts $FileVar "        \"buffer_size\":                        2,"
+    if {([GiD_AccessValue get gendata Scheme_Type] eq "cd") || ([GiD_AccessValue get gendata Scheme_Type] eq "ocd")} {
+        puts $FileVar "        \"buffer_size\":                        3,"
+    } else {
+        puts $FileVar "        \"buffer_size\":                        2,"
+    }
     puts $FileVar "        \"echo_level\":                         [GiD_AccessValue get gendata Echo_Level],"
     puts $FileVar "        \"clear_storage\":                      false,"
     puts $FileVar "        \"compute_reactions\":                  [GiD_AccessValue get gendata Write_Reactions],"
