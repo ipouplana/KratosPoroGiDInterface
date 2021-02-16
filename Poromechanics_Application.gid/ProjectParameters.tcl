@@ -129,10 +129,10 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
             puts $FileVar "            \"max_iteration\":       100,"
             puts $FileVar "            \"scaling\":             [GiD_AccessValue get gendata Scaling],"
             puts $FileVar "            \"preconditioner_type\": \"ilu0\""
-        } elseif {([GiD_AccessValue get gendata Solver_Type] eq "skyline_lu_factorization") || ([GiD_AccessValue get gendata Solver_Type] eq "ExternalSolversApplication.super_lu")} {
+        } elseif {([GiD_AccessValue get gendata Solver_Type] eq "skyline_lu_factorization") || ([GiD_AccessValue get gendata Solver_Type] eq "LinearSolversApplication.sparse_lu")} {
             puts $FileVar "            \"solver_type\":   \"[GiD_AccessValue get gendata Solver_Type]\""
         } else {
-            puts $FileVar "            \"solver_type\":   \"ExternalSolversApplication.super_lu\""
+            puts $FileVar "            \"solver_type\":   \"LinearSolversApplication.sparse_lu\""
         }
     }
     puts $FileVar "        \},"
