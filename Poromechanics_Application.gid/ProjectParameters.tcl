@@ -327,7 +327,7 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
         set PutStrings [string trimright $PutStrings ,]
     }
     append PutStrings \]
-    puts $FileVar "                        \"nodal_nonhistorical_results\":       $PutStrings,"
+    puts $FileVar "                        \"nodal_nonhistorical_results\": $PutStrings,"
     # gauss_point_results
     set PutStrings \[
     set iGroup 0
