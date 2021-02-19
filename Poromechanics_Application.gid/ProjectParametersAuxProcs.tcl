@@ -45,6 +45,36 @@ proc AppendOutputVariables {String GroupNum QuestionName VarName} {
 
 #-------------------------------------------------------------------------------
 
+proc WriteFaceLoadControlModuleProcess {FileVar GroupNum Groups TableDict NumGroups} {
+    upvar $FileVar MyFileVar
+    upvar $GroupNum MyGroupNum
+
+    for {set i 0} {$i < [llength $Groups]} {incr i} {
+        incr MyGroupNum
+        puts $MyFileVar "            \"python_module\": \"poromechanics_face_load_control_module_process\","
+        puts $MyFileVar "            \"kratos_module\": \"KratosMultiphysics.PoromechanicsApplication\","
+        puts $MyFileVar "            \"Parameters\":    \{"
+        puts $MyFileVar "                \"model_part_name\": \"PorousModelPart.[lindex [lindex $Groups $i] 1]\","
+        puts $MyFileVar "                \"initial_velocity\":   [lindex [lindex $Groups $i] 15],"
+        puts $MyFileVar "                \"limit_velocity\":   [lindex [lindex $Groups $i] 16],"
+        puts $MyFileVar "                \"velocity_factor\":   [lindex [lindex $Groups $i] 17],"
+        puts $MyFileVar "                \"initial_stiffness\":   [lindex [lindex $Groups $i] 18],"
+        puts $MyFileVar "                \"force_increment_tolerance\":   [lindex [lindex $Groups $i] 19],"
+        puts $MyFileVar "                \"update_stiffness\":   [lindex [lindex $Groups $i] 20],"
+        puts $MyFileVar "                \"force_averaging_time\":   [lindex [lindex $Groups $i] 21],"
+        puts $MyFileVar "                \"active\":          \[[lindex [lindex $Groups $i] 3],[lindex [lindex $Groups $i] 7],[lindex [lindex $Groups $i] 11]\],"
+        puts $MyFileVar "                \"table\":           \[[dict get $TableDict [lindex [lindex $Groups $i] 1] Table0],[dict get $TableDict [lindex [lindex $Groups $i] 1] Table1],[dict get $TableDict [lindex [lindex $Groups $i] 1] Table2]\]"
+        puts $MyFileVar "            \}"
+        if {$MyGroupNum < $NumGroups} {
+            puts $MyFileVar "        \},\{"
+        } else {
+            puts $MyFileVar "        \}\],"
+        }
+    }
+}
+
+#-------------------------------------------------------------------------------
+
 proc WriteConstraintVectorProcess {FileVar GroupNum Groups EntityType VarName TableDict NumGroups} {
     upvar $FileVar MyFileVar
     upvar $GroupNum MyGroupNum

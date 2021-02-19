@@ -55,7 +55,13 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     }
     puts $FileVar "        \"echo_level\":                         [GiD_AccessValue get gendata Echo_Level],"
     puts $FileVar "        \"clear_storage\":                      false,"
-    puts $FileVar "        \"compute_reactions\":                  [GiD_AccessValue get gendata Write_Reactions],"
+    set FLCMGroups [GiD_Info conditions Face_Load_Control_Module groups]
+    set NumFLCMGroups [llength $FLCMGroups]
+    if {$NumFLCMGroups > 0} {
+        puts $FileVar "        \"compute_reactions\":                  true,"
+    } else {
+        puts $FileVar "        \"compute_reactions\":                  [GiD_AccessValue get gendata Write_Reactions],"
+    }
     puts $FileVar "        \"move_mesh_flag\":                     [GiD_AccessValue get gendata Move_Mesh],"
     set IsPeriodic [GiD_AccessValue get gendata Periodic_Interface_Conditions]
     if {$IsPeriodic eq true} {
@@ -165,6 +171,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     AppendGroupNames PutStrings Force
     # Face_Load
     AppendGroupNames PutStrings Face_Load
+    # Face_Load_Control_Module
+    AppendGroupNames PutStrings Face_Load_Control_Module
     # Normal_Load
     AppendGroupNames PutStrings Normal_Load
     # Normal_Fluid_Flux
@@ -306,6 +314,20 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     }
     append PutStrings \]
     puts $FileVar "                        \"nodal_results\":       $PutStrings,"
+    # Nodal Non-historical variables
+    set PutStrings \[
+    set iGroup 0
+    set FLCMGroups [GiD_Info conditions Face_Load_Control_Module groups]
+    set NumFLCMGroups [llength $FLCMGroups]
+    if {$NumFLCMGroups > 0} {
+        incr iGroup
+        append PutStrings \" AVERAGE_REACTION \" , \" TARGET_REACTION \" , \" LOADING_VELOCITY \" ,
+    }
+    if {$iGroup > 0} {
+        set PutStrings [string trimright $PutStrings ,]
+    }
+    append PutStrings \]
+    puts $FileVar "                        \"nodal_nonhistorical_results\":       $PutStrings,"
     # gauss_point_results
     set PutStrings \[
     set iGroup 0
@@ -340,8 +362,13 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     set NumGroups [llength $Groups]
     set Groups [GiD_Info conditions Fluid_Pressure groups]
     incr NumGroups [llength $Groups]
+    set Groups [GiD_Info conditions Face_Load_Control_Module groups]
+    incr NumGroups [llength $Groups]
     set iGroup 0
     puts $FileVar "        \"constraints_process_list\": \[\{"
+    # Face_Load_Control_Module
+    set Groups [GiD_Info conditions Face_Load_Control_Module groups]
+    WriteFaceLoadControlModuleProcess FileVar iGroup $Groups $TableDict $NumGroups
     # Solid_Displacement
     set Groups [GiD_Info conditions Solid_Displacement groups]
     WriteConstraintVectorProcess FileVar iGroup $Groups volumes DISPLACEMENT $TableDict $NumGroups
