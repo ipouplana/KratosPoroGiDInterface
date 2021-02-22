@@ -31,16 +31,16 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     ## solver_settings
     puts $FileVar "    \"solver_settings\": \{"
     if {[GiD_AccessValue get gendata Parallel_Configuration] eq "MPI"} {
-        puts $FileVar "        \"solver_type\":                        \"poromechanics_MPI_U_Pw_solver\","
+        puts $FileVar "        \"solver_type\":    \"poromechanics_MPI_U_Pw_solver\","
     } elseif {[GiD_AccessValue get gendata Solution_Type] eq "explicit"} {
-        puts $FileVar "        \"solver_type\":                        \"poromechanics_U_Pw_explicit_dynamic_solver\","
+        puts $FileVar "        \"solver_type\":    \"poromechanics_U_Pw_explicit_dynamic_solver\","
     } else {
-        puts $FileVar "        \"solver_type\":                        \"poromechanics_U_Pw_solver\","
+        puts $FileVar "        \"solver_type\":    \"poromechanics_U_Pw_solver\","
     }
-    puts $FileVar "        \"model_part_name\":                    \"PorousModelPart\","
-    puts $FileVar "        \"domain_size\":                        [GiD_AccessValue get gendata Domain_Size],"
-    puts $FileVar "        \"start_time\":                         [GiD_AccessValue get gendata Start_Time],"
-    puts $FileVar "        \"time_step\":                          [GiD_AccessValue get gendata Delta_Time],"
+    puts $FileVar "        \"model_part_name\":    \"PorousModelPart\","
+    puts $FileVar "        \"domain_size\":    [GiD_AccessValue get gendata Domain_Size],"
+    puts $FileVar "        \"start_time\":    [GiD_AccessValue get gendata Start_Time],"
+    puts $FileVar "        \"time_step\":    [GiD_AccessValue get gendata Delta_Time],"
     puts $FileVar "        \"model_import_settings\":              \{"
     puts $FileVar "            \"input_type\":    \"mdpa\","
     puts $FileVar "            \"input_filename\":    \"$basename\""
@@ -49,59 +49,60 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     puts $FileVar "            \"materials_filename\":    \"PoroMaterials.json\""
     puts $FileVar "        \},"
     if {([GiD_AccessValue get gendata Scheme_Type] eq "cd") || ([GiD_AccessValue get gendata Scheme_Type] eq "ocd")} {
-        puts $FileVar "        \"buffer_size\":                        3,"
+        puts $FileVar "        \"buffer_size\":    3,"
     } else {
-        puts $FileVar "        \"buffer_size\":                        2,"
+        puts $FileVar "        \"buffer_size\":    2,"
     }
-    puts $FileVar "        \"echo_level\":                         [GiD_AccessValue get gendata Echo_Level],"
-    puts $FileVar "        \"clear_storage\":                      false,"
+    puts $FileVar "        \"echo_level\":    [GiD_AccessValue get gendata Echo_Level],"
+    puts $FileVar "        \"clear_storage\":    false,"
     set FLCMGroups [GiD_Info conditions Face_Load_Control_Module groups]
     set NumFLCMGroups [llength $FLCMGroups]
     if {$NumFLCMGroups > 0} {
-        puts $FileVar "        \"compute_reactions\":                  true,"
+        puts $FileVar "        \"compute_reactions\":    true,"
     } else {
-        puts $FileVar "        \"compute_reactions\":                  [GiD_AccessValue get gendata Write_Reactions],"
+        puts $FileVar "        \"compute_reactions\":    [GiD_AccessValue get gendata Write_Reactions],"
     }
-    puts $FileVar "        \"move_mesh_flag\":                     [GiD_AccessValue get gendata Move_Mesh],"
+    puts $FileVar "        \"move_mesh_flag\":    [GiD_AccessValue get gendata Move_Mesh],"
     set IsPeriodic [GiD_AccessValue get gendata Periodic_Interface_Conditions]
     if {$IsPeriodic eq true} {
-        puts $FileVar "        \"periodic_interface_conditions\":      true,"
-        puts $FileVar "        \"reform_dofs_at_each_step\":           true,"
-        puts $FileVar "        \"nodal_smoothing\":                    true,"
+        puts $FileVar "        \"periodic_interface_conditions\":    true,"
+        puts $FileVar "        \"reform_dofs_at_each_step\":    true,"
+        puts $FileVar "        \"nodal_smoothing\":    true,"
     } else {
-        puts $FileVar "        \"periodic_interface_conditions\":      false,"
-        puts $FileVar "        \"reform_dofs_at_each_step\":           [GiD_AccessValue get gendata Reform_Dofs_At_Each_Step],"
-        puts $FileVar "        \"nodal_smoothing\":                    [GiD_AccessValue get gendata Nodal_Smoothing],"
+        puts $FileVar "        \"periodic_interface_conditions\":    false,"
+        puts $FileVar "        \"reform_dofs_at_each_step\":    [GiD_AccessValue get gendata Reform_Dofs_At_Each_Step],"
+        puts $FileVar "        \"nodal_smoothing\":    [GiD_AccessValue get gendata Nodal_Smoothing],"
     }
-    puts $FileVar "        \"block_builder\":                      [GiD_AccessValue get gendata Block_Builder],"
-    puts $FileVar "        \"solution_type\":                      \"[GiD_AccessValue get gendata Solution_Type]\","
-    puts $FileVar "        \"scheme_type\":                        \"[GiD_AccessValue get gendata Scheme_Type]\","
-    puts $FileVar "        \"newmark_beta\":                       [GiD_AccessValue get gendata Newmark_Beta],"
-    puts $FileVar "        \"newmark_gamma\":                      [GiD_AccessValue get gendata Newmark_Gamma],"
-    puts $FileVar "        \"newmark_theta\":                      [GiD_AccessValue get gendata Newmark_Theta],"
+    puts $FileVar "        \"block_builder\":    [GiD_AccessValue get gendata Block_Builder],"
+    puts $FileVar "        \"solution_type\":    \"[GiD_AccessValue get gendata Solution_Type]\","
+    puts $FileVar "        \"scheme_type\":    \"[GiD_AccessValue get gendata Scheme_Type]\","
+    puts $FileVar "        \"newmark_beta\":    [GiD_AccessValue get gendata Newmark_Beta],"
+    puts $FileVar "        \"newmark_gamma\":    [GiD_AccessValue get gendata Newmark_Gamma],"
+    puts $FileVar "        \"newmark_theta\":    [GiD_AccessValue get gendata Newmark_Theta],"
     if {[GiD_AccessValue get gendata Solution_Type] eq "explicit"} {
-        puts $FileVar "        \"theta_1\":                      [GiD_AccessValue get gendata Theta_1],"
-        puts $FileVar "        \"theta_3\":                      [GiD_AccessValue get gendata Theta_3],"
-        puts $FileVar "        \"delta\":                      [GiD_AccessValue get gendata Delta],"
+        puts $FileVar "        \"theta_1\":    [GiD_AccessValue get gendata Theta_1],"
+        puts $FileVar "        \"theta_3\"    [GiD_AccessValue get gendata Theta_3],"
+        puts $FileVar "        \"delta\":    [GiD_AccessValue get gendata Delta],"
+        puts $FileVar "        \"initial_radius\":    [GiD_AccessValue get gendata Initial_Radius],"
     }
-    puts $FileVar "        \"rayleigh_alpha\":                         [GiD_AccessValue get gendata Rayleigh_Alpha],"
-    puts $FileVar "        \"rayleigh_beta\":                         [GiD_AccessValue get gendata Rayleigh_Beta],"
-    puts $FileVar "        \"strategy_type\":                      \"[GiD_AccessValue get gendata Strategy_Type]\","
-    puts $FileVar "        \"convergence_criterion\":              \"[GiD_AccessValue get gendata Convergence_Criterion]\","
+    puts $FileVar "        \"rayleigh_alpha\":    [GiD_AccessValue get gendata Rayleigh_Alpha],"
+    puts $FileVar "        \"rayleigh_beta\":    [GiD_AccessValue get gendata Rayleigh_Beta],"
+    puts $FileVar "        \"strategy_type\":    \"[GiD_AccessValue get gendata Strategy_Type]\","
+    puts $FileVar "        \"convergence_criterion\":    \"[GiD_AccessValue get gendata Convergence_Criterion]\","
     puts $FileVar "        \"displacement_relative_tolerance\":    [GiD_AccessValue get gendata Displacement_Relative_Tolerance],"
     puts $FileVar "        \"displacement_absolute_tolerance\":    [GiD_AccessValue get gendata Displacement_Absolute_Tolerance],"
-    puts $FileVar "        \"residual_relative_tolerance\":        [GiD_AccessValue get gendata Residual_Relative_Tolerance],"
-    puts $FileVar "        \"residual_absolute_tolerance\":        [GiD_AccessValue get gendata Residual_Absolute_Tolerance],"
-    puts $FileVar "        \"max_iteration\":                      [GiD_AccessValue get gendata Max_Iterations],"
-    puts $FileVar "        \"desired_iterations\":                 [GiD_AccessValue get gendata Desired_Iterations],"
-    puts $FileVar "        \"max_radius_factor\":                  [GiD_AccessValue get gendata Max_Radius_Factor],"
-    puts $FileVar "        \"min_radius_factor\":                  [GiD_AccessValue get gendata Min_Radius_Factor],"
+    puts $FileVar "        \"residual_relative_tolerance\":    [GiD_AccessValue get gendata Residual_Relative_Tolerance],"
+    puts $FileVar "        \"residual_absolute_tolerance\":    [GiD_AccessValue get gendata Residual_Absolute_Tolerance],"
+    puts $FileVar "        \"max_iteration\":    [GiD_AccessValue get gendata Max_Iterations],"
+    puts $FileVar "        \"desired_iterations\":    [GiD_AccessValue get gendata Desired_Iterations],"
+    puts $FileVar "        \"max_radius_factor\":    [GiD_AccessValue get gendata Max_Radius_Factor],"
+    puts $FileVar "        \"min_radius_factor\":    [GiD_AccessValue get gendata Min_Radius_Factor],"
     if {[GiD_AccessValue get gendata Parallel_Configuration] eq "MPI"} {
-        puts $FileVar "        \"nonlocal_damage\":                    false,"
+        puts $FileVar "        \"nonlocal_damage\":    false,"
     } else {
-        puts $FileVar "        \"nonlocal_damage\":                    [GiD_AccessValue get gendata Non-local_Damage],"
+        puts $FileVar "        \"nonlocal_damage\":    [GiD_AccessValue get gendata Non-local_Damage],"
     }
-    puts $FileVar "        \"characteristic_length\":              [GiD_AccessValue get gendata Characteristic_Length],"
+    puts $FileVar "        \"characteristic_length\":    [GiD_AccessValue get gendata Characteristic_Length],"
     ## linear_solver_settings
     puts $FileVar "        \"linear_solver_settings\":             \{"
     if {[GiD_AccessValue get gendata Parallel_Configuration] eq "MPI"} {

@@ -66,7 +66,7 @@ HELP: Working mode: save initial stresses at the end of the calculation or load 
 TITLE:Solver_Settings
 QUESTION: Solution_Type#CB#(implicit_quasi_static,implicit_dynamic,explicit)
 VALUE: implicit_quasi_static
-DEPENDENCIES: (implicit_quasi_static,RESTORE,Max_Iterations,#CURRENT#,RESTORE,Strategy_Type,#CURRENT#,RESTORE,Convergence_Criterion,#CURRENT#,RESTORE,Block_Builder,#CURRENT#,RESTORE,Solver_Type,#CURRENT#,RESTORE,Scaling,#CURRENT#,RESTORE,Verbosity,#CURRENT#)(implicit_dynamic,RESTORE,Max_Iterations,#CURRENT#,RESTORE,Strategy_Type,#CURRENT#,RESTORE,Convergence_Criterion,#CURRENT#,RESTORE,Block_Builder,#CURRENT#,RESTORE,Solver_Type,#CURRENT#,RESTORE,Scaling,#CURRENT#,RESTORE,Verbosity,#CURRENT#)(explicit,HIDE,Max_Iterations,#CURRENT#,HIDE,Strategy_Type,#CURRENT#,HIDE,Convergence_Criterion,#CURRENT#,HIDE,Block_Builder,#CURRENT#,HIDE,Solver_Type,#CURRENT#,HIDE,Scaling,#CURRENT#,HIDE,Verbosity,#CURRENT#)
+DEPENDENCIES: (implicit_quasi_static,RESTORE,Max_Iterations,#CURRENT#,RESTORE,Convergence_Criterion,#CURRENT#,RESTORE,Block_Builder,#CURRENT#,RESTORE,Solver_Type,#CURRENT#,RESTORE,Scaling,#CURRENT#,RESTORE,Verbosity,#CURRENT#)(implicit_dynamic,RESTORE,Max_Iterations,#CURRENT#,RESTORE,Convergence_Criterion,#CURRENT#,RESTORE,Block_Builder,#CURRENT#,RESTORE,Solver_Type,#CURRENT#,RESTORE,Scaling,#CURRENT#,RESTORE,Verbosity,#CURRENT#)(explicit,HIDE,Max_Iterations,#CURRENT#,HIDE,Convergence_Criterion,#CURRENT#,HIDE,Block_Builder,#CURRENT#,HIDE,Solver_Type,#CURRENT#,HIDE,Scaling,#CURRENT#,HIDE,Verbosity,#CURRENT#)
 QUESTION: Scheme_Type#CB#(Newmark,cd,ocd,vv,ovv)
 VALUE: Newmark
 DEPENDENCIES: (Newmark,RESTORE,Newmark_Beta,#CURRENT#,RESTORE,Newmark_Gamma,#CURRENT#,RESTORE,Newmark_Theta,#CURRENT#,HIDE,Theta_1,#CURRENT#,HIDE,Theta_3,#CURRENT#,HIDE,Delta,#CURRENT#)(cd,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,Theta_1,#CURRENT#,RESTORE,Theta_3,#CURRENT#,RESTORE,Delta,#CURRENT#)(ocd,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,Theta_1,#CURRENT#,RESTORE,Theta_3,#CURRENT#,RESTORE,Delta,#CURRENT#)(vv,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,Theta_1,#CURRENT#,RESTORE,Theta_3,#CURRENT#,RESTORE,Delta,#CURRENT#)(ovv,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,Theta_1,#CURRENT#,RESTORE,Theta_3,#CURRENT#,RESTORE,Delta,#CURRENT#)
@@ -89,7 +89,7 @@ QUESTION: Rayleigh_Beta
 VALUE: 0.0
 QUESTION: Strategy_Type#CB#(newton_raphson,arc_length)
 VALUE: newton_raphson
-DEPENDENCIES: (newton_raphson,HIDE,Desired_Iterations,#CURRENT#,HIDE,Max_Radius_Factor,#CURRENT#,HIDE,Min_Radius_Factor,#CURRENT#)(arc_length,RESTORE,Desired_Iterations,#CURRENT#,RESTORE,Max_Radius_Factor,#CURRENT#,RESTORE,Min_Radius_Factor,#CURRENT#)
+DEPENDENCIES: (newton_raphson,HIDE,Desired_Iterations,#CURRENT#,HIDE,Max_Radius_Factor,#CURRENT#,HIDE,Min_Radius_Factor,#CURRENT#,HIDE,Initial_Radius,#CURRENT#)(arc_length,RESTORE,Desired_Iterations,#CURRENT#,RESTORE,Max_Radius_Factor,#CURRENT#,RESTORE,Min_Radius_Factor,#CURRENT#,RESTORE,Initial_Radius,#CURRENT#)
 QUESTION: Convergence_Criterion#CB#(Displacement_criterion,Residual_criterion,And_criterion,Or_criterion)
 VALUE: Displacement_criterion
 DEPENDENCIES: (Displacement_criterion,RESTORE,Displacement_Relative_Tolerance,#CURRENT#,RESTORE,Displacement_Absolute_Tolerance,#CURRENT#,HIDE,Residual_Relative_Tolerance,#CURRENT#,HIDE,Residual_Absolute_Tolerance,#CURRENT#)(Residual_criterion,HIDE,Displacement_Relative_Tolerance,#CURRENT#,HIDE,Displacement_Absolute_Tolerance,#CURRENT#,RESTORE,Residual_Relative_Tolerance,#CURRENT#,RESTORE,Residual_Absolute_Tolerance,#CURRENT#)(And_criterion,RESTORE,Displacement_Relative_Tolerance,#CURRENT#,RESTORE,Displacement_Absolute_Tolerance,#CURRENT#,RESTORE,Residual_Relative_Tolerance,#CURRENT#,RESTORE,Residual_Absolute_Tolerance,#CURRENT#)(Or_criterion,RESTORE,Displacement_Relative_Tolerance,#CURRENT#,RESTORE,Displacement_Absolute_Tolerance,#CURRENT#,RESTORE,Residual_Relative_Tolerance,#CURRENT#,RESTORE,Residual_Absolute_Tolerance,#CURRENT#)
@@ -125,6 +125,9 @@ QUESTION: Scaling#CB#(true,false)
 VALUE: false
 QUESTION: Verbosity
 VALUE: 0
+QUESTION: Initial_Radius
+VALUE: 1.0e-12
+HELP: Initial radius of the explicit arc-length strategy. It is not used for the implicit arc-length strategy.
 
 
 TITLE:Output_Configuration
