@@ -81,7 +81,7 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     puts $FileVar "        \"newmark_theta\":    [GiD_AccessValue get gendata Newmark_Theta],"
     if {[GiD_AccessValue get gendata Solution_Type] eq "explicit"} {
         puts $FileVar "        \"theta_1\":    [GiD_AccessValue get gendata Theta_1],"
-        puts $FileVar "        \"theta_3\":    [GiD_AccessValue get gendata Theta_3],"
+        puts $FileVar "        \"g_factor\":    [GiD_AccessValue get gendata g_factor],"
         puts $FileVar "        \"delta\":    [GiD_AccessValue get gendata Delta],"
         puts $FileVar "        \"initial_radius\":    [GiD_AccessValue get gendata Initial_Radius],"
     }
