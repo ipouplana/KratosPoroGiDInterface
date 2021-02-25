@@ -82,7 +82,6 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     if {[GiD_AccessValue get gendata Solution_Type] eq "explicit"} {
         puts $FileVar "        \"theta_1\":    [GiD_AccessValue get gendata Theta_1],"
         puts $FileVar "        \"g_factor\":    [GiD_AccessValue get gendata g_factor],"
-        puts $FileVar "        \"delta\":    [GiD_AccessValue get gendata Delta],"
         puts $FileVar "        \"initial_radius\":    [GiD_AccessValue get gendata Initial_Radius],"
     }
     puts $FileVar "        \"rayleigh_alpha\":    [GiD_AccessValue get gendata Rayleigh_Alpha],"
