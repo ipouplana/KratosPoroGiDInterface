@@ -48,7 +48,7 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     puts $FileVar "        \"material_import_settings\": \{"
     puts $FileVar "            \"materials_filename\":    \"PoroMaterials.json\""
     puts $FileVar "        \},"
-    if {([GiD_AccessValue get gendata Scheme_Type] eq "cd") || ([GiD_AccessValue get gendata Scheme_Type] eq "ocd")} {
+    if {([GiD_AccessValue get gendata Scheme_Type] eq "cd") || ([GiD_AccessValue get gendata Scheme_Type] eq "ocd") || ([GiD_AccessValue get gendata Scheme_Type] eq "cd_fic")} {
         puts $FileVar "        \"buffer_size\":    3,"
     } else {
         puts $FileVar "        \"buffer_size\":    2,"
@@ -82,6 +82,7 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     if {[GiD_AccessValue get gendata Solution_Type] eq "explicit"} {
         puts $FileVar "        \"theta_1\":    [GiD_AccessValue get gendata Theta_1],"
         puts $FileVar "        \"g_factor\":    [GiD_AccessValue get gendata g_factor],"
+        puts $FileVar "        \"delta\":    [GiD_AccessValue get gendata delta],"
         puts $FileVar "        \"initial_radius\":    [GiD_AccessValue get gendata Initial_Radius],"
     }
     puts $FileVar "        \"rayleigh_alpha\":    [GiD_AccessValue get gendata Rayleigh_Alpha],"

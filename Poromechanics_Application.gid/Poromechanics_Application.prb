@@ -67,9 +67,9 @@ TITLE:Solver_Settings
 QUESTION: Solution_Type#CB#(implicit_quasi_static,implicit_dynamic,explicit)
 VALUE: implicit_quasi_static
 DEPENDENCIES: (implicit_quasi_static,RESTORE,Max_Iterations,#CURRENT#,RESTORE,Convergence_Criterion,#CURRENT#,RESTORE,Block_Builder,#CURRENT#,RESTORE,Solver_Type,#CURRENT#,RESTORE,Scaling,#CURRENT#,RESTORE,Verbosity,#CURRENT#)(implicit_dynamic,RESTORE,Max_Iterations,#CURRENT#,RESTORE,Convergence_Criterion,#CURRENT#,RESTORE,Block_Builder,#CURRENT#,RESTORE,Solver_Type,#CURRENT#,RESTORE,Scaling,#CURRENT#,RESTORE,Verbosity,#CURRENT#)(explicit,HIDE,Max_Iterations,#CURRENT#,HIDE,Convergence_Criterion,#CURRENT#,HIDE,Block_Builder,#CURRENT#,HIDE,Solver_Type,#CURRENT#,HIDE,Scaling,#CURRENT#,HIDE,Verbosity,#CURRENT#)
-QUESTION: Scheme_Type#CB#(Newmark,cd,ocd,vv,ovv)
+QUESTION: Scheme_Type#CB#(Newmark,cd,ocd,cd_fic,vv,ovv)
 VALUE: Newmark
-DEPENDENCIES: (Newmark,RESTORE,Newmark_Beta,#CURRENT#,RESTORE,Newmark_Gamma,#CURRENT#,RESTORE,Newmark_Theta,#CURRENT#,HIDE,Theta_1,#CURRENT#,HIDE,g_factor,#CURRENT#)(cd,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,Theta_1,#CURRENT#,RESTORE,g_factor,#CURRENT#)(ocd,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,Theta_1,#CURRENT#,RESTORE,g_factor,#CURRENT#)(vv,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,Theta_1,#CURRENT#,RESTORE,g_factor,#CURRENT#)(ovv,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,Theta_1,#CURRENT#,RESTORE,g_factor,#CURRENT#)
+DEPENDENCIES: (Newmark,RESTORE,Newmark_Beta,#CURRENT#,RESTORE,Newmark_Gamma,#CURRENT#,RESTORE,Newmark_Theta,#CURRENT#,HIDE,Theta_1,#CURRENT#,HIDE,g_factor,#CURRENT#,HIDE,delta,#CURRENT#)(cd,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,Theta_1,#CURRENT#,HIDE,g_factor,#CURRENT#,HIDE,delta,#CURRENT#)(ocd,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,Theta_1,#CURRENT#,RESTORE,g_factor,#CURRENT#,HIDE,delta,#CURRENT#)(cd_fic,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,Theta_1,#CURRENT#,HIDE,g_factor,#CURRENT#,RESTORE,delta,#CURRENT#)(vv,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,Theta_1,#CURRENT#,HIDE,g_factor,#CURRENT#,HIDE,delta,#CURRENT#)(ovv,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,Theta_1,#CURRENT#,RESTORE,g_factor,#CURRENT#,HIDE,delta,#CURRENT#)
 QUESTION: Newmark_Beta
 VALUE: 0.25
 QUESTION: Newmark_Gamma
@@ -80,6 +80,8 @@ HELP: 0: Forward Euler, 1: Backward Euler, 0.5: Crank-Nicolson
 QUESTION: Theta_1
 VALUE: 0.5
 QUESTION: g_factor
+VALUE: 1.0
+QUESTION: delta
 VALUE: 1.0
 QUESTION: Rayleigh_Alpha
 VALUE: 0.0
