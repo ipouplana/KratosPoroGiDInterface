@@ -61,6 +61,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
         puts $FileVar "        \"reform_dofs_at_each_step\":           [GiD_AccessValue get gendata Reform_Dofs_At_Each_Step],"
         puts $FileVar "        \"nodal_smoothing\":                    [GiD_AccessValue get gendata Nodal_Smoothing],"
     }
+    puts $FileVar "        \"gp_to_nodal_variable_list\": \[\],"
+    puts $FileVar "        \"gp_to_nodal_variable_extrapolate_non_historical\": false,"
     puts $FileVar "        \"block_builder\":                      [GiD_AccessValue get gendata Block_Builder],"
     puts $FileVar "        \"solution_type\":                      \"[GiD_AccessValue get gendata Solution_Type]\","
     puts $FileVar "        \"scheme_type\":                        \"[GiD_AccessValue get gendata Scheme_Type]\","
