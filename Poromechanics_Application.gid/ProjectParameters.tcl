@@ -16,7 +16,6 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     puts $FileVar "        \"end_time\":             [GiD_AccessValue get gendata End_Time],"
     puts $FileVar "        \"echo_level\":           [GiD_AccessValue get gendata Echo_Level],"
     puts $FileVar "        \"parallel_type\":        \"[GiD_AccessValue get gendata Parallel_Configuration]\","
-    puts $FileVar "        \"number_of_threads\":    [GiD_AccessValue get gendata Number_of_threads],"
     if {[GiD_AccessValue get gendata Initial_Stresses] eq false} {
         puts $FileVar "        \"fracture_utility\":     [GiD_AccessValue get gendata Fracture_Propagation]"
     } else {
@@ -126,10 +125,10 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
             puts $FileVar "            \"max_iteration\":       100,"
             puts $FileVar "            \"scaling\":             [GiD_AccessValue get gendata Scaling],"
             puts $FileVar "            \"preconditioner_type\": \"ilu0\""
-        } elseif {([GiD_AccessValue get gendata Solver_Type] eq "skyline_lu_factorization") || ([GiD_AccessValue get gendata Solver_Type] eq "ExternalSolversApplication.super_lu")} {
+        } elseif {([GiD_AccessValue get gendata Solver_Type] eq "skyline_lu_factorization") || ([GiD_AccessValue get gendata Solver_Type] eq "LinearSolversApplication.sparse_lu")} {
             puts $FileVar "            \"solver_type\":   \"[GiD_AccessValue get gendata Solver_Type]\""
         } else {
-            puts $FileVar "            \"solver_type\":   \"ExternalSolversApplication.super_lu\""
+            puts $FileVar "            \"solver_type\":   \"LinearSolversApplication.sparse_lu\""
         }
     }
     puts $FileVar "        \},"
@@ -287,6 +286,7 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     # Nodal smoothed variables
     if {[GiD_AccessValue get gendata Nodal_Smoothing] eq true} {
         AppendOutputVariables PutStrings iGroup Write_Effective_Stress NODAL_EFFECTIVE_STRESS_TENSOR
+        AppendOutputVariables PutStrings iGroup Write_Fluid_Pressure_Gradient NODAL_WATER_PRESSURE_GRADIENT
         AppendOutputVariables PutStrings iGroup Write_Damage NODAL_DAMAGE_VARIABLE
         AppendOutputVariables PutStrings iGroup Write_Joint_Width NODAL_JOINT_WIDTH
         AppendOutputVariables PutStrings iGroup Write_Damage NODAL_JOINT_DAMAGE
@@ -301,6 +301,7 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     set PutStrings \[
     set iGroup 0
     AppendOutputVariables PutStrings iGroup Write_Strain GREEN_LAGRANGE_STRAIN_TENSOR
+    AppendOutputVariables PutStrings iGroup Write_Fluid_Pressure_Gradient WATER_PRESSURE_GRADIENT
     AppendOutputVariables PutStrings iGroup Write_Effective_Stress EFFECTIVE_STRESS_TENSOR
     AppendOutputVariables PutStrings iGroup Write_Total_Stress TOTAL_STRESS_TENSOR
     AppendOutputVariables PutStrings iGroup Write_Von_Mises_Stress VON_MISES_STRESS
