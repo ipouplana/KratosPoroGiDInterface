@@ -63,10 +63,11 @@ HELP: Working mode: save initial stresses at the end of the calculation or load 
 TITLE:Solver_Settings
 QUESTION: Solution_Type#CB#(implicit_quasi_static,implicit_dynamic,explicit)
 VALUE: implicit_quasi_static
+HELP: For the moment, explicit solution type can only be used for purely solid mechanics problems and not for coupled solid-pore-fluid interaction problems.
 DEPENDENCIES: (implicit_quasi_static,RESTORE,Max_Iterations,#CURRENT#,RESTORE,Convergence_Criterion,#CURRENT#,RESTORE,Block_Builder,#CURRENT#,RESTORE,Solver_Type,#CURRENT#,RESTORE,Scaling,#CURRENT#,RESTORE,Verbosity,#CURRENT#,RESTORE,Strategy_Type,#CURRENT#,RESTORE,Displacement_Relative_Tolerance,#CURRENT#,RESTORE,Displacement_Absolute_Tolerance,#CURRENT#)(implicit_dynamic,RESTORE,Max_Iterations,#CURRENT#,RESTORE,Convergence_Criterion,#CURRENT#,RESTORE,Block_Builder,#CURRENT#,RESTORE,Solver_Type,#CURRENT#,RESTORE,Scaling,#CURRENT#,RESTORE,Verbosity,#CURRENT#,RESTORE,Strategy_Type,#CURRENT#,RESTORE,Displacement_Relative_Tolerance,#CURRENT#,RESTORE,Displacement_Absolute_Tolerance,#CURRENT#)(explicit,HIDE,Max_Iterations,#CURRENT#,HIDE,Convergence_Criterion,Displacement_criterion,HIDE,Block_Builder,#CURRENT#,HIDE,Solver_Type,#CURRENT#,HIDE,Scaling,#CURRENT#,HIDE,Verbosity,#CURRENT#,HIDE,Strategy_Type,newton_raphson,HIDE,Displacement_Relative_Tolerance,#CURRENT#,HIDE,Displacement_Absolute_Tolerance,#CURRENT#)
-QUESTION: Scheme_Type#CB#(Newmark,cd,ocd,cd_fic,vv,ovv)
+QUESTION: Scheme_Type#CB#(Newmark,Explicit_Central_Differences,Explicit_Velocity_Verlet)
 VALUE: Newmark
-DEPENDENCIES: (Newmark,RESTORE,Newmark_Beta,#CURRENT#,RESTORE,Newmark_Gamma,#CURRENT#,RESTORE,Newmark_Theta,#CURRENT#,HIDE,g_factor,#CURRENT#,HIDE,delta_1,#CURRENT#,HIDE,delta_2,#CURRENT#,HIDE,gamma,#CURRENT#)(cd,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,HIDE,g_factor,#CURRENT#,HIDE,delta_1,#CURRENT#,HIDE,delta_2,#CURRENT#,HIDE,gamma,#CURRENT#)(ocd,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,g_factor,#CURRENT#,HIDE,delta_1,#CURRENT#,HIDE,delta_2,#CURRENT#,HIDE,gamma,#CURRENT#)(cd_fic,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,HIDE,g_factor,#CURRENT#,RESTORE,delta_1,#CURRENT#,RESTORE,delta_2,#CURRENT#,RESTORE,gamma,#CURRENT#)(vv,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,HIDE,g_factor,#CURRENT#,HIDE,delta_1,#CURRENT#,HIDE,delta_2,#CURRENT#,HIDE,gamma,#CURRENT#)(ovv,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,g_factor,#CURRENT#,HIDE,delta_1,#CURRENT#,HIDE,delta_2,#CURRENT#,HIDE,gamma,#CURRENT#)
+DEPENDENCIES: (Newmark,RESTORE,Newmark_Beta,#CURRENT#,RESTORE,Newmark_Gamma,#CURRENT#,RESTORE,Newmark_Theta,#CURRENT#,HIDE,g_factor,#CURRENT#,HIDE,Calculate_xi,#CURRENT#,HIDE,xi_1_factor,#CURRENT#)(Explicit_Central_Differences,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,g_factor,#CURRENT#,RESTORE,Calculate_xi,#CURRENT#,RESTORE,xi_1_factor,#CURRENT#)(Explicit_Velocity_Verlet,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,HIDE,g_factor,#CURRENT#,HIDE,Calculate_xi,#CURRENT#,HIDE,xi_1_factor,#CURRENT#)
 QUESTION: Newmark_Beta
 VALUE: 0.25
 QUESTION: Newmark_Gamma
@@ -75,24 +76,31 @@ QUESTION: Newmark_Theta
 VALUE: 0.5
 HELP: 0: Forward Euler, 1: Backward Euler, 0.5: Crank-Nicolson
 QUESTION: g_factor
-VALUE: 1.0
-QUESTION: delta_1
 VALUE: 0.0
-QUESTION: delta_2
-VALUE: 0.0
-QUESTION: gamma
-VALUE: 0.0
+HELP: For g_factor >= 1.0 the Explicit_Central_Differences scheme with added mass is activated and so the critical time step can be larger than 2/wn.
 QUESTION: Calculate_Rayleigh_Alpha_Beta#CB#(true,false)
 VALUE: false
+HELP: Automatically calculate rayleigh coefficients or introduce them manually.
 DEPENDENCIES: (false,RESTORE,Rayleigh_Alpha,#CURRENT#,RESTORE,Rayleigh_Beta,#CURRENT#,HIDE,xi_1,#CURRENT#,HIDE,xi_n,#CURRENT#,HIDE,omega_1,#CURRENT#,HIDE,omega_n,#CURRENT#)(true,HIDE,Rayleigh_Alpha,#CURRENT#,HIDE,Rayleigh_Beta,#CURRENT#,RESTORE,xi_1,#CURRENT#,RESTORE,xi_n,#CURRENT#,RESTORE,omega_1,#CURRENT#,RESTORE,omega_n,#CURRENT#)
+QUESTION: Calculate_xi#CB#(true,false)
+VALUE: false
+HELP: Automatically calculate xi_1 and xi_n coefficients or introduce them manually.
+DEPENDENCIES: (false,HIDE,xi_1_factor,#CURRENT#,RESTORE,xi_1,#CURRENT#,RESTORE,xi_n,#CURRENT#)(true,RESTORE,xi_1_factor,#CURRENT#,HIDE,xi_1,#CURRENT#,HIDE,xi_n,#CURRENT#)
 QUESTION: omega_1
 VALUE: 1.0
+HELP: Angular frequency associated to the first mode of vibration of the structure (rad/s).
 QUESTION: omega_n
 VALUE: 10.0
+HELP: Angular frequency associated to the last mode of vibration of the structure (rad/s).
+QUESTION: xi_1_factor
+VALUE: 1.0
+HELP: Factor multiplying the damping ratio associated to the first mode of vibration of the structure. For critically damped structures use 1.0.
 QUESTION: xi_1
 VALUE: 1.0
+HELP: Damping ratio associated to the first mode of vibration of the structure.
 QUESTION: xi_n
 VALUE: 0.05
+HELP: Damping ratio associated to the last mode of vibration of the structure.
 QUESTION: Rayleigh_Alpha
 VALUE: 0.0
 QUESTION: Rayleigh_Beta
