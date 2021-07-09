@@ -225,6 +225,68 @@ VALUE: #N# 2 0.0 0.0
 HELP: If Pressure_Distribution is set to Uniform, Value means Pressure_Value. If Pressure_Distribution is Hydrostatic, Value means Reference_Coordinate.
 END CONDITION
 
+CONDITION: Face_Load_Control_Module
+CONDTYPE: over groups
+CONDMESHTYPE: over face elements
+GROUPALLOW: lines surfaces nodes faces
+QUESTION: FACE_LOAD_X#CB#(true,false)
+VALUE: true
+DEPENDENCIES: (false,HIDE,X_Value,0.0,HIDE,Imposed_Face_Load_X,Constant)(true,RESTORE,X_Value,#CURRENT#,RESTORE,Imposed_Face_Load_X,#CURRENT#)
+QUESTION: X_Value
+VALUE: 0.0
+HELP: Units in IS for 2D cases: N/m. Units in IS for 3D cases: N/m2.
+QUESTION: Imposed_Face_Load_X#CB#(Constant,Table_Interpolation)
+VALUE: Table_Interpolation
+HELP: Only working with table interpolation for the moment.
+DEPENDENCIES: (Constant,HIDE,Face_Load_X_Table,#CURRENT#)(Table_Interpolation,RESTORE,Face_Load_X_Table,#CURRENT#)
+QUESTION: Face_Load_X_Table(Time,Face_Load_X)
+VALUE: #N# 2 0.0 0.0
+QUESTION: FACE_LOAD_Y#CB#(true,false)
+VALUE: true
+DEPENDENCIES: (false,HIDE,Y_Value,0.0,HIDE,Imposed_Face_Load_Y,Constant)(true,RESTORE,Y_Value,#CURRENT#,RESTORE,Imposed_Face_Load_Y,#CURRENT#)
+QUESTION: Y_Value
+VALUE: 0.0
+HELP: Units in IS for 2D cases: N/m. Units in IS for 3D cases: N/m2.
+QUESTION: Imposed_Face_Load_Y#CB#(Constant,Table_Interpolation)
+VALUE: Table_Interpolation
+HELP: Only working with table interpolation for the moment.
+DEPENDENCIES: (Constant,HIDE,Face_Load_Y_Table,#CURRENT#)(Table_Interpolation,RESTORE,Face_Load_Y_Table,#CURRENT#)
+QUESTION: Face_Load_Y_Table(Time,Face_Load_Y)
+VALUE: #N# 2 0.0 0.0
+QUESTION: FACE_LOAD_Z#CB#(true,false)
+VALUE: true
+DEPENDENCIES: (false,HIDE,Z_Value,0.0,HIDE,Imposed_Face_Load_Z,Constant)(true,RESTORE,Z_Value,#CURRENT#,RESTORE,Imposed_Face_Load_Z,#CURRENT#)
+QUESTION: Z_Value
+VALUE: 0.0
+HELP: Units in IS for 2D cases: N/m. Units in IS for 3D cases: N/m2.
+QUESTION: Imposed_Face_Load_Z#CB#(Constant,Table_Interpolation)
+VALUE: Table_Interpolation
+HELP: Only working with table interpolation for the moment.
+DEPENDENCIES: (Constant,HIDE,Face_Load_Z_Table,#CURRENT#)(Table_Interpolation,RESTORE,Face_Load_Z_Table,#CURRENT#)
+QUESTION: Face_Load_Z_Table(Time,Face_Load_Z)
+VALUE: #N# 2 0.0 0.0
+QUESTION: Initial_Velocity
+VALUE: 0.0
+HELP: Initial loading velocity in IS (m/s)
+QUESTION: Limit_Velocity
+VALUE: 1.0
+HELP: Limit velocity allowed in IS (m/s)
+QUESTION: Velocity_Factor
+VALUE: 1.0
+HELP: Factor of delta velocity added to the loading velocity.
+QUESTION: Initial_Stiffness
+VALUE: 1.0e7
+HELP: A decent approximation can be calculated as YoungModulus * CharacteristicLength (N/m).
+QUESTION: Force_Increment_Tolerance
+VALUE: 100.0
+HELP: The delta force that should trigger a change in the loading velocity (N)
+QUESTION: Update_Stiffness#CB#(true,false)
+VALUE: true
+HELP: Update the initial stiffness or let it constant.
+QUESTION: Force_Averaging_Time
+VALUE: 1.0e-5
+HELP: If set equal to the time step, no force average is performed (s).
+END CONDITION
 
 BOOK: Loads
 

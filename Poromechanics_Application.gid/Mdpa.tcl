@@ -25,6 +25,8 @@ proc WriteMdpa { basename dir problemtypedir } {
     VectorTable FileVar TableId TableDict Force FORCE
     # Face_Load
     VectorTable FileVar TableId TableDict Face_Load FACE_LOAD
+    # Face_Load_Control_Module
+    VectorTable FileVar TableId TableDict Face_Load_Control_Module FACE_LOAD
     # Normal_Load
     NormalTangentialTable FileVar TableId TableDict Normal_Load NORMAL_CONTACT_STRESS TANGENTIAL_CONTACT_STRESS
     # Normal_Fluid_Flux
@@ -483,6 +485,47 @@ proc WriteMdpa { basename dir problemtypedir } {
             }
         }
     }
+    # Face_Load_Control_Module
+    set Groups [GiD_Info conditions Face_Load_Control_Module groups]
+    if {$Dim eq 2} {
+        if {$IsQuadratic eq 0} {
+            # UPwFaceLoadCondition2D2N
+            WriteFaceConditions FileVar ConditionId ConditionDict $Groups UPwFaceLoadCondition2D2N $PropertyDict
+        } else {
+            # LineLoadDiffOrderCondition2D3N
+            WriteFaceConditions FileVar ConditionId ConditionDict $Groups LineLoadDiffOrderCondition2D3N $PropertyDict
+        }
+    } else {
+        if {$IsQuadratic eq 0} {
+            for {set i 0} {$i < [llength $Groups]} {incr i} {
+                set MyConditionList [list]
+                # UPwFaceLoadCondition3D3N
+                WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] tetrahedra UPwFaceLoadCondition3D3N $PropertyDict
+                WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] prism UPwFaceLoadCondition3D3N $PropertyDict
+                # UPwFaceLoadCondition3D4N
+                WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] hexahedra UPwFaceLoadCondition3D4N $PropertyDict
+                dict set ConditionDict [lindex [lindex $Groups $i] 1] $MyConditionList
+            }
+        } elseif {$IsQuadratic eq 1} {
+            for {set i 0} {$i < [llength $Groups]} {incr i} {
+                set MyConditionList [list]
+                # SurfaceLoadDiffOrderCondition3D6N
+                WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] tetrahedra SurfaceLoadDiffOrderCondition3D6N $PropertyDict
+                # SurfaceLoadDiffOrderCondition3D8N
+                WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] hexahedra SurfaceLoadDiffOrderCondition3D8N $PropertyDict
+                dict set ConditionDict [lindex [lindex $Groups $i] 1] $MyConditionList
+            }
+        } else {
+            for {set i 0} {$i < [llength $Groups]} {incr i} {
+                set MyConditionList [list]
+                # SurfaceLoadDiffOrderCondition3D6N
+                WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] tetrahedra SurfaceLoadDiffOrderCondition3D6N $PropertyDict
+                # SurfaceLoadDiffOrderCondition3D9N
+                WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] hexahedra SurfaceLoadDiffOrderCondition3D9N $PropertyDict
+                dict set ConditionDict [lindex [lindex $Groups $i] 1] $MyConditionList
+            }
+        }
+    }
     # Normal_Load
     set Groups [GiD_Info conditions Normal_Load groups]
     if {$Dim eq 2} {
@@ -655,6 +698,8 @@ proc WriteMdpa { basename dir problemtypedir } {
     WriteLoadSubmodelPart FileVar Force $TableDict $ConditionDict
     # Face_Load
     WriteLoadSubmodelPart FileVar Face_Load $TableDict $ConditionDict
+    # Face_Load_Control_Module
+    WriteLoadSubmodelPart FileVar Face_Load_Control_Module $TableDict $ConditionDict
     # Normal_Load
     WriteLoadSubmodelPart FileVar Normal_Load $TableDict $ConditionDict
     # Normal_Fluid_Flux
