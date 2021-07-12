@@ -1,8 +1,9 @@
 PROBLEM DATA
 
 TITLE:Problem_Data
-QUESTION: Domain_Size#CB#(2,3)
+QUESTION: Domain_Size#CB#(2,3,2.5)
 VALUE: 2
+HELP: 2.5 stands for a 2D geometry with a 3D constitutive law.
 QUESTION: Start_Time
 VALUE: 0.0
 HELP: Units in IS: s
@@ -55,9 +56,9 @@ QUESTION: Initial_Stresses#CB#(true,false)
 VALUE: false
 HELP: Take into account initial stresses (only for linear elasticity for the moment).
 DEPENDENCIES: (true,RESTORE,Mode,#CURRENT#)(false,HIDE,Mode,#CURRENT#)
-QUESTION: Mode#CB#(save,load)
+QUESTION: Mode#CB#(save,load,external)
 VALUE: save
-HELP: Working mode: save initial stresses at the end of the calculation or load them at the beginning.
+HELP: save: save initial stresses at the end of the calculation, load: load them at the beginning, external: INITIAL_STRESS_TENSOR must be externally set
 
 
 TITLE:Solver_Settings
