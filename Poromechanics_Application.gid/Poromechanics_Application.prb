@@ -1,9 +1,8 @@
 PROBLEM DATA
 
 TITLE:Problem_Data
-QUESTION: Domain_Size#CB#(2,3,2.5)
+QUESTION: Domain_Size#CB#(2,3)
 VALUE: 2
-HELP: 2.5 stands for a 2D geometry with a 3D constitutive law.
 QUESTION: Start_Time
 VALUE: 0.0
 HELP: Units in IS: s
