@@ -3,6 +3,7 @@ PROBLEM DATA
 TITLE:Problem_Data
 QUESTION: Domain_Size#CB#(2,3)
 VALUE: 2
+HELP: For 2.5D cases, select Domain_Size as 2 and define a 3D constitutive law.
 QUESTION: Start_Time
 VALUE: 0.0
 HELP: Units in IS: s
