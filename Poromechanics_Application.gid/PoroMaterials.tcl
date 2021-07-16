@@ -134,7 +134,7 @@ proc WritePoroMaterials { basename dir problemtypedir PropertyId } {
         puts $FileVar "                \"FRACTURE_ENERGY\": [lindex [lindex $Groups $i] 22],"
         puts $FileVar "                \"SHEAR_FRACTURE_ENERGY\": [lindex [lindex $Groups $i] 23],"
         puts $FileVar "                \"STATE_VARIABLE\": [lindex [lindex $Groups $i] 24],"
-        puts $FileVar "                \"BIOT_COEFFICIENT\": [lindex [lindex $Groups $i] 25],"
+        puts $FileVar "                \"BIOT_COEFFICIENT\": [lindex [lindex $Groups $i] 25]"
         puts $FileVar "            \},"
         puts $FileVar "            \"Tables\": \{\}"
         puts $FileVar "        \}"
