@@ -247,7 +247,7 @@ proc WriteMdpa { basename dir problemtypedir } {
             puts $FileVar "  CRITICAL_DISPLACEMENT [lindex [lindex $Groups $i] 17]"
             puts $FileVar "  YIELD_STRESS [lindex [lindex $Groups $i] 18]"
             puts $FileVar "  FRICTION_COEFFICIENT [lindex [lindex $Groups $i] 19]"
-            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 24]"
+            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 25]"
             puts $FileVar "End Properties"
             puts $FileVar ""
         } elseif {[lindex [lindex $Groups $i] 4] eq "BilinearCohesivePlaneStrain2DLaw" || [lindex [lindex $Groups $i] 4] eq "BilinearCohesivePlaneStress2DLaw"} {
@@ -270,7 +270,7 @@ proc WriteMdpa { basename dir problemtypedir } {
             puts $FileVar "  CRITICAL_DISPLACEMENT [lindex [lindex $Groups $i] 17]"
             puts $FileVar "  YIELD_STRESS [lindex [lindex $Groups $i] 18]"
             puts $FileVar "  FRICTION_COEFFICIENT [lindex [lindex $Groups $i] 19]"
-            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 24]"
+            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 25]"
             puts $FileVar "End Properties"
             puts $FileVar ""
         } elseif {[lindex [lindex $Groups $i] 4] eq "ExponentialCohesive3DLaw"} {
