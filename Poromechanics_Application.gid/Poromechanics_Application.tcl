@@ -198,15 +198,15 @@ proc Poromechanics_Application::CreateContactEntity { } {
 
     ## Contact Volume:
 
-    # set Surf1 [list 1 1]
+    # set Surf1 [list 1 0]
     # set Surf2 [list 5 0]
 
     # # Orientation of Surf1:
     # #     0: SAME1ST. The normal to the surface points towards the contact volume.
     # #     1: DIFF1ST. The normal to the surface points towards the oppsite direction of the contact volume.
     # # Orientation of Surf2:
-    # #     0: DIFF1ST. The normal to the surface points towards the oppsite direction of the contact volume.
-    # #     1: SAME1ST. The normal to the surface points towards the contact volume.
+    # #     0: SAME1ST. The normal to the surface points towards the contact volume.
+    # #     1: DIFF1ST. The normal to the surface points towards the oppsite direction of the contact volume.
 
     # Transformation matrix for a contact volume between Surf1 and Surf2. R means rotation, and T translation.
 
