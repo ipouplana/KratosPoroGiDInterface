@@ -110,7 +110,7 @@ proc WriteMdpa { basename dir problemtypedir } {
             if {[GiD_AccessValue get gendata Non-local_Damage] eq true} {
                 puts $FileVar "  CONSTITUTIVE_LAW_NAME SimoJuNonlocalDamage3DLaw"
             } else {
-                puts $FileVar "  CONSTITUTIVE_LAW_NAME SimoJuLocalDamage3DLaw"
+                puts $FileVar "  CONSTITUTIVE_LAW_NAME SimoJuLocalDamage3DLawMixOrtho"
             }
             puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 4]"
             puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 5]"
