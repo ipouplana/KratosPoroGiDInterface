@@ -138,6 +138,11 @@ HELP: Units in IS: N·m/m2
 QUESTION: State_Variable
 VALUE: 1.0e-12
 HELP: Initial value for the internal state variable of exponential cohesive law. A high value implies that the joint is initially damaged (e.g. 1.0e12).
+QUESTION: Tau_Stress
+VALUE: 1.0
+HELP: Shear strength of the joint. Units in IS: N/m2
+QUESTION: Curve_Fitting_Eta
+VALUE: 1.0
 QUESTION: Biot_coefficient
 VALUE: 0.6
 END CONDITION
