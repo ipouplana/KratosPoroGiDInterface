@@ -16,7 +16,7 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     puts $FileVar "        \"end_time\":             [GiD_AccessValue get gendata End_Time],"
     puts $FileVar "        \"echo_level\":           [GiD_AccessValue get gendata Echo_Level],"
     puts $FileVar "        \"parallel_type\":        \"[GiD_AccessValue get gendata Parallel_Configuration]\","
-    puts $FileVar "        \"run_DCB_test\":         true,"
+    puts $FileVar "        \"run_DCB_test\":         false,"
     if {[GiD_AccessValue get gendata Initial_Stresses] eq false} {
         puts $FileVar "        \"fracture_utility\":     [GiD_AccessValue get gendata Fracture_Propagation]"
     } else {

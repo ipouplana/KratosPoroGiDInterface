@@ -46,7 +46,7 @@ proc WritePoroMaterials { basename dir problemtypedir PropertyId } {
             if {[GiD_AccessValue get gendata Non-local_Damage] eq true} {
                 puts $FileVar "                \"name\": \"SimoJuNonlocalDamage3DLaw\""
             } else {
-                puts $FileVar "                \"name\": \"SimoJuLocalDamage3DLawMixOrtho\""
+                puts $FileVar "                \"name\": \"SimoJuLocalDamage3DLaw\""
             }
         } elseif {[lindex [lindex $Groups $i] 3] eq "SimoJuDamagePlaneStrain2DLaw"} {
             if {[GiD_AccessValue get gendata Non-local_Damage] eq true} {
