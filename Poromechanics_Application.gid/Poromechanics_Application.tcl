@@ -178,12 +178,12 @@ proc Poromechanics_Application::CreateContactEntity { } {
 
     ## This proc can be called from the command line of GiD as "-np- Poromechanics_Application::CreateContactEntity"
 
-    set LayerName "Joint"
+    set LayerName "int"
 
     ## Contact Surface:
 
-    # set Line1 [list 111 1]
-    # set Line2 [list 110 0]
+    set Line1 [list 1 0]
+    set Line2 [list 2 1]
 
     # # Orientation of Line1:
     # #     0: SAME1ST. The normal to the line points towards the oppsite direction of the contact surface.
@@ -192,9 +192,8 @@ proc Poromechanics_Application::CreateContactEntity { } {
     # #     0: SAME1ST. The normal to the line points towards the contact surface.
     # #     1: DIFF1ST. The normal to the line points towards the oppsite direction of the contact surface.
 
-    # GiD_Geometry create surface append contactsurface \
-    #     $LayerName 2 $Line1 $Line2
-
+    GiD_Geometry create surface append contactsurface \
+        $LayerName 2 $Line1 $Line2
 
     ## Contact Volume:
 
