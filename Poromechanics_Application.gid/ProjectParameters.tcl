@@ -182,6 +182,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     AppendGroupNames PutStrings Face_Load_Control_Module
     # Normal_Load
     AppendGroupNames PutStrings Normal_Load
+    # Discharge
+    AppendGroupNames PutStrings Discharge
     # Normal_Fluid_Flux
     AppendGroupNames PutStrings Normal_Fluid_Flux
     # Interface_Face_Load
@@ -218,6 +220,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
         AppendGroupNamesWithNum PutStrings iGroup Face_Load
         # Normal_Load
         AppendGroupNamesWithNum PutStrings iGroup Normal_Load
+        # Discharge
+        AppendGroupNamesWithNum PutStrings iGroup Discharge
         # Normal_Fluid_Flux
         AppendGroupNamesWithNum PutStrings iGroup Normal_Fluid_Flux
         # Interface_Face_Load
@@ -239,6 +243,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
         AppendGroupVariables PutStrings Face_Load FACE_LOAD
         # Normal_Load
         AppendGroupVariables PutStrings Normal_Load NORMAL_CONTACT_STRESS
+        # Discharge
+        AppendGroupVariables PutStrings Discharge DISCHARGE
         # Normal_Fluid_Flux
         AppendGroupVariables PutStrings Normal_Fluid_Flux NORMAL_FLUID_FLUX
         # Interface_Face_Load
@@ -302,6 +308,7 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     AppendOutputVariables PutStrings iGroup Write_Face_Load FACE_LOAD
     AppendOutputVariables PutStrings iGroup Write_Normal_Load NORMAL_CONTACT_STRESS
     AppendOutputVariables PutStrings iGroup Write_Tangential_Load TANGENTIAL_CONTACT_STRESS
+    AppendOutputVariables PutStrings iGroup Write_Discharge DISCHARGE
     AppendOutputVariables PutStrings iGroup Write_Normal_Fluid_Flux NORMAL_FLUID_FLUX
     AppendOutputVariables PutStrings iGroup Write_Body_Acceleration VOLUME_ACCELERATION
     if {[GiD_AccessValue get gendata Parallel_Configuration] eq "MPI"} {
@@ -399,6 +406,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     incr NumGroups [llength $Groups]
     set Groups [GiD_Info conditions Normal_Load groups]
     incr NumGroups [llength $Groups]
+    set Groups [GiD_Info conditions Discharge groups]
+    set NumGroups [llength $Groups]
     set Groups [GiD_Info conditions Normal_Fluid_Flux groups]
     incr NumGroups [llength $Groups]
     set Groups [GiD_Info conditions Interface_Face_Load groups]
@@ -419,6 +428,9 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
         # Normal_Load
         set Groups [GiD_Info conditions Normal_Load groups]
         WriteNormalLoadProcess FileVar iGroup $Groups NORMAL_CONTACT_STRESS $TableDict $NumGroups
+        # Discharge
+        set Groups [GiD_Info conditions Discharge groups]
+        WriteLoadScalarProcess FileVar iGroup $Groups DISCHARGE $TableDict $NumGroups
         # Normal_Fluid_Flux
         set Groups [GiD_Info conditions Normal_Fluid_Flux groups]
         WriteLoadScalarProcess FileVar iGroup $Groups NORMAL_FLUID_FLUX $TableDict $NumGroups

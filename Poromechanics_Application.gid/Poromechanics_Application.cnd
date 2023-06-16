@@ -440,6 +440,20 @@ QUESTION: Tangential_Load_Table(Time,Tangential_Load)
 VALUE: #N# 2 0.0 0.0
 END CONDITION
 
+CONDITION: Discharge
+CONDTYPE: over groups
+CONDMESHTYPE: over nodes
+GROUPALLOW: points nodes
+QUESTION: Value
+VALUE: 0.0
+HELP: Units in IS: m3/s. A positive value corresponds to an inlet.
+QUESTION: Imposed_Discharge#CB#(Constant,Table_Interpolation)
+VALUE: Constant
+DEPENDENCIES: (Constant,HIDE,Discharge_Table,#CURRENT#)(Table_Interpolation,RESTORE,Discharge_Table,#CURRENT#)
+QUESTION: Discharge_Table(Time,Discharge)
+VALUE: #N# 2 0.0 0.0
+END CONDITION
+
 CONDITION: Normal_Fluid_Flux
 CONDTYPE: over groups
 CONDMESHTYPE: over face elements
