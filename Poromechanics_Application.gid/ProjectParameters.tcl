@@ -407,7 +407,7 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     set Groups [GiD_Info conditions Normal_Load groups]
     incr NumGroups [llength $Groups]
     set Groups [GiD_Info conditions Discharge groups]
-    set NumGroups [llength $Groups]
+    incr NumGroups [llength $Groups]
     set Groups [GiD_Info conditions Normal_Fluid_Flux groups]
     incr NumGroups [llength $Groups]
     set Groups [GiD_Info conditions Interface_Face_Load groups]
