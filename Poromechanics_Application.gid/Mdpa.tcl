@@ -692,10 +692,10 @@ proc WriteMdpa { basename dir problemtypedir } {
     set Groups [GiD_Info conditions Discharge groups]
     if {$Dim eq 2} {
         # UPwDischargeCondition2D1N
-        WriteNodalConditions FileVar ConditionId ConditionDict $Groups UPwDischargeCondition2D1N $PropertyDict
+        WriteNodalConditions FileVar ConditionId ConditionDict $Groups UPwDischargeCondition2D1N $BodyElemsProp
     } else {
         # UPwDischargeCondition3D1N
-        WriteNodalConditions FileVar ConditionId ConditionDict $Groups UPwDischargeCondition3D1N $PropertyDict
+        WriteNodalConditions FileVar ConditionId ConditionDict $Groups UPwDischargeCondition3D1N $BodyElemsProp
     }
     # Normal_Fluid_Flux
     set Groups [GiD_Info conditions Normal_Fluid_Flux groups]
