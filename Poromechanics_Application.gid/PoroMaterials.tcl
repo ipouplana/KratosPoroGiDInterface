@@ -125,6 +125,10 @@ proc WritePoroMaterials { basename dir problemtypedir PropertyId } {
             puts $FileVar "                \"name\": \"ElastoPlasticModMohrCoulombCohesive3DLaw\""
         } elseif {[lindex [lindex $Groups $i] 4] eq "ElastoPlasticModMohrCoulombCohesive2DLaw"} {
             puts $FileVar "                \"name\": \"ElastoPlasticModMohrCoulombCohesive2DLaw\""
+        } elseif {[lindex [lindex $Groups $i] 4] eq "ElastoPlasticMohrCoulombCohesive3DLaw"} {
+            puts $FileVar "                \"name\": \"ElastoPlasticMohrCoulombCohesive3DLaw\""
+        } elseif {[lindex [lindex $Groups $i] 4] eq "ElastoPlasticMohrCoulombCohesive2DLaw"} {
+            puts $FileVar "                \"name\": \"ElastoPlasticMohrCoulombCohesive2DLaw\""
         }
         puts $FileVar "            \},"
         puts $FileVar "            \"Variables\": \{"
