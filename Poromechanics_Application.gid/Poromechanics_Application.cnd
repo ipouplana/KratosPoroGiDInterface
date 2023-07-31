@@ -122,9 +122,9 @@ HELP: Units in IS: N/m2
 QUESTION: Fluid_Bulk_Modulus
 VALUE: 2.0e9
 HELP: Units in IS: N/m2
-QUESTION: Transversal_Permeability
+QUESTION: Transversal_Permeability_Coefficient
 VALUE: 1.0e-13
-HELP: Units in IS: m2
+HELP: This is the transversal leak-off coefficient. Units in IS: m2/m
 QUESTION: Dynamic_Viscosity
 VALUE: 1.0e-3
 HELP: Units in IS: N/m2·s
@@ -134,9 +134,9 @@ HELP: Units in IS: m
 QUESTION: Damage_Threshold
 VALUE: 1.0e-4
 HELP: Strain value after which damage starts growing.
-QUESTION: Minimum_Joint_Width
-VALUE: 1.0e-3
-HELP: Small number for avoiding division by zero in zero-thickness cases. Units in IS: m
+QUESTION: Initial_Joint_Width
+VALUE: 0.0
+HELP: Initial joint width. It can be larger or equal to the geometrical joint width. Units in IS: m
 QUESTION: Critical_Displacement
 VALUE: 0.05
 HELP: Relative displacement after which cohesive stresses vanish. Units in IS: m
