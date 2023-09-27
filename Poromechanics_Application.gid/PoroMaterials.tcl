@@ -121,6 +121,14 @@ proc WritePoroMaterials { basename dir problemtypedir PropertyId } {
             puts $FileVar "                \"name\": \"IsotropicDamageCohesive2DLaw\""
         } elseif {[lindex [lindex $Groups $i] 4] eq "IsotropicDamageCohesive3DLaw"} {
             puts $FileVar "                \"name\": \"IsotropicDamageCohesive3DLaw\""
+        } elseif {[lindex [lindex $Groups $i] 4] eq "ElastoPlasticModMohrCoulombCohesive3DLaw"} {
+            puts $FileVar "                \"name\": \"ElastoPlasticModMohrCoulombCohesive3DLaw\""
+        } elseif {[lindex [lindex $Groups $i] 4] eq "ElastoPlasticModMohrCoulombCohesive2DLaw"} {
+            puts $FileVar "                \"name\": \"ElastoPlasticModMohrCoulombCohesive2DLaw\""
+        } elseif {[lindex [lindex $Groups $i] 4] eq "ElastoPlasticMohrCoulombCohesive3DLaw"} {
+            puts $FileVar "                \"name\": \"ElastoPlasticMohrCoulombCohesive3DLaw\""
+        } elseif {[lindex [lindex $Groups $i] 4] eq "ElastoPlasticMohrCoulombCohesive2DLaw"} {
+            puts $FileVar "                \"name\": \"ElastoPlasticMohrCoulombCohesive2DLaw\""
         }
         puts $FileVar "            \},"
         puts $FileVar "            \"Variables\": \{"
@@ -139,11 +147,11 @@ proc WritePoroMaterials { basename dir problemtypedir PropertyId } {
         puts $FileVar "                \"POROSITY\": [lindex [lindex $Groups $i] 13],"
         puts $FileVar "                \"BULK_MODULUS_SOLID\": [lindex [lindex $Groups $i] 14],"
         puts $FileVar "                \"BULK_MODULUS_FLUID\": [lindex [lindex $Groups $i] 15],"
-        puts $FileVar "                \"TRANSVERSAL_PERMEABILITY\": [lindex [lindex $Groups $i] 16],"
+        puts $FileVar "                \"TRANSVERSAL_PERMEABILITY_COEFFICIENT\": [lindex [lindex $Groups $i] 16],"
         puts $FileVar "                \"DYNAMIC_VISCOSITY\": [lindex [lindex $Groups $i] 17],"
         puts $FileVar "                \"THICKNESS\": [lindex [lindex $Groups $i] 18],"
         puts $FileVar "                \"DAMAGE_THRESHOLD\": [lindex [lindex $Groups $i] 19],"
-        puts $FileVar "                \"MINIMUM_JOINT_WIDTH\": [lindex [lindex $Groups $i] 20],"
+        puts $FileVar "                \"INITIAL_JOINT_WIDTH\": [lindex [lindex $Groups $i] 20],"
         puts $FileVar "                \"CRITICAL_DISPLACEMENT\": [lindex [lindex $Groups $i] 21],"
         puts $FileVar "                \"YIELD_STRESS\": [lindex [lindex $Groups $i] 22],"
         puts $FileVar "                \"FRICTION_COEFFICIENT\": [lindex [lindex $Groups $i] 23],"
@@ -151,10 +159,13 @@ proc WritePoroMaterials { basename dir problemtypedir PropertyId } {
         puts $FileVar "                \"SHEAR_FRACTURE_ENERGY\": [lindex [lindex $Groups $i] 27],"
         puts $FileVar "                \"TENSILE_STRENGTH\": [lindex [lindex $Groups $i] 28],"
         puts $FileVar "                \"BETA_EQSTRAIN_SHEAR_FACTOR\": [lindex [lindex $Groups $i] 29],"
-        puts $FileVar "                \"STATE_VARIABLE\": [lindex [lindex $Groups $i] 30],"
-        puts $FileVar "                \"TAU\": [lindex [lindex $Groups $i] 31],"
-        puts $FileVar "                \"CURVE_FITTING_ETA\": [lindex [lindex $Groups $i] 32],"
-        puts $FileVar "                \"BIOT_COEFFICIENT\": [lindex [lindex $Groups $i] 33]"
+        puts $FileVar "                \"FRICTION_ANGLE\": [lindex [lindex $Groups $i] 30],"
+        puts $FileVar "                \"COHESION\": [lindex [lindex $Groups $i] 31],"
+        puts $FileVar "                \"DILATANCY_ANGLE\": [lindex [lindex $Groups $i] 32],"
+        puts $FileVar "                \"STATE_VARIABLE\": [lindex [lindex $Groups $i] 33],"
+        puts $FileVar "                \"TAU\": [lindex [lindex $Groups $i] 34],"
+        puts $FileVar "                \"CURVE_FITTING_ETA\": [lindex [lindex $Groups $i] 35],"
+        puts $FileVar "                \"BIOT_COEFFICIENT\": [lindex [lindex $Groups $i] 36]"
         puts $FileVar "            \},"
         puts $FileVar "            \"Tables\": \{\}"
         puts $FileVar "        \}"

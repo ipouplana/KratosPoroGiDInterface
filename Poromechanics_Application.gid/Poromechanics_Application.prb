@@ -64,7 +64,7 @@ HELP: save: save initial stresses at the end of the calculation, load: load them
 TITLE:Solver_Settings
 QUESTION: Solution_Type#CB#(implicit_quasi_static,implicit_dynamic,explicit)
 VALUE: implicit_quasi_static
-HELP: For the moment, explicit solution type can only be used for purely solid mechanics problems and not for coupled solid-pore-fluid interaction problems.
+HELP: The quasi-static scheme only makes use of the Newmark_Theta parameter. The explicit scheme can only be used for purely solid mechanics problems and not for coupled solid-pore-fluid interaction problems.
 DEPENDENCIES: (implicit_quasi_static,RESTORE,Max_Iterations,#CURRENT#,RESTORE,Convergence_Criterion,#CURRENT#,RESTORE,Block_Builder,#CURRENT#,RESTORE,Solver_Type,#CURRENT#,RESTORE,Scaling,#CURRENT#,RESTORE,Verbosity,#CURRENT#,RESTORE,Strategy_Type,#CURRENT#,RESTORE,Displacement_Relative_Tolerance,#CURRENT#,RESTORE,Displacement_Absolute_Tolerance,#CURRENT#)(implicit_dynamic,RESTORE,Max_Iterations,#CURRENT#,RESTORE,Convergence_Criterion,#CURRENT#,RESTORE,Block_Builder,#CURRENT#,RESTORE,Solver_Type,#CURRENT#,RESTORE,Scaling,#CURRENT#,RESTORE,Verbosity,#CURRENT#,RESTORE,Strategy_Type,#CURRENT#,RESTORE,Displacement_Relative_Tolerance,#CURRENT#,RESTORE,Displacement_Absolute_Tolerance,#CURRENT#)(explicit,HIDE,Max_Iterations,#CURRENT#,HIDE,Convergence_Criterion,Displacement_criterion,HIDE,Block_Builder,#CURRENT#,HIDE,Solver_Type,#CURRENT#,HIDE,Scaling,#CURRENT#,HIDE,Verbosity,#CURRENT#,HIDE,Strategy_Type,newton_raphson,HIDE,Displacement_Relative_Tolerance,#CURRENT#,HIDE,Displacement_Absolute_Tolerance,#CURRENT#)
 QUESTION: Scheme_Type#CB#(Newmark,Explicit_Central_Differences,Explicit_Velocity_Verlet)
 VALUE: Newmark
