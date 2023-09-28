@@ -473,7 +473,7 @@ CONDMESHTYPE: over face elements
 GROUPALLOW: lines surfaces nodes faces
 QUESTION: Value
 VALUE: 0.0
-HELP: Units in IS for 2D cases: m2/s. Units in IS for 3D cases: m/s. A positive value corresponds to an outflow.
+HELP: Units in IS for 2D cases: m2/s. Units in IS for 3D cases: m/s. A positive value corresponds to an inflow.
 QUESTION: Imposed_Normal_Fluid_Flux#CB#(Constant,Table_Interpolation)
 VALUE: Constant
 DEPENDENCIES: (Constant,HIDE,Normal_Fluid_Flux_Table,#CURRENT#)(Table_Interpolation,RESTORE,Normal_Fluid_Flux_Table,#CURRENT#)
@@ -526,7 +526,7 @@ CONDMESHTYPE: over body elements
 GROUPALLOW: lines surfaces nodes elements
 QUESTION: Value
 VALUE: 0.0
-HELP: Units in IS for 2D cases: m2/s. Units in IS for 3D cases: m/s. A positive value corresponds to an outflow.
+HELP: Units in IS for 2D cases: m2/s. Units in IS for 3D cases: m/s. A positive value corresponds to an inflow.
 QUESTION: Imposed_Normal_Fluid_Flux#CB#(Constant,Table_Interpolation)
 VALUE: Constant
 DEPENDENCIES: (Constant,HIDE,Normal_Fluid_Flux_Table,#CURRENT#)(Table_Interpolation,RESTORE,Normal_Fluid_Flux_Table,#CURRENT#)
