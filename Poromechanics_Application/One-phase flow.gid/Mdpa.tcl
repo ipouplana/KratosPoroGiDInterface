@@ -803,11 +803,11 @@ proc WriteMdpa { basename dir problemtypedir } {
     if {$Dim eq 2} {
         if {$IsQuadratic eq 0} {
             if {$FIC eq false} {
-                # UPwNormalFluxCondition2D2N
-                WriteFaceConditions FileVar ConditionId ConditionDict $Groups UPwNormalFluxCondition2D2N $PropertyDict
+                # UPwNormalLiquidFluxCondition2D2N
+                WriteFaceConditions FileVar ConditionId ConditionDict $Groups UPwNormalLiquidFluxCondition2D2N $PropertyDict
             } else {
-                # UPwNormalFluxFICCondition2D2N
-                WriteFaceConditions FileVar ConditionId ConditionDict $Groups UPwNormalFluxFICCondition2D2N $PropertyDict
+                # UPwNormalLiquidFluxFICCondition2D2N
+                WriteFaceConditions FileVar ConditionId ConditionDict $Groups UPwNormalLiquidFluxFICCondition2D2N $PropertyDict
             }
         } else {
             # LineNormalLiquidFluxDiffOrderCondition2D3N
@@ -818,21 +818,21 @@ proc WriteMdpa { basename dir problemtypedir } {
             if {$FIC eq false} {
                 for {set i 0} {$i < [llength $Groups]} {incr i} {
                     set MyConditionList [list]
-                    # UPwNormalFluxCondition3D3N
-                    WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] tetrahedra UPwNormalFluxCondition3D3N $PropertyDict
-                    WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] prism UPwNormalFluxCondition3D3N $PropertyDict
-                    # UPwNormalFluxCondition3D4N
-                    WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] hexahedra UPwNormalFluxCondition3D4N $PropertyDict
+                    # UPwNormalLiquidFluxCondition3D3N
+                    WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] tetrahedra UPwNormalLiquidFluxCondition3D3N $PropertyDict
+                    WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] prism UPwNormalLiquidFluxCondition3D3N $PropertyDict
+                    # UPwNormalLiquidFluxCondition3D4N
+                    WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] hexahedra UPwNormalLiquidFluxCondition3D4N $PropertyDict
                     dict set ConditionDict [lindex [lindex $Groups $i] 1] $MyConditionList
                 }
             } else {
                 for {set i 0} {$i < [llength $Groups]} {incr i} {
                     set MyConditionList [list]
-                    # UPwNormalFluxFICCondition3D3N
-                    WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] tetrahedra UPwNormalFluxFICCondition3D3N $PropertyDict
-                    WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] prism UPwNormalFluxFICCondition3D3N $PropertyDict
-                    # UPwNormalFluxFICCondition3D4N
-                    WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] hexahedra UPwNormalFluxFICCondition3D4N $PropertyDict
+                    # UPwNormalLiquidFluxFICCondition3D3N
+                    WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] tetrahedra UPwNormalLiquidFluxFICCondition3D3N $PropertyDict
+                    WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] prism UPwNormalLiquidFluxFICCondition3D3N $PropertyDict
+                    # UPwNormalLiquidFluxFICCondition3D4N
+                    WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] hexahedra UPwNormalLiquidFluxFICCondition3D4N $PropertyDict
                     dict set ConditionDict [lindex [lindex $Groups $i] 1] $MyConditionList
                 }
             }
@@ -871,11 +871,11 @@ proc WriteMdpa { basename dir problemtypedir } {
     set Groups [GiD_Info conditions Interface_Normal_Liquid_Flux groups]
     for {set i 0} {$i < [llength $Groups]} {incr i} {
         set MyConditionList [list]
-        # UPwNormalFluxInterfaceCondition2D2N
-        WriteInterfaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] linear UPwNormalFluxInterfaceCondition2D2N $InterfaceElemsProp Line2D2Connectivities
-        # UPwNormalFluxInterfaceCondition3D4N
-        WriteInterfaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] triangle UPwNormalFluxInterfaceCondition3D4N $InterfaceElemsProp TriangleInterface3D4Connectivities
-        WriteInterfaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] quadrilateral UPwNormalFluxInterfaceCondition3D4N $InterfaceElemsProp QuadrilateralInterface3D4Connectivities
+        # UPwNormalLiquidFluxInterfaceCondition2D2N
+        WriteInterfaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] linear UPwNormalLiquidFluxInterfaceCondition2D2N $InterfaceElemsProp Line2D2Connectivities
+        # UPwNormalLiquidFluxInterfaceCondition3D4N
+        WriteInterfaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] triangle UPwNormalLiquidFluxInterfaceCondition3D4N $InterfaceElemsProp TriangleInterface3D4Connectivities
+        WriteInterfaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] quadrilateral UPwNormalLiquidFluxInterfaceCondition3D4N $InterfaceElemsProp QuadrilateralInterface3D4Connectivities
         dict set ConditionDict [lindex [lindex $Groups $i] 1] $MyConditionList
     }
 
