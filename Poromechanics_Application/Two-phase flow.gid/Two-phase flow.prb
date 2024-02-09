@@ -18,9 +18,6 @@ VALUE: 1
 QUESTION: Parallel_Configuration#CB#(OpenMP,MPI)
 VALUE: OpenMP
 HELP: For the moment, MPI only works in Linux and requires compiling METIS_APPLICATION and TRILINOS_APPLICATION. Non-local_Damage does not work in MPI.
-QUESTION: Periodic_Interface_Conditions#CB#(true,false)
-VALUE: false
-HELP: Define periodic conditions between the upper and lower nodes of interface elements (for dynamic activation of joints).
 QUESTION: FIC_Stabilization#CB#(true,false)
 VALUE: false
 HELP: Only for linear elements with equal order interpolation for displacements and pressures.

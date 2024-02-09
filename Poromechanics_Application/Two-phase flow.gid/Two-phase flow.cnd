@@ -8,6 +8,9 @@ QUESTION: Constitutive_Law#CB#(LinearElasticPlaneStrainSolid2DLaw,LinearElasticP
 VALUE: LinearElasticPlaneStrainSolid2DLaw
 HELP: Note that for a 2.5D element, a 3D constitutive law must be defined (a THICKNESS of 1.0 is considered).
 DEPENDENCIES: (LinearElasticPlaneStrainSolid2DLaw,HIDE,Thickness,1.0,HIDE,Intrinsic_Permeability_ZZ,#CURRENT#,HIDE,Intrinsic_Permeability_YZ,#CURRENT#,HIDE,Intrinsic_Permeability_ZX,#CURRENT#,HIDE,Damage_Threshold,#CURRENT#,HIDE,Fracture_Energy,#CURRENT#,HIDE,Strength_Ratio,#CURRENT#,HIDE,Residual_Strength,#CURRENT#,HIDE,Softening_Slope,#CURRENT#)(LinearElasticPlaneStressSolid2DLaw,RESTORE,Thickness,#CURRENT#,HIDE,Intrinsic_Permeability_ZZ,#CURRENT#,HIDE,Intrinsic_Permeability_YZ,#CURRENT#,HIDE,Intrinsic_Permeability_ZX,#CURRENT#,HIDE,Damage_Threshold,#CURRENT#,HIDE,Fracture_Energy,#CURRENT#,HIDE,Strength_Ratio,#CURRENT#,HIDE,Residual_Strength,#CURRENT#,HIDE,Softening_Slope,#CURRENT#)(LinearElasticSolid3DLaw,HIDE,Thickness,1.0,RESTORE,Intrinsic_Permeability_ZZ,#CURRENT#,RESTORE,Intrinsic_Permeability_YZ,#CURRENT#,RESTORE,Intrinsic_Permeability_ZX,#CURRENT#,HIDE,Damage_Threshold,#CURRENT#,HIDE,Fracture_Energy,#CURRENT#,HIDE,Strength_Ratio,#CURRENT#,HIDE,Residual_Strength,#CURRENT#,HIDE,Softening_Slope,#CURRENT#)(SimoJuDamagePlaneStrain2DLaw,HIDE,Thickness,1.0,HIDE,Intrinsic_Permeability_ZZ,#CURRENT#,HIDE,Intrinsic_Permeability_YZ,#CURRENT#,HIDE,Intrinsic_Permeability_ZX,#CURRENT#,RESTORE,Damage_Threshold,#CURRENT#,RESTORE,Fracture_Energy,#CURRENT#,RESTORE,Strength_Ratio,#CURRENT#,HIDE,Residual_Strength,#CURRENT#,HIDE,Softening_Slope,#CURRENT#)(SimoJuDamagePlaneStress2DLaw,RESTORE,Thickness,#CURRENT#,HIDE,Intrinsic_Permeability_ZZ,#CURRENT#,HIDE,Intrinsic_Permeability_YZ,#CURRENT#,HIDE,Intrinsic_Permeability_ZX,#CURRENT#,RESTORE,Damage_Threshold,#CURRENT#,RESTORE,Fracture_Energy,#CURRENT#,RESTORE,Strength_Ratio,#CURRENT#,HIDE,Residual_Strength,#CURRENT#,HIDE,Softening_Slope,#CURRENT#)(SimoJuDamage3DLaw,HIDE,Thickness,1.0,RESTORE,Intrinsic_Permeability_ZZ,#CURRENT#,RESTORE,Intrinsic_Permeability_YZ,#CURRENT#,RESTORE,Intrinsic_Permeability_ZX,#CURRENT#,RESTORE,Damage_Threshold,#CURRENT#,RESTORE,Fracture_Energy,#CURRENT#,RESTORE,Strength_Ratio,#CURRENT#,HIDE,Residual_Strength,#CURRENT#,HIDE,Softening_Slope,#CURRENT#)(ModifiedMisesDamagePlaneStrain2DLaw,HIDE,Thickness,1.0,HIDE,Intrinsic_Permeability_ZZ,#CURRENT#,HIDE,Intrinsic_Permeability_YZ,#CURRENT#,HIDE,Intrinsic_Permeability_ZX,#CURRENT#,RESTORE,Damage_Threshold,#CURRENT#,HIDE,Fracture_Energy,#CURRENT#,RESTORE,Strength_Ratio,#CURRENT#,RESTORE,Residual_Strength,#CURRENT#,RESTORE,Softening_Slope,#CURRENT#)(ModifiedMisesDamagePlaneStress2DLaw,RESTORE,Thickness,#CURRENT#,HIDE,Intrinsic_Permeability_ZZ,#CURRENT#,HIDE,Intrinsic_Permeability_YZ,#CURRENT#,HIDE,Intrinsic_Permeability_ZX,#CURRENT#,RESTORE,Damage_Threshold,#CURRENT#,HIDE,Fracture_Energy,#CURRENT#,RESTORE,Strength_Ratio,#CURRENT#,RESTORE,Residual_Strength,#CURRENT#,RESTORE,Softening_Slope,#CURRENT#)(ModifiedMisesDamage3DLaw,HIDE,Thickness,1.0,RESTORE,Intrinsic_Permeability_ZZ,#CURRENT#,RESTORE,Intrinsic_Permeability_YZ,#CURRENT#,RESTORE,Intrinsic_Permeability_ZX,#CURRENT#,RESTORE,Damage_Threshold,#CURRENT#,HIDE,Fracture_Energy,#CURRENT#,RESTORE,Strength_Ratio,#CURRENT#,RESTORE,Residual_Strength,#CURRENT#,RESTORE,Softening_Slope,#CURRENT#)
+QUESTION: Saturation_Law#CB#(BrooksAndCoreyLaw,VanGenuchtenLaw)
+VALUE: BrooksAndCoreyLaw
+HELP: TODO
 QUESTION: Young_Modulus
 VALUE: 3.0e7
 HELP: Units in IS: N/m2
@@ -57,9 +60,21 @@ HELP: Units in IS: N/m2·s
 QUESTION: Gas_Dynamic_Viscosity
 VALUE: 1.47e-5
 HELP: Units in IS: N/m2·s
-QUESTION: Biot_coefficient
+QUESTION: Biot_Coefficient
 VALUE: 0.6
 HELP: Nondimensional parameter relating the volume of the fluid change and the bulk volume change.
+QUESTION: Gas_Diffusion_Coefficient
+VALUE: 1.0
+HELP: TODO
+QUESTION: Residual_Liquid_Saturation
+VALUE: 0.0
+HELP: TODO
+QUESTION: Pore_Size_Factor
+VALUE: 2.0
+HELP: TODO
+QUESTION: Gas_Entry_Pressure
+VALUE: 1.0e3
+HELP: Units in IS: N/m2
 QUESTION: Thickness
 VALUE: 1.0
 HELP: Units in IS: m
@@ -79,123 +94,6 @@ QUESTION: Softening_Slope
 VALUE: 9000.0
 HELP: Parameter controlling the slope of the softening branch of the damage evolution law.
 END CONDITION
-
-CONDITION: Interface_Part
-CONDTYPE: over groups
-CONDMESHTYPE: over body elements
-GROUPALLOW: surfaces volumes nodes elements
-QUESTION: Link#CB#(true,false)
-VALUE: false
-QUESTION: Constitutive_Law#CB#(ElasticCohesive2DLaw,ElasticCohesive3DLaw,IsotropicDamageCohesive2DLaw,IsotropicDamageCohesive3DLaw,ElastoPlasticMohrCoulombCohesive2DLaw,ElastoPlasticMohrCoulombCohesive3DLaw,ElastoPlasticModMohrCoulombCohesive2DLaw,ElastoPlasticModMohrCoulombCohesive3DLaw,BilinearCohesivePlaneStrain2DLaw,BilinearCohesivePlaneStress2DLaw,BilinearCohesive3DLaw,ExponentialCohesivePlaneStrain2DLaw,ExponentialCohesivePlaneStress2DLaw,ExponentialCohesive3DLaw)
-VALUE: BilinearCohesivePlaneStrain2DLaw
-DEPENDENCIES: (ElasticCohesive3DLaw,RESTORE,Thickness,#CURRENT#,RESTORE,Normal_Stiffness,#CURRENT#,RESTORE,Shear_Stiffness,#CURRENT#,RESTORE,Penalty_Stiffness,#CURRENT#,HIDE,Young_Modulus,#CURRENT#,HIDE,Poisson_Ratio,#CURRENT#,HIDE,Yield_Stress,#CURRENT#,HIDE,Tensile_Strength,#CURRENT#,HIDE,Shear_Factor,#CURRENT#,HIDE,Damage_Evolution_Law,#CURRENT#,HIDE,Shear_Fracture_Energy,#CURRENT#,HIDE,State_Variable,#CURRENT#,HIDE,Damage_Threshold,#CURRENT#,HIDE,Critical_Displacement,#CURRENT#,HIDE,Friction_Coefficient,#CURRENT#,HIDE,Tau_Stress,#CURRENT#,HIDE,Curve_Fitting_Eta,#CURRENT#,HIDE,Friction_Angle,#CURRENT#,HIDE,Cohesion,#CURRENT#,HIDE,Dilatancy_Angle,#CURRENT#)
-DEPENDENCIES: (ElasticCohesive2DLaw,RESTORE,Thickness,#CURRENT#,RESTORE,Normal_Stiffness,#CURRENT#,RESTORE,Shear_Stiffness,#CURRENT#,RESTORE,Penalty_Stiffness,#CURRENT#,HIDE,Young_Modulus,#CURRENT#,HIDE,Poisson_Ratio,#CURRENT#,HIDE,Yield_Stress,#CURRENT#,HIDE,Tensile_Strength,#CURRENT#,HIDE,Shear_Factor,#CURRENT#,HIDE,Damage_Evolution_Law,#CURRENT#,HIDE,Shear_Fracture_Energy,#CURRENT#,HIDE,State_Variable,#CURRENT#,HIDE,Damage_Threshold,#CURRENT#,HIDE,Critical_Displacement,#CURRENT#,HIDE,Friction_Coefficient,#CURRENT#,HIDE,Tau_Stress,#CURRENT#,HIDE,Curve_Fitting_Eta,#CURRENT#,HIDE,Friction_Angle,#CURRENT#,HIDE,Cohesion,#CURRENT#,HIDE,Dilatancy_Angle,#CURRENT#)
-DEPENDENCIES: (IsotropicDamageCohesive3DLaw,RESTORE,Thickness,#CURRENT#,RESTORE,Normal_Stiffness,#CURRENT#,RESTORE,Shear_Stiffness,#CURRENT#,RESTORE,Penalty_Stiffness,#CURRENT#,HIDE,Young_Modulus,#CURRENT#,HIDE,Poisson_Ratio,#CURRENT#,HIDE,Yield_Stress,#CURRENT#,RESTORE,Tensile_Strength,#CURRENT#,RESTORE,Shear_Factor,#CURRENT#,RESTORE,Damage_Evolution_Law,#CURRENT#,HIDE,Shear_Fracture_Energy,#CURRENT#,HIDE,State_Variable,#CURRENT#,HIDE,Damage_Threshold,#CURRENT#,HIDE,Critical_Displacement,#CURRENT#,HIDE,Friction_Coefficient,#CURRENT#,HIDE,Tau_Stress,#CURRENT#,HIDE,Curve_Fitting_Eta,#CURRENT#,HIDE,Friction_Angle,#CURRENT#,HIDE,Cohesion,#CURRENT#,HIDE,Dilatancy_Angle,#CURRENT#)
-DEPENDENCIES: (IsotropicDamageCohesive2DLaw,RESTORE,Thickness,#CURRENT#,RESTORE,Normal_Stiffness,#CURRENT#,RESTORE,Shear_Stiffness,#CURRENT#,RESTORE,Penalty_Stiffness,#CURRENT#,HIDE,Young_Modulus,#CURRENT#,HIDE,Poisson_Ratio,#CURRENT#,HIDE,Yield_Stress,#CURRENT#,RESTORE,Tensile_Strength,#CURRENT#,RESTORE,Shear_Factor,#CURRENT#,RESTORE,Damage_Evolution_Law,#CURRENT#,HIDE,Shear_Fracture_Energy,#CURRENT#,HIDE,State_Variable,#CURRENT#,HIDE,Damage_Threshold,#CURRENT#,HIDE,Critical_Displacement,#CURRENT#,HIDE,Friction_Coefficient,#CURRENT#,HIDE,Tau_Stress,#CURRENT#,HIDE,Curve_Fitting_Eta,#CURRENT#,HIDE,Friction_Angle,#CURRENT#,HIDE,Cohesion,#CURRENT#,HIDE,Dilatancy_Angle,#CURRENT#)
-DEPENDENCIES: (BilinearCohesivePlaneStress2DLaw,RESTORE,Thickness,#CURRENT#,HIDE,Normal_Stiffness,#CURRENT#,HIDE,Shear_Stiffness,#CURRENT#,HIDE,Penalty_Stiffness,#CURRENT#,RESTORE,Young_Modulus,#CURRENT#,RESTORE,Poisson_Ratio,#CURRENT#,RESTORE,Yield_Stress,#CURRENT#,HIDE,Tensile_Strength,#CURRENT#,HIDE,Shear_Factor,#CURRENT#,HIDE,Damage_Evolution_Law,#CURRENT#,HIDE,Fracture_Energy,#CURRENT#,HIDE,Shear_Fracture_Energy,#CURRENT#,HIDE,State_Variable,#CURRENT#,RESTORE,Damage_Threshold,#CURRENT#,RESTORE,Critical_Displacement,#CURRENT#,RESTORE,Friction_Coefficient,#CURRENT#,HIDE,Tau_Stress,#CURRENT#,HIDE,Curve_Fitting_Eta,#CURRENT#,HIDE,Friction_Angle,#CURRENT#,HIDE,Cohesion,#CURRENT#,HIDE,Dilatancy_Angle,#CURRENT#)
-DEPENDENCIES: (BilinearCohesivePlaneStrain2DLaw,HIDE,Thickness,1.0,HIDE,Normal_Stiffness,#CURRENT#,HIDE,Shear_Stiffness,#CURRENT#,HIDE,Penalty_Stiffness,#CURRENT#,RESTORE,Young_Modulus,#CURRENT#,RESTORE,Poisson_Ratio,#CURRENT#,RESTORE,Yield_Stress,#CURRENT#,HIDE,Fracture_Energy,#CURRENT#,HIDE,Tensile_Strength,#CURRENT#,HIDE,Shear_Factor,#CURRENT#,HIDE,Damage_Evolution_Law,#CURRENT#,HIDE,Shear_Fracture_Energy,#CURRENT#,HIDE,State_Variable,#CURRENT#,RESTORE,Damage_Threshold,#CURRENT#,RESTORE,Critical_Displacement,#CURRENT#,RESTORE,Friction_Coefficient,#CURRENT#,HIDE,Tau_Stress,#CURRENT#,HIDE,Curve_Fitting_Eta,#CURRENT#,HIDE,Friction_Angle,#CURRENT#,HIDE,Cohesion,#CURRENT#,HIDE,Dilatancy_Angle,#CURRENT#)
-DEPENDENCIES: (BilinearCohesive3DLaw,HIDE,Thickness,#CURRENT#,HIDE,Normal_Stiffness,#CURRENT#,HIDE,Shear_Stiffness,#CURRENT#,HIDE,Penalty_Stiffness,#CURRENT#,RESTORE,Young_Modulus,#CURRENT#,RESTORE,Poisson_Ratio,#CURRENT#,RESTORE,Yield_Stress,#CURRENT#,HIDE,Tensile_Strength,#CURRENT#,HIDE,Shear_Factor,#CURRENT#,HIDE,Damage_Evolution_Law,#CURRENT#,HIDE,Fracture_Energy,#CURRENT#,HIDE,Shear_Fracture_Energy,#CURRENT#,HIDE,State_Variable,#CURRENT#,RESTORE,Damage_Threshold,#CURRENT#,RESTORE,Critical_Displacement,#CURRENT#,RESTORE,Friction_Coefficient,#CURRENT#,HIDE,Tau_Stress,#CURRENT#,HIDE,Curve_Fitting_Eta,#CURRENT#,HIDE,Friction_Angle,#CURRENT#,HIDE,Cohesion,#CURRENT#,HIDE,Dilatancy_Angle,#CURRENT#)
-DEPENDENCIES: (ExponentialCohesivePlaneStrain2DLaw,HIDE,Thickness,1.0,HIDE,Normal_Stiffness,#CURRENT#,HIDE,Shear_Stiffness,#CURRENT#,HIDE,Penalty_Stiffness,#CURRENT#,RESTORE,Young_Modulus,#CURRENT#,RESTORE,Poisson_Ratio,#CURRENT#,RESTORE,Yield_Stress,#CURRENT#,RESTORE,Fracture_Energy,#CURRENT#,HIDE,Tensile_Strength,#CURRENT#,HIDE,Shear_Factor,#CURRENT#,HIDE,Damage_Evolution_Law,#CURRENT#,RESTORE,Shear_Fracture_Energy,#CURRENT#,RESTORE,State_Variable,#CURRENT#,HIDE,Damage_Threshold,#CURRENT#,HIDE,Critical_Displacement,#CURRENT#,HIDE,Friction_Coefficient,#CURRENT#,RESTORE,Tau_Stress,#CURRENT#,RESTORE,Curve_Fitting_Eta,#CURRENT#,HIDE,Friction_Angle,#CURRENT#,HIDE,Cohesion,#CURRENT#,HIDE,Dilatancy_Angle,#CURRENT#)
-DEPENDENCIES: (ExponentialCohesivePlaneStress2DLaw,RESTORE,Thickness,#CURRENT#,HIDE,Normal_Stiffness,#CURRENT#,HIDE,Shear_Stiffness,#CURRENT#,HIDE,Penalty_Stiffness,#CURRENT#,RESTORE,Young_Modulus,#CURRENT#,RESTORE,Poisson_Ratio,#CURRENT#,RESTORE,Yield_Stress,#CURRENT#,HIDE,Tensile_Strength,#CURRENT#,HIDE,Shear_Factor,#CURRENT#,HIDE,Damage_Evolution_Law,#CURRENT#,RESTORE,Fracture_Energy,#CURRENT#,RESTORE,Shear_Fracture_Energy,#CURRENT#,RESTORE,State_Variable,#CURRENT#,HIDE,Damage_Threshold,#CURRENT#,HIDE,Critical_Displacement,#CURRENT#,HIDE,Friction_Coefficient,#CURRENT#,RESTORE,Tau_Stress,#CURRENT#,RESTORE,Curve_Fitting_Eta,#CURRENT#,HIDE,Friction_Angle,#CURRENT#,HIDE,Cohesion,#CURRENT#,HIDE,Dilatancy_Angle,#CURRENT#)
-DEPENDENCIES: (ExponentialCohesive3DLaw,HIDE,Thickness,#CURRENT#,HIDE,Normal_Stiffness,#CURRENT#,HIDE,Shear_Stiffness,#CURRENT#,HIDE,Penalty_Stiffness,#CURRENT#,RESTORE,Young_Modulus,#CURRENT#,RESTORE,Poisson_Ratio,#CURRENT#,RESTORE,Yield_Stress,#CURRENT#,HIDE,Tensile_Strength,#CURRENT#,HIDE,Shear_Factor,#CURRENT#,HIDE,Damage_Evolution_Law,#CURRENT#,RESTORE,Fracture_Energy,#CURRENT#,RESTORE,Shear_Fracture_Energy,#CURRENT#,RESTORE,State_Variable,#CURRENT#,HIDE,Damage_Threshold,#CURRENT#,HIDE,Critical_Displacement,#CURRENT#,HIDE,Friction_Coefficient,#CURRENT#,RESTORE,Tau_Stress,#CURRENT#,RESTORE,Curve_Fitting_Eta,#CURRENT#,HIDE,Friction_Angle,#CURRENT#,HIDE,Cohesion,#CURRENT#,HIDE,Dilatancy_Angle,#CURRENT#)
-DEPENDENCIES: (ElastoPlasticModMohrCoulombCohesive2DLaw,RESTORE,Thickness,#CURRENT#,RESTORE,Normal_Stiffness,#CURRENT#,RESTORE,Shear_Stiffness,#CURRENT#,RESTORE,Penalty_Stiffness,#CURRENT#,HIDE,Young_Modulus,#CURRENT#,HIDE,Poisson_Ratio,#CURRENT#,HIDE,Yield_Stress,#CURRENT#,RESTORE,Tensile_Strength,#CURRENT#,HIDE,Shear_Factor,#CURRENT#,HIDE,Damage_Evolution_Law,#CURRENT#,HIDE,Shear_Fracture_Energy,#CURRENT#,HIDE,State_Variable,#CURRENT#,HIDE,Damage_Threshold,#CURRENT#,HIDE,Critical_Displacement,#CURRENT#,HIDE,Friction_Coefficient,#CURRENT#,HIDE,Tau_Stress,#CURRENT#,HIDE,Curve_Fitting_Eta,#CURRENT#,RESTORE,Friction_Angle,#CURRENT#,RESTORE,Cohesion,#CURRENT#,RESTORE,Dilatancy_Angle,#CURRENT#)
-DEPENDENCIES: (ElastoPlasticModMohrCoulombCohesive3DLaw,RESTORE,Thickness,#CURRENT#,RESTORE,Normal_Stiffness,#CURRENT#,RESTORE,Shear_Stiffness,#CURRENT#,RESTORE,Penalty_Stiffness,#CURRENT#,HIDE,Young_Modulus,#CURRENT#,HIDE,Poisson_Ratio,#CURRENT#,HIDE,Yield_Stress,#CURRENT#,RESTORE,Tensile_Strength,#CURRENT#,HIDE,Shear_Factor,#CURRENT#,HIDE,Damage_Evolution_Law,#CURRENT#,HIDE,Shear_Fracture_Energy,#CURRENT#,HIDE,State_Variable,#CURRENT#,HIDE,Damage_Threshold,#CURRENT#,HIDE,Critical_Displacement,#CURRENT#,HIDE,Friction_Coefficient,#CURRENT#,HIDE,Tau_Stress,#CURRENT#,HIDE,Curve_Fitting_Eta,#CURRENT#,RESTORE,Friction_Angle,#CURRENT#,RESTORE,Cohesion,#CURRENT#,RESTORE,Dilatancy_Angle,#CURRENT#)
-DEPENDENCIES: (ElastoPlasticMohrCoulombCohesive2DLaw,RESTORE,Thickness,#CURRENT#,RESTORE,Normal_Stiffness,#CURRENT#,RESTORE,Shear_Stiffness,#CURRENT#,RESTORE,Penalty_Stiffness,#CURRENT#,HIDE,Young_Modulus,#CURRENT#,HIDE,Poisson_Ratio,#CURRENT#,HIDE,Yield_Stress,#CURRENT#,RESTORE,Tensile_Strength,#CURRENT#,HIDE,Shear_Factor,#CURRENT#,HIDE,Damage_Evolution_Law,#CURRENT#,HIDE,Shear_Fracture_Energy,#CURRENT#,HIDE,State_Variable,#CURRENT#,HIDE,Damage_Threshold,#CURRENT#,HIDE,Critical_Displacement,#CURRENT#,HIDE,Friction_Coefficient,#CURRENT#,HIDE,Tau_Stress,#CURRENT#,HIDE,Curve_Fitting_Eta,#CURRENT#,RESTORE,Friction_Angle,#CURRENT#,RESTORE,Cohesion,#CURRENT#,RESTORE,Dilatancy_Angle,#CURRENT#)
-DEPENDENCIES: (ElastoPlasticMohrCoulombCohesive3DLaw,RESTORE,Thickness,#CURRENT#,RESTORE,Normal_Stiffness,#CURRENT#,RESTORE,Shear_Stiffness,#CURRENT#,RESTORE,Penalty_Stiffness,#CURRENT#,HIDE,Young_Modulus,#CURRENT#,HIDE,Poisson_Ratio,#CURRENT#,HIDE,Yield_Stress,#CURRENT#,RESTORE,Tensile_Strength,#CURRENT#,HIDE,Shear_Factor,#CURRENT#,HIDE,Damage_Evolution_Law,#CURRENT#,HIDE,Shear_Fracture_Energy,#CURRENT#,HIDE,State_Variable,#CURRENT#,HIDE,Damage_Threshold,#CURRENT#,HIDE,Critical_Displacement,#CURRENT#,HIDE,Friction_Coefficient,#CURRENT#,HIDE,Tau_Stress,#CURRENT#,HIDE,Curve_Fitting_Eta,#CURRENT#,RESTORE,Friction_Angle,#CURRENT#,RESTORE,Cohesion,#CURRENT#,RESTORE,Dilatancy_Angle,#CURRENT#)
-QUESTION: Damage_Evolution_Law#CB#(Linear,Exponential)
-VALUE: Linear
-QUESTION: Normal_Stiffness
-VALUE: 1.0e7
-HELP: It defines the normal stiffness in contact cases. Units in IS: N/m2
-QUESTION: Shear_Stiffness
-VALUE: 1.0e7
-HELP: It defines the shear stiffness in contact cases. Units in IS: N/m2
-QUESTION: Penalty_Stiffness
-VALUE: 1.0e6
-HELP: It defines the shear stiffness in contact cases. Units in IS: N/m2
-QUESTION: Young_Modulus
-VALUE: 3.0e7
-HELP: It defines the normal stiffness in contact cases. Units in IS: N/m2
-QUESTION: Poisson_Ratio
-VALUE: 0.2
-QUESTION: Solid_Density
-VALUE: 2.0e3
-HELP: Units in IS: Kg/m3
-QUESTION: Liquid_Density
-VALUE: 1.0e3
-HELP: Units in IS: Kg/m3
-QUESTION: Porosity
-VALUE: 0.3
-QUESTION: Solid_Bulk_Modulus
-VALUE: 1.0e12
-HELP: Units in IS: N/m2
-QUESTION: Liquid_Bulk_Modulus
-VALUE: 2.0e9
-HELP: Units in IS: N/m2
-QUESTION: Transversal_Permeability_Coefficient
-VALUE: 1.0e-13
-HELP: This is the transversal leak-off coefficient. Units in IS: m2/m
-QUESTION: Dynamic_Viscosity
-VALUE: 1.0e-3
-HELP: Units in IS: N/m2·s
-QUESTION: Thickness
-VALUE: 1.0
-HELP: Units in IS: m
-QUESTION: Damage_Threshold
-VALUE: 1.0e-4
-HELP: Strain value after which damage starts growing.
-QUESTION: Initial_Joint_Width
-VALUE: 0.0
-HELP: Initial joint width. It can be larger or equal to the geometrical joint width. Units in IS: m
-QUESTION: Critical_Displacement
-VALUE: 0.05
-HELP: Relative displacement after which cohesive stresses vanish. Units in IS: m
-QUESTION: Yield_Stress
-VALUE: 3.5e6
-HELP: Cohesive strength of the joint. Units in IS: N/m2
-QUESTION: Friction_Coefficient
-VALUE: 0.4
-HELP: Mohr-Coulomb's friction coefficient in contact cases.
-QUESTION: Joint_Activation#CB#(true,false)
-VALUE: false
-HELP: True means that the joint is initially inactive, but can be activated during the calculation. False means that the joint is active from the beginning.
-DEPENDENCIES: (true,RESTORE,Stress_Limit,#CURRENT#)(false,HIDE,Stress_Limit,#CURRENT#)
-QUESTION: Stress_Limit
-VALUE: 100.0e6
-HELP: Principal stress S1 after which the joint is activated.
-QUESTION: Fracture_Energy
-VALUE: 100.0
-HELP: Units in IS: N·m/m2
-QUESTION: Shear_Fracture_Energy
-VALUE: 100.0
-HELP: Units in IS: N·m/m2
-QUESTION: Tensile_Strength
-VALUE: 1.0
-HELP: Tensile stress associated with the elastic limit. Units in IS: N/m2
-QUESTION: Shear_Factor
-VALUE: 1.0
-HELP: Factor that defines the contribution of the shear strain in the computation of the equivalent strain measure. It must vary from 0.0 to 1.0
-QUESTION: Friction_Angle
-VALUE: 0.35
-HELP: Friction angle of the cohesive yield surface. Units in IS: rad
-QUESTION: Cohesion
-VALUE: 100
-HELP: Cohesion of the yield surface. Units in IS: N/m2
-QUESTION: Dilatancy_Angle
-VALUE: 0.35
-HELP: Dilantancy angle of the cohesive plastic potential surface. Units in IS: rad
-QUESTION: State_Variable
-VALUE: 1.0e-12
-HELP: Initial value for the internal state variable of exponential cohesive law. A high value implies that the joint is initially damaged (e.g. 1.0e12).
-QUESTION: Tau_Stress
-VALUE: 1.0
-HELP: Shear strength of the joint. Units in IS: N/m2
-QUESTION: Curve_Fitting_Eta
-VALUE: 1.0
-QUESTION: Biot_coefficient
-VALUE: 0.6
-END CONDITION
-
 
 BOOK: Dirichlet_Constraints
 
@@ -467,59 +365,6 @@ CONDITION: Normal_Liquid_Flux
 CONDTYPE: over groups
 CONDMESHTYPE: over face elements
 GROUPALLOW: lines surfaces nodes faces
-QUESTION: Value
-VALUE: 0.0
-HELP: Units in IS for 2D cases: m2/s. Units in IS for 3D cases: m/s. A positive value corresponds to an outflow.
-QUESTION: Imposed_Normal_Liquid_Flux#CB#(Constant,Table_Interpolation)
-VALUE: Constant
-DEPENDENCIES: (Constant,HIDE,Normal_Liquid_Flux_Table,#CURRENT#)(Table_Interpolation,RESTORE,Normal_Liquid_Flux_Table,#CURRENT#)
-QUESTION: Normal_Liquid_Flux_Table(Time,Normal_Liquid_Flux)
-VALUE: #N# 2 0.0 0.0
-END CONDITION
-
-CONDITION: Interface_Face_Load
-CONDTYPE: over groups
-CONDMESHTYPE: over body elements
-GROUPALLOW: lines surfaces nodes elements
-QUESTION: FACE_LOAD_X#CB#(true,false)
-VALUE: true
-DEPENDENCIES: (false,HIDE,X_Value,0.0,HIDE,Imposed_Face_Load_X,Constant)(true,RESTORE,X_Value,#CURRENT#,RESTORE,Imposed_Face_Load_X,#CURRENT#)
-QUESTION: X_Value
-VALUE: 0.0
-HELP: Units in IS for 2D cases: N/m. Units in IS for 3D cases: N/m2.
-QUESTION: Imposed_Face_Load_X#CB#(Constant,Table_Interpolation)
-VALUE: Constant
-DEPENDENCIES: (Constant,HIDE,Face_Load_X_Table,#CURRENT#)(Table_Interpolation,RESTORE,Face_Load_X_Table,#CURRENT#)
-QUESTION: Face_Load_X_Table(Time,Face_Load_X)
-VALUE: #N# 2 0.0 0.0
-QUESTION: FACE_LOAD_Y#CB#(true,false)
-VALUE: true
-DEPENDENCIES: (false,HIDE,Y_Value,0.0,HIDE,Imposed_Face_Load_Y,Constant)(true,RESTORE,Y_Value,#CURRENT#,RESTORE,Imposed_Face_Load_Y,#CURRENT#)
-QUESTION: Y_Value
-VALUE: 0.0
-HELP: Units in IS for 2D cases: N/m. Units in IS for 3D cases: N/m2.
-QUESTION: Imposed_Face_Load_Y#CB#(Constant,Table_Interpolation)
-VALUE: Constant
-DEPENDENCIES: (Constant,HIDE,Face_Load_Y_Table,#CURRENT#)(Table_Interpolation,RESTORE,Face_Load_Y_Table,#CURRENT#)
-QUESTION: Face_Load_Y_Table(Time,Face_Load_Y)
-VALUE: #N# 2 0.0 0.0
-QUESTION: FACE_LOAD_Z#CB#(true,false)
-VALUE: true
-DEPENDENCIES: (false,HIDE,Z_Value,0.0,HIDE,Imposed_Face_Load_Z,Constant)(true,RESTORE,Z_Value,#CURRENT#,RESTORE,Imposed_Face_Load_Z,#CURRENT#)
-QUESTION: Z_Value
-VALUE: 0.0
-HELP: Units in IS for 2D cases: N/m. Units in IS for 3D cases: N/m2.
-QUESTION: Imposed_Face_Load_Z#CB#(Constant,Table_Interpolation)
-VALUE: Constant
-DEPENDENCIES: (Constant,HIDE,Face_Load_Z_Table,#CURRENT#)(Table_Interpolation,RESTORE,Face_Load_Z_Table,#CURRENT#)
-QUESTION: Face_Load_Z_Table(Time,Face_Load_Z)
-VALUE: #N# 2 0.0 0.0
-END CONDITION
-
-CONDITION: Interface_Normal_Liquid_Flux
-CONDTYPE: over groups
-CONDMESHTYPE: over body elements
-GROUPALLOW: lines surfaces nodes elements
 QUESTION: Value
 VALUE: 0.0
 HELP: Units in IS for 2D cases: m2/s. Units in IS for 3D cases: m/s. A positive value corresponds to an outflow.

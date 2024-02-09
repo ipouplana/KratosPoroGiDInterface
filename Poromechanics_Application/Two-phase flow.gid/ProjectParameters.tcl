@@ -62,16 +62,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
         puts $FileVar "        \"compute_reactions\":    [GiD_AccessValue get gendata Write_Reactions],"
     }
     puts $FileVar "        \"move_mesh_flag\":    [GiD_AccessValue get gendata Move_Mesh],"
-    set IsPeriodic [GiD_AccessValue get gendata Periodic_Interface_Conditions]
-    if {$IsPeriodic eq true} {
-        puts $FileVar "        \"periodic_interface_conditions\":    true,"
-        puts $FileVar "        \"reform_dofs_at_each_step\":    true,"
-        puts $FileVar "        \"nodal_smoothing\":    true,"
-    } else {
-        puts $FileVar "        \"periodic_interface_conditions\":    false,"
-        puts $FileVar "        \"reform_dofs_at_each_step\":    [GiD_AccessValue get gendata Reform_Dofs_At_Each_Step],"
-        puts $FileVar "        \"nodal_smoothing\":    [GiD_AccessValue get gendata Nodal_Smoothing],"
-    }
+    puts $FileVar "        \"reform_dofs_at_each_step\":    [GiD_AccessValue get gendata Reform_Dofs_At_Each_Step],"
+    puts $FileVar "        \"nodal_smoothing\":    [GiD_AccessValue get gendata Nodal_Smoothing],"
     puts $FileVar "        \"gp_to_nodal_variable_list\": \[\],"
     puts $FileVar "        \"gp_to_nodal_variable_extrapolate_non_historical\": false,"
     puts $FileVar "        \"block_builder\":    [GiD_AccessValue get gendata Block_Builder],"
@@ -159,8 +151,6 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     set PutStrings \[
     # Body_Part
     AppendGroupNames PutStrings Body_Part
-    # Interface_Part
-    AppendGroupNames PutStrings Interface_Part
     set PutStrings [string trimright $PutStrings ,]
     append PutStrings \]
     puts $FileVar "        \"problem_domain_sub_model_part_list\": $PutStrings,"
@@ -180,21 +170,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     AppendGroupNames PutStrings Normal_Load
     # Normal_Liquid_Flux
     AppendGroupNames PutStrings Normal_Liquid_Flux
-    # Interface_Face_Load
-    AppendGroupNames PutStrings Interface_Face_Load
-    # Interface_Normal_Liquid_Flux
-    AppendGroupNames PutStrings Interface_Normal_Liquid_Flux
     # Body_Acceleration
     AppendGroupNames PutStrings Body_Acceleration
-    # Periodic_Bars
-    if {$IsPeriodic eq true} {
-        set Groups [GiD_Info conditions Interface_Part groups]
-        for {set i 0} {$i < [llength $Groups]} {incr i} {
-            if {[lindex [lindex $Groups $i] 20] eq true} {
-                append PutStrings \" Periodic_Bars_[lindex [lindex $Groups $i] 1] \" ,
-            }
-        }
-    }
     set PutStrings [string trimright $PutStrings ,]
     append PutStrings \]
     puts $FileVar "        \"processes_sub_model_part_list\":      $PutStrings,"
@@ -216,10 +193,6 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
         AppendGroupNamesWithNum PutStrings iGroup Normal_Load
         # Normal_Liquid_Flux
         AppendGroupNamesWithNum PutStrings iGroup Normal_Liquid_Flux
-        # Interface_Face_Load
-        AppendGroupNamesWithNum PutStrings iGroup Interface_Face_Load
-        # Interface_Normal_Liquid_Flux
-        AppendGroupNamesWithNum PutStrings iGroup Interface_Normal_Liquid_Flux
         # Body_Acceleration
         AppendGroupNamesWithNum PutStrings iGroup Body_Acceleration
         if {$iGroup > 0} {
@@ -237,10 +210,6 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
         AppendGroupVariables PutStrings Normal_Load NORMAL_CONTACT_STRESS
         # Normal_Liquid_Flux
         AppendGroupVariables PutStrings Normal_Liquid_Flux NORMAL_LIQUID_FLUX
-        # Interface_Face_Load
-        AppendGroupVariables PutStrings Interface_Face_Load FACE_LOAD
-        # Interface_Normal_Liquid_Flux
-        AppendGroupVariables PutStrings Interface_Normal_Liquid_Flux NORMAL_LIQUID_FLUX
         # Body_Acceleration
         AppendGroupVariables PutStrings Body_Acceleration VOLUME_ACCELERATION
         if {$iGroup > 0} {
@@ -397,10 +366,6 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     incr NumGroups [llength $Groups]
     set Groups [GiD_Info conditions Normal_Liquid_Flux groups]
     incr NumGroups [llength $Groups]
-    set Groups [GiD_Info conditions Interface_Face_Load groups]
-    incr NumGroups [llength $Groups]
-    set Groups [GiD_Info conditions Interface_Normal_Liquid_Flux groups]
-    incr NumGroups [llength $Groups]
     set Groups [GiD_Info conditions Body_Acceleration groups]
     incr NumGroups [llength $Groups]
     if {$NumGroups > 0} {
@@ -418,12 +383,6 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
         # Normal_Liquid_Flux
         set Groups [GiD_Info conditions Normal_Liquid_Flux groups]
         WriteLoadScalarProcess FileVar iGroup $Groups NORMAL_LIQUID_FLUX $TableDict $NumGroups
-        # Interface_Face_Load
-        set Groups [GiD_Info conditions Interface_Face_Load groups]
-        WriteLoadVectorProcess FileVar iGroup $Groups FACE_LOAD $TableDict $NumGroups
-        # Interface_Normal_Liquid_Flux
-        set Groups [GiD_Info conditions Interface_Normal_Liquid_Flux groups]
-        WriteLoadScalarProcess FileVar iGroup $Groups NORMAL_LIQUID_FLUX $TableDict $NumGroups
         # Body_Acceleration
         set Groups [GiD_Info conditions Body_Acceleration groups]
         WriteLoadVectorProcess FileVar iGroup $Groups VOLUME_ACCELERATION $TableDict $NumGroups
@@ -432,25 +391,7 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     }
     ## auxiliar_process_list
     set NumGroups 0
-    if {$IsPeriodic eq true} {
-        set Groups [GiD_Info conditions Interface_Part groups]
-        for {set i 0} {$i < [llength $Groups]} {incr i} {
-            if {[lindex [lindex $Groups $i] 20] eq true} {
-                incr NumGroups
-            }
-        }
-    }
-    if {$NumGroups > 0} {
-        set iGroup 0
-        puts $FileVar "        \"auxiliar_process_list\": \[\{"
-        # Periodic_Bars
-        if {$IsPeriodic eq true} {
-            set Groups [GiD_Info conditions Interface_Part groups]
-            WritePeriodicInterfaceProcess FileVar iGroup $Groups $NumGroups
-        }
-    } else {
-        puts $FileVar "        \"auxiliar_process_list\": \[\]"
-    }
+    puts $FileVar "        \"auxiliar_process_list\": \[\]"
 
     puts $FileVar "    \}"
     puts $FileVar "\}"

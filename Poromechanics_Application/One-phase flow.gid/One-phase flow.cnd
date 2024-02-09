@@ -66,7 +66,7 @@ HELP: Parameter controlling the residual strength of the damage evolution law.
 QUESTION: Softening_Slope
 VALUE: 9000.0
 HELP: Parameter controlling the slope of the softening branch of the damage evolution law.
-QUESTION: Biot_coefficient
+QUESTION: Biot_Coefficient
 VALUE: 0.6
 HELP: Nondimensional parameter relating the volume of the fluid change and the bulk volume change.
 END CONDITION
@@ -183,7 +183,7 @@ VALUE: 1.0
 HELP: Shear strength of the joint. Units in IS: N/m2
 QUESTION: Curve_Fitting_Eta
 VALUE: 1.0
-QUESTION: Biot_coefficient
+QUESTION: Biot_Coefficient
 VALUE: 0.6
 END CONDITION
 
