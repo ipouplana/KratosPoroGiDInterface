@@ -19,8 +19,8 @@ proc WriteMdpa { basename dir problemtypedir } {
     set TableDict [dict create]
     # Solid_Displacement
     ConstraintVectorTable FileVar TableId TableDict Solid_Displacement DISPLACEMENT
-    # Fluid_Pressure
-    PressureTable FileVar TableId TableDict Fluid_Pressure WATER_PRESSURE
+    # Liquid_Pressure
+    PressureTable FileVar TableId TableDict Liquid_Pressure LIQUID_PRESSURE
     # Force
     VectorTable FileVar TableId TableDict Force FORCE
     # Face_Load
@@ -29,12 +29,12 @@ proc WriteMdpa { basename dir problemtypedir } {
     VectorTable FileVar TableId TableDict Face_Load_Control_Module FACE_LOAD
     # Normal_Load
     NormalTangentialTable FileVar TableId TableDict Normal_Load NORMAL_CONTACT_STRESS TANGENTIAL_CONTACT_STRESS
-    # Normal_Fluid_Flux
-    ScalarTable FileVar TableId TableDict Normal_Fluid_Flux NORMAL_FLUID_FLUX
+    # Normal_Liquid_Flux
+    ScalarTable FileVar TableId TableDict Normal_Liquid_Flux NORMAL_LIQUID_FLUX
     # Interface_Face_Load
     VectorTable FileVar TableId TableDict Interface_Face_Load FACE_LOAD
-    # Interface_Normal_Fluid_Flux
-    ScalarTable FileVar TableId TableDict Interface_Normal_Fluid_Flux NORMAL_FLUID_FLUX
+    # Interface_Normal_Liquid_Flux
+    ScalarTable FileVar TableId TableDict Interface_Normal_Liquid_Flux NORMAL_LIQUID_FLUX
     # Body_Acceleration
     VectorTable FileVar TableId TableDict Body_Acceleration VOLUME_ACCELERATION
     puts $FileVar ""
@@ -60,10 +60,10 @@ proc WriteMdpa { basename dir problemtypedir } {
             puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 4]"
             puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 5]"
             puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 6]"
-            puts $FileVar "  DENSITY_WATER [lindex [lindex $Groups $i] 7]"
+            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 7]"
             puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 8]"
             puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  BULK_MODULUS_FLUID [lindex [lindex $Groups $i] 10]"
+            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 10]"
             puts $FileVar "  PERMEABILITY_XX [lindex [lindex $Groups $i] 11]"
             puts $FileVar "  PERMEABILITY_YY [lindex [lindex $Groups $i] 12]"
             puts $FileVar "  PERMEABILITY_ZZ [lindex [lindex $Groups $i] 13]"
@@ -91,10 +91,10 @@ proc WriteMdpa { basename dir problemtypedir } {
             puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 4]"
             puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 5]"
             puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 6]"
-            puts $FileVar "  DENSITY_WATER [lindex [lindex $Groups $i] 7]"
+            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 7]"
             puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 8]"
             puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  BULK_MODULUS_FLUID [lindex [lindex $Groups $i] 10]"
+            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 10]"
             puts $FileVar "  PERMEABILITY_XX [lindex [lindex $Groups $i] 11]"
             puts $FileVar "  PERMEABILITY_YY [lindex [lindex $Groups $i] 12]"
             puts $FileVar "  PERMEABILITY_XY [lindex [lindex $Groups $i] 14]"
@@ -115,10 +115,10 @@ proc WriteMdpa { basename dir problemtypedir } {
             puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 4]"
             puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 5]"
             puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 6]"
-            puts $FileVar "  DENSITY_WATER [lindex [lindex $Groups $i] 7]"
+            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 7]"
             puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 8]"
             puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  BULK_MODULUS_FLUID [lindex [lindex $Groups $i] 10]"
+            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 10]"
             puts $FileVar "  PERMEABILITY_XX [lindex [lindex $Groups $i] 11]"
             puts $FileVar "  PERMEABILITY_YY [lindex [lindex $Groups $i] 12]"
             puts $FileVar "  PERMEABILITY_ZZ [lindex [lindex $Groups $i] 13]"
@@ -153,10 +153,10 @@ proc WriteMdpa { basename dir problemtypedir } {
             puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 4]"
             puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 5]"
             puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 6]"
-            puts $FileVar "  DENSITY_WATER [lindex [lindex $Groups $i] 7]"
+            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 7]"
             puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 8]"
             puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  BULK_MODULUS_FLUID [lindex [lindex $Groups $i] 10]"
+            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 10]"
             puts $FileVar "  PERMEABILITY_XX [lindex [lindex $Groups $i] 11]"
             puts $FileVar "  PERMEABILITY_YY [lindex [lindex $Groups $i] 12]"
             puts $FileVar "  PERMEABILITY_XY [lindex [lindex $Groups $i] 14]"
@@ -176,10 +176,10 @@ proc WriteMdpa { basename dir problemtypedir } {
             puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 4]"
             puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 5]"
             puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 6]"
-            puts $FileVar "  DENSITY_WATER [lindex [lindex $Groups $i] 7]"
+            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 7]"
             puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 8]"
             puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  BULK_MODULUS_FLUID [lindex [lindex $Groups $i] 10]"
+            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 10]"
             puts $FileVar "  PERMEABILITY_XX [lindex [lindex $Groups $i] 11]"
             puts $FileVar "  PERMEABILITY_YY [lindex [lindex $Groups $i] 12]"
             puts $FileVar "  PERMEABILITY_ZZ [lindex [lindex $Groups $i] 13]"
@@ -207,10 +207,10 @@ proc WriteMdpa { basename dir problemtypedir } {
             puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 4]"
             puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 5]"
             puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 6]"
-            puts $FileVar "  DENSITY_WATER [lindex [lindex $Groups $i] 7]"
+            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 7]"
             puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 8]"
             puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  BULK_MODULUS_FLUID [lindex [lindex $Groups $i] 10]"
+            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 10]"
             puts $FileVar "  PERMEABILITY_XX [lindex [lindex $Groups $i] 11]"
             puts $FileVar "  PERMEABILITY_YY [lindex [lindex $Groups $i] 12]"
             puts $FileVar "  PERMEABILITY_XY [lindex [lindex $Groups $i] 14]"
@@ -236,10 +236,10 @@ proc WriteMdpa { basename dir problemtypedir } {
             puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
             puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
             puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_WATER [lindex [lindex $Groups $i] 12]"
+            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
             puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
             puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_FLUID [lindex [lindex $Groups $i] 15]"
+            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
             puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
             puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
             puts $FileVar "  DAMAGE_THRESHOLD [lindex [lindex $Groups $i] 19]"
@@ -258,10 +258,10 @@ proc WriteMdpa { basename dir problemtypedir } {
             puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
             puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
             puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_WATER [lindex [lindex $Groups $i] 12]"
+            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
             puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
             puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_FLUID [lindex [lindex $Groups $i] 15]"
+            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
             puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
             puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
             puts $FileVar "  THICKNESS [lindex [lindex $Groups $i] 18]"
@@ -284,10 +284,10 @@ proc WriteMdpa { basename dir problemtypedir } {
             puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
             puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
             puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_WATER [lindex [lindex $Groups $i] 12]"
+            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
             puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
             puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_FLUID [lindex [lindex $Groups $i] 15]"
+            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
             puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
             puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
             puts $FileVar "  THICKNESS [lindex [lindex $Groups $i] 18]"
@@ -310,10 +310,10 @@ proc WriteMdpa { basename dir problemtypedir } {
             puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
             puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
             puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_WATER [lindex [lindex $Groups $i] 12]"
+            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
             puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
             puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_FLUID [lindex [lindex $Groups $i] 15]"
+            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
             puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
             puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
             puts $FileVar "  INITIAL_JOINT_WIDTH [lindex [lindex $Groups $i] 20]"
@@ -340,10 +340,10 @@ proc WriteMdpa { basename dir problemtypedir } {
             puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
             puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
             puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_WATER [lindex [lindex $Groups $i] 12]"
+            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
             puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
             puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_FLUID [lindex [lindex $Groups $i] 15]"
+            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
             puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
             puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
             puts $FileVar "  THICKNESS [lindex [lindex $Groups $i] 18]"
@@ -373,10 +373,10 @@ proc WriteMdpa { basename dir problemtypedir } {
             puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
             puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
             puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_WATER [lindex [lindex $Groups $i] 12]"
+            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
             puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
             puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_FLUID [lindex [lindex $Groups $i] 15]"
+            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
             puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
             puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
             puts $FileVar "  INITIAL_JOINT_WIDTH [lindex [lindex $Groups $i] 20]"
@@ -397,10 +397,10 @@ proc WriteMdpa { basename dir problemtypedir } {
             puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
             puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
             puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_WATER [lindex [lindex $Groups $i] 12]"
+            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
             puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
             puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_FLUID [lindex [lindex $Groups $i] 15]"
+            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
             puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
             puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
             puts $FileVar "  INITIAL_JOINT_WIDTH [lindex [lindex $Groups $i] 20]"
@@ -419,10 +419,10 @@ proc WriteMdpa { basename dir problemtypedir } {
             puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
             puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
             puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_WATER [lindex [lindex $Groups $i] 12]"
+            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
             puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
             puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_FLUID [lindex [lindex $Groups $i] 15]"
+            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
             puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
             puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
             puts $FileVar "  THICKNESS [lindex [lindex $Groups $i] 17]"
@@ -445,10 +445,10 @@ proc WriteMdpa { basename dir problemtypedir } {
             puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
             puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
             puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_WATER [lindex [lindex $Groups $i] 12]"
+            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
             puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
             puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_FLUID [lindex [lindex $Groups $i] 15]"
+            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
             puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
             puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
             puts $FileVar "  INITIAL_JOINT_WIDTH [lindex [lindex $Groups $i] 20]"
@@ -473,10 +473,10 @@ proc WriteMdpa { basename dir problemtypedir } {
             puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
             puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
             puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_WATER [lindex [lindex $Groups $i] 12]"
+            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
             puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
             puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_FLUID [lindex [lindex $Groups $i] 15]"
+            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
             puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
             puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
             puts $FileVar "  INITIAL_JOINT_WIDTH [lindex [lindex $Groups $i] 20]"
@@ -501,10 +501,10 @@ proc WriteMdpa { basename dir problemtypedir } {
             puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
             puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
             puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_WATER [lindex [lindex $Groups $i] 12]"
+            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
             puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
             puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_FLUID [lindex [lindex $Groups $i] 15]"
+            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
             puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
             puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
             puts $FileVar "  INITIAL_JOINT_WIDTH [lindex [lindex $Groups $i] 20]"
@@ -529,10 +529,10 @@ proc WriteMdpa { basename dir problemtypedir } {
             puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
             puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
             puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_WATER [lindex [lindex $Groups $i] 12]"
+            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
             puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
             puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_FLUID [lindex [lindex $Groups $i] 15]"
+            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
             puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
             puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
             puts $FileVar "  INITIAL_JOINT_WIDTH [lindex [lindex $Groups $i] 20]"
@@ -793,8 +793,8 @@ proc WriteMdpa { basename dir problemtypedir } {
             }
         }
     }
-    # Normal_Fluid_Flux
-    set Groups [GiD_Info conditions Normal_Fluid_Flux groups]
+    # Normal_Liquid_Flux
+    set Groups [GiD_Info conditions Normal_Liquid_Flux groups]
     if {$Dim eq 2} {
         if {$IsQuadratic eq 0} {
             if {$FIC eq false} {
@@ -805,8 +805,8 @@ proc WriteMdpa { basename dir problemtypedir } {
                 WriteFaceConditions FileVar ConditionId ConditionDict $Groups UPwNormalFluxFICCondition2D2N $PropertyDict
             }
         } else {
-            # LineNormalFluidFluxDiffOrderCondition2D3N
-            WriteFaceConditions FileVar ConditionId ConditionDict $Groups LineNormalFluidFluxDiffOrderCondition2D3N $PropertyDict
+            # LineNormalLiquidFluxDiffOrderCondition2D3N
+            WriteFaceConditions FileVar ConditionId ConditionDict $Groups LineNormalLiquidFluxDiffOrderCondition2D3N $PropertyDict
         }
     } else {
         if {$IsQuadratic eq 0} {
@@ -834,19 +834,19 @@ proc WriteMdpa { basename dir problemtypedir } {
         } elseif {$IsQuadratic eq 1} {
             for {set i 0} {$i < [llength $Groups]} {incr i} {
                 set MyConditionList [list]
-                # SurfaceNormalFluidFluxDiffOrderCondition3D6N
-                WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] tetrahedra SurfaceNormalFluidFluxDiffOrderCondition3D6N $PropertyDict
-                # SurfaceNormalFluidFluxDiffOrderCondition3D8N
-                WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] hexahedra SurfaceNormalFluidFluxDiffOrderCondition3D8N $PropertyDict
+                # SurfaceNormalLiquidFluxDiffOrderCondition3D6N
+                WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] tetrahedra SurfaceNormalLiquidFluxDiffOrderCondition3D6N $PropertyDict
+                # SurfaceNormalLiquidFluxDiffOrderCondition3D8N
+                WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] hexahedra SurfaceNormalLiquidFluxDiffOrderCondition3D8N $PropertyDict
                 dict set ConditionDict [lindex [lindex $Groups $i] 1] $MyConditionList
             }
         } else {
             for {set i 0} {$i < [llength $Groups]} {incr i} {
                 set MyConditionList [list]
-                # SurfaceNormalFluidFluxDiffOrderCondition3D6N
-                WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] tetrahedra SurfaceNormalFluidFluxDiffOrderCondition3D6N $PropertyDict
-                # SurfaceNormalFluidFluxDiffOrderCondition3D9N
-                WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] hexahedra SurfaceNormalFluidFluxDiffOrderCondition3D9N $PropertyDict
+                # SurfaceNormalLiquidFluxDiffOrderCondition3D6N
+                WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] tetrahedra SurfaceNormalLiquidFluxDiffOrderCondition3D6N $PropertyDict
+                # SurfaceNormalLiquidFluxDiffOrderCondition3D9N
+                WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] hexahedra SurfaceNormalLiquidFluxDiffOrderCondition3D9N $PropertyDict
                 dict set ConditionDict [lindex [lindex $Groups $i] 1] $MyConditionList
             }
         }
@@ -862,8 +862,8 @@ proc WriteMdpa { basename dir problemtypedir } {
         WriteInterfaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] quadrilateral UPwFaceLoadInterfaceCondition3D4N $InterfaceElemsProp QuadrilateralInterface3D4Connectivities
         dict set ConditionDict [lindex [lindex $Groups $i] 1] $MyConditionList
     }
-    # Interface_Normal_Fluid_Flux
-    set Groups [GiD_Info conditions Interface_Normal_Fluid_Flux groups]
+    # Interface_Normal_Liquid_Flux
+    set Groups [GiD_Info conditions Interface_Normal_Liquid_Flux groups]
     for {set i 0} {$i < [llength $Groups]} {incr i} {
         set MyConditionList [list]
         # UPwNormalFluxInterfaceCondition2D2N
@@ -914,8 +914,8 @@ proc WriteMdpa { basename dir problemtypedir } {
     WriteElementSubmodelPart FileVar Interface_Part
     # Solid_Displacement
     WriteConstraintSubmodelPart FileVar Solid_Displacement $TableDict
-    # Fluid_Pressure
-    WriteConstraintSubmodelPart FileVar Fluid_Pressure $TableDict
+    # Liquid_Pressure
+    WriteConstraintSubmodelPart FileVar Liquid_Pressure $TableDict
     # Force
     WriteLoadSubmodelPart FileVar Force $TableDict $ConditionDict
     # Face_Load
@@ -924,12 +924,12 @@ proc WriteMdpa { basename dir problemtypedir } {
     WriteLoadSubmodelPart FileVar Face_Load_Control_Module $TableDict $ConditionDict
     # Normal_Load
     WriteLoadSubmodelPart FileVar Normal_Load $TableDict $ConditionDict
-    # Normal_Fluid_Flux
-    WriteLoadSubmodelPart FileVar Normal_Fluid_Flux $TableDict $ConditionDict
+    # Normal_Liquid_Flux
+    WriteLoadSubmodelPart FileVar Normal_Liquid_Flux $TableDict $ConditionDict
     # Interface_Face_Load
     WriteLoadSubmodelPart FileVar Interface_Face_Load $TableDict $ConditionDict
-    # Interface_Normal_Fluid_Flux
-    WriteLoadSubmodelPart FileVar Interface_Normal_Fluid_Flux $TableDict $ConditionDict
+    # Interface_Normal_Liquid_Flux
+    WriteLoadSubmodelPart FileVar Interface_Normal_Liquid_Flux $TableDict $ConditionDict
     # Body_Acceleration
     WriteConstraintSubmodelPart FileVar Body_Acceleration $TableDict
 

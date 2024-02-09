@@ -148,7 +148,7 @@ VALUE: 0
 TITLE:Output_Configuration
 QUESTION: Write_Solid_Displacement#CB#(true,false)
 VALUE: true
-QUESTION: Write_Fluid_Pressure#CB#(true,false)
+QUESTION: Write_Liquid_Pressure#CB#(true,false)
 VALUE: true
 QUESTION: Write_Reactions#CB#(true,false)
 VALUE: false
@@ -160,7 +160,7 @@ QUESTION: Write_Normal_Load#CB#(true,false)
 VALUE: false
 QUESTION: Write_Tangential_Load#CB#(true,false)
 VALUE: false
-QUESTION: Write_Normal_Fluid_Flux#CB#(true,false)
+QUESTION: Write_Normal_Liquid_Flux#CB#(true,false)
 VALUE: false
 QUESTION: Write_Body_Acceleration#CB#(true,false)
 VALUE: false
@@ -175,9 +175,9 @@ QUESTION: Write_Initial_Stress#CB#(true,false)
 VALUE: false
 QUESTION: Write_Von_Mises_Stress#CB#(true,false)
 VALUE: false
-QUESTION: Write_Fluid_Flux#CB#(true,false)
+QUESTION: Write_Liquid_Flux#CB#(true,false)
 VALUE: true
-QUESTION: Write_Fluid_Pressure_Gradient#CB#(true,false)
+QUESTION: Write_Liquid_Pressure_Gradient#CB#(true,false)
 VALUE: false
 QUESTION: Write_Permeability#CB#(true,false)
 VALUE: false
@@ -191,7 +191,7 @@ QUESTION: Write_Local_Stress_Vector#CB#(true,false)
 VALUE: false
 QUESTION: Write_Local_Relative_Displacement#CB#(true,false)
 VALUE: false
-QUESTION: Write_Local_Fluid_Flux#CB#(true,false)
+QUESTION: Write_Local_Liquid_Flux#CB#(true,false)
 VALUE: false
 QUESTION: Write_Local_Permeability#CB#(true,false)
 VALUE: false

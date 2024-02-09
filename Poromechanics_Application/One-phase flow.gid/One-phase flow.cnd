@@ -16,7 +16,7 @@ VALUE: 0.2
 QUESTION: Solid_Density
 VALUE: 2.0e3
 HELP: Units in IS: Kg/m3
-QUESTION: Fluid_Density
+QUESTION: Liquid_Density
 VALUE: 1.0e3
 HELP: Units in IS: Kg/m3
 QUESTION: Porosity
@@ -24,7 +24,7 @@ VALUE: 0.3
 QUESTION: Solid_Bulk_Modulus
 VALUE: 1.0e12
 HELP: Units in IS: N/m2
-QUESTION: Fluid_Bulk_Modulus
+QUESTION: Liquid_Bulk_Modulus
 VALUE: 2.0e9
 HELP: Units in IS: N/m2
 QUESTION: Intrinsic_Permeability_XX
@@ -68,6 +68,7 @@ VALUE: 9000.0
 HELP: Parameter controlling the slope of the softening branch of the damage evolution law.
 QUESTION: Biot_coefficient
 VALUE: 0.6
+HELP: Nondimensional parameter relating the volume of the fluid change and the bulk volume change.
 END CONDITION
 
 CONDITION: Interface_Part
@@ -111,7 +112,7 @@ VALUE: 0.2
 QUESTION: Solid_Density
 VALUE: 2.0e3
 HELP: Units in IS: Kg/m3
-QUESTION: Fluid_Density
+QUESTION: Liquid_Density
 VALUE: 1.0e3
 HELP: Units in IS: Kg/m3
 QUESTION: Porosity
@@ -119,7 +120,7 @@ VALUE: 0.3
 QUESTION: Solid_Bulk_Modulus
 VALUE: 1.0e12
 HELP: Units in IS: N/m2
-QUESTION: Fluid_Bulk_Modulus
+QUESTION: Liquid_Bulk_Modulus
 VALUE: 2.0e9
 HELP: Units in IS: N/m2
 QUESTION: Transversal_Permeability_Coefficient
@@ -240,7 +241,7 @@ QUESTION: Displacement_Z_Table(Time,Displacement_Z)
 VALUE: #N# 2 0.0 0.0
 END CONDITION
 
-CONDITION: Fluid_Pressure
+CONDITION: Liquid_Pressure
 CONDTYPE: over groups
 CONDMESHTYPE: over nodes
 GROUPALLOW: points lines surfaces volumes nodes
@@ -264,8 +265,8 @@ HELP: Fixed: it is not a DOF, it is an imposed value. Unfixed: it is an initial 
 DEPENDENCIES: (false,HIDE,Imposed_Pressure,Constant)(true,RESTORE,Imposed_Pressure,#CURRENT#)
 QUESTION: Imposed_Pressure#CB#(Constant,Table_Interpolation)
 VALUE: Constant
-DEPENDENCIES: (Constant,HIDE,Fluid_Pressure_Table,#CURRENT#)(Table_Interpolation,RESTORE,Fluid_Pressure_Table,#CURRENT#)
-QUESTION: Fluid_Pressure_Table(Time,Value)
+DEPENDENCIES: (Constant,HIDE,Liquid_Pressure_Table,#CURRENT#)(Table_Interpolation,RESTORE,Liquid_Pressure_Table,#CURRENT#)
+QUESTION: Liquid_Pressure_Table(Time,Value)
 VALUE: #N# 2 0.0 0.0
 HELP: If Pressure_Distribution is set to Uniform, Value means Pressure_Value. If Pressure_Distribution is Hydrostatic, Value means Reference_Coordinate.
 END CONDITION
@@ -453,17 +454,17 @@ QUESTION: Tangential_Load_Table(Time,Tangential_Load)
 VALUE: #N# 2 0.0 0.0
 END CONDITION
 
-CONDITION: Normal_Fluid_Flux
+CONDITION: Normal_Liquid_Flux
 CONDTYPE: over groups
 CONDMESHTYPE: over face elements
 GROUPALLOW: lines surfaces nodes faces
 QUESTION: Value
 VALUE: 0.0
 HELP: Units in IS for 2D cases: m2/s. Units in IS for 3D cases: m/s. A positive value corresponds to an outflow.
-QUESTION: Imposed_Normal_Fluid_Flux#CB#(Constant,Table_Interpolation)
+QUESTION: Imposed_Normal_Liquid_Flux#CB#(Constant,Table_Interpolation)
 VALUE: Constant
-DEPENDENCIES: (Constant,HIDE,Normal_Fluid_Flux_Table,#CURRENT#)(Table_Interpolation,RESTORE,Normal_Fluid_Flux_Table,#CURRENT#)
-QUESTION: Normal_Fluid_Flux_Table(Time,Normal_Fluid_Flux)
+DEPENDENCIES: (Constant,HIDE,Normal_Liquid_Flux_Table,#CURRENT#)(Table_Interpolation,RESTORE,Normal_Liquid_Flux_Table,#CURRENT#)
+QUESTION: Normal_Liquid_Flux_Table(Time,Normal_Liquid_Flux)
 VALUE: #N# 2 0.0 0.0
 END CONDITION
 
@@ -506,17 +507,17 @@ QUESTION: Face_Load_Z_Table(Time,Face_Load_Z)
 VALUE: #N# 2 0.0 0.0
 END CONDITION
 
-CONDITION: Interface_Normal_Fluid_Flux
+CONDITION: Interface_Normal_Liquid_Flux
 CONDTYPE: over groups
 CONDMESHTYPE: over body elements
 GROUPALLOW: lines surfaces nodes elements
 QUESTION: Value
 VALUE: 0.0
 HELP: Units in IS for 2D cases: m2/s. Units in IS for 3D cases: m/s. A positive value corresponds to an outflow.
-QUESTION: Imposed_Normal_Fluid_Flux#CB#(Constant,Table_Interpolation)
+QUESTION: Imposed_Normal_Liquid_Flux#CB#(Constant,Table_Interpolation)
 VALUE: Constant
-DEPENDENCIES: (Constant,HIDE,Normal_Fluid_Flux_Table,#CURRENT#)(Table_Interpolation,RESTORE,Normal_Fluid_Flux_Table,#CURRENT#)
-QUESTION: Normal_Fluid_Flux_Table(Time,Normal_Fluid_Flux)
+DEPENDENCIES: (Constant,HIDE,Normal_Liquid_Flux_Table,#CURRENT#)(Table_Interpolation,RESTORE,Normal_Liquid_Flux_Table,#CURRENT#)
+QUESTION: Normal_Liquid_Flux_Table(Time,Normal_Liquid_Flux)
 VALUE: #N# 2 0.0 0.0
 END CONDITION
 
