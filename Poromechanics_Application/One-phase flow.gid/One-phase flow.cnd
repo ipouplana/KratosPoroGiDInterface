@@ -48,6 +48,9 @@ HELP: Units in IS: m2
 QUESTION: Dynamic_Viscosity
 VALUE: 1.0e-3
 HELP: Units in IS: N/m2·s
+QUESTION: Biot_Coefficient
+VALUE: 0.6
+HELP: Nondimensional parameter relating the volume of the fluid change and the bulk volume change.
 QUESTION: Thickness
 VALUE: 1.0
 HELP: Units in IS: m
@@ -66,9 +69,6 @@ HELP: Parameter controlling the residual strength of the damage evolution law.
 QUESTION: Softening_Slope
 VALUE: 9000.0
 HELP: Parameter controlling the slope of the softening branch of the damage evolution law.
-QUESTION: Biot_Coefficient
-VALUE: 0.6
-HELP: Nondimensional parameter relating the volume of the fluid change and the bulk volume change.
 END CONDITION
 
 CONDITION: Interface_Part
@@ -129,6 +129,9 @@ HELP: This is the transversal leak-off coefficient. Units in IS: m2/m
 QUESTION: Dynamic_Viscosity
 VALUE: 1.0e-3
 HELP: Units in IS: N/m2·s
+QUESTION: Biot_Coefficient
+VALUE: 0.6
+HELP: Nondimensional parameter relating the volume of the fluid change and the bulk volume change.
 QUESTION: Thickness
 VALUE: 1.0
 HELP: Units in IS: m
@@ -147,13 +150,6 @@ HELP: Cohesive strength of the joint. Units in IS: N/m2
 QUESTION: Friction_Coefficient
 VALUE: 0.4
 HELP: Mohr-Coulomb's friction coefficient in contact cases.
-QUESTION: Joint_Activation#CB#(true,false)
-VALUE: false
-HELP: True means that the joint is initially inactive, but can be activated during the calculation. False means that the joint is active from the beginning.
-DEPENDENCIES: (true,RESTORE,Stress_Limit,#CURRENT#)(false,HIDE,Stress_Limit,#CURRENT#)
-QUESTION: Stress_Limit
-VALUE: 100.0e6
-HELP: Principal stress S1 after which the joint is activated.
 QUESTION: Fracture_Energy
 VALUE: 100.0
 HELP: Units in IS: N·m/m2
@@ -183,8 +179,13 @@ VALUE: 1.0
 HELP: Shear strength of the joint. Units in IS: N/m2
 QUESTION: Curve_Fitting_Eta
 VALUE: 1.0
-QUESTION: Biot_Coefficient
-VALUE: 0.6
+QUESTION: Joint_Activation#CB#(true,false)
+VALUE: false
+HELP: True means that the joint is initially inactive, but can be activated during the calculation. False means that the joint is active from the beginning.
+DEPENDENCIES: (true,RESTORE,Stress_Limit,#CURRENT#)(false,HIDE,Stress_Limit,#CURRENT#)
+QUESTION: Stress_Limit
+VALUE: 100.0e6
+HELP: Principal stress S1 after which the joint is activated.
 END CONDITION
 
 

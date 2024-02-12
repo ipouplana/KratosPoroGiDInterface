@@ -48,505 +48,141 @@ proc WriteMdpa { basename dir problemtypedir } {
     # Body_Part
     set Groups [GiD_Info conditions Body_Part groups]
     for {set i 0} {$i < [llength $Groups]} {incr i} {
+        incr PropertyId
+        dict set PropertyDict [lindex [lindex $Groups $i] 1] $PropertyId
+        puts $FileVar "Begin Properties $PropertyId"
         if {[lindex [lindex $Groups $i] 3] eq "LinearElasticSolid3DLaw"} {
-            incr PropertyId
-            dict set PropertyDict [lindex [lindex $Groups $i] 1] $PropertyId
-            puts $FileVar "Begin Properties $PropertyId"
-            if { ([GiD_AccessValue get gendata Initial_Stresses] eq false) || (([GiD_AccessValue get gendata Initial_Stresses] eq true) && ([GiD_AccessValue get gendata Mode] eq "save")) } {
-                puts $FileVar "  CONSTITUTIVE_LAW_NAME LinearElasticSolid3DLaw"
-            } else {
-                puts $FileVar "  CONSTITUTIVE_LAW_NAME HistoryLinearElastic3DLaw"
-            }
-            puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 4]"
-            puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 5]"
-            puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 6]"
-            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 7]"
-            puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 8]"
-            puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 10]"
-            puts $FileVar "  PERMEABILITY_XX [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  PERMEABILITY_YY [lindex [lindex $Groups $i] 12]"
-            puts $FileVar "  PERMEABILITY_ZZ [lindex [lindex $Groups $i] 13]"
-            puts $FileVar "  PERMEABILITY_XY [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  PERMEABILITY_YZ [lindex [lindex $Groups $i] 15]"
-            puts $FileVar "  PERMEABILITY_ZX [lindex [lindex $Groups $i] 16]"
-            puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
-            puts $FileVar "  THICKNESS [lindex [lindex $Groups $i] 18]"
-            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 24]"
-            puts $FileVar "End Properties"
-            puts $FileVar ""
-        } elseif { ([lindex [lindex $Groups $i] 3] eq "LinearElasticPlaneStrainSolid2DLaw") || ([lindex [lindex $Groups $i] 3] eq "LinearElasticPlaneStressSolid2DLaw")} {
-            incr PropertyId
-            dict set PropertyDict [lindex [lindex $Groups $i] 1] $PropertyId
-            puts $FileVar "Begin Properties $PropertyId"
             if { ([GiD_AccessValue get gendata Initial_Stresses] eq false) || (([GiD_AccessValue get gendata Initial_Stresses] eq true) && ([GiD_AccessValue get gendata Mode] eq "save")) } {
                 puts $FileVar "  CONSTITUTIVE_LAW_NAME [lindex [lindex $Groups $i] 3]"
             } else {
-                if {[lindex [lindex $Groups $i] 3] eq "LinearElasticPlaneStrainSolid2DLaw"} {
-                    puts $FileVar "  CONSTITUTIVE_LAW_NAME HistoryLinearElasticPlaneStrain2DLaw"
-                } else {
-                    puts $FileVar "  CONSTITUTIVE_LAW_NAME HistoryLinearElasticPlaneStress2DLaw"
-                }
+                puts $FileVar "  CONSTITUTIVE_LAW_NAME HistoryLinearElastic3DLaw"
             }
-            puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 4]"
-            puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 5]"
-            puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 6]"
-            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 7]"
-            puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 8]"
-            puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 10]"
-            puts $FileVar "  PERMEABILITY_XX [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  PERMEABILITY_YY [lindex [lindex $Groups $i] 12]"
-            puts $FileVar "  PERMEABILITY_XY [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
-            puts $FileVar "  THICKNESS [lindex [lindex $Groups $i] 18]"
-            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 24]"
-            puts $FileVar "End Properties"
-            puts $FileVar ""
+        } elseif {[lindex [lindex $Groups $i] 3] eq "LinearElasticPlaneStrainSolid2DLaw"} {
+            if { ([GiD_AccessValue get gendata Initial_Stresses] eq false) || (([GiD_AccessValue get gendata Initial_Stresses] eq true) && ([GiD_AccessValue get gendata Mode] eq "save")) } {
+                puts $FileVar "  CONSTITUTIVE_LAW_NAME [lindex [lindex $Groups $i] 3]"
+            } else {
+                puts $FileVar "  CONSTITUTIVE_LAW_NAME HistoryLinearElasticPlaneStrain2DLaw"
+            }
+        } elseif {[lindex [lindex $Groups $i] 3] eq "LinearElasticPlaneStressSolid2DLaw"} {
+            if { ([GiD_AccessValue get gendata Initial_Stresses] eq false) || (([GiD_AccessValue get gendata Initial_Stresses] eq true) && ([GiD_AccessValue get gendata Mode] eq "save")) } {
+                puts $FileVar "  CONSTITUTIVE_LAW_NAME [lindex [lindex $Groups $i] 3]"
+            } else {
+                puts $FileVar "  CONSTITUTIVE_LAW_NAME HistoryLinearElasticPlaneStress2DLaw"
+            }
         } elseif {[lindex [lindex $Groups $i] 3] eq "SimoJuDamage3DLaw"} {
-            incr PropertyId
-            dict set PropertyDict [lindex [lindex $Groups $i] 1] $PropertyId
-            puts $FileVar "Begin Properties $PropertyId"
             if {[GiD_AccessValue get gendata Non-local_Damage] eq true} {
                 puts $FileVar "  CONSTITUTIVE_LAW_NAME SimoJuNonlocalDamage3DLaw"
             } else {
                 puts $FileVar "  CONSTITUTIVE_LAW_NAME SimoJuLocalDamage3DLaw"
             }
-            puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 4]"
-            puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 5]"
-            puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 6]"
-            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 7]"
-            puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 8]"
-            puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 10]"
-            puts $FileVar "  PERMEABILITY_XX [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  PERMEABILITY_YY [lindex [lindex $Groups $i] 12]"
-            puts $FileVar "  PERMEABILITY_ZZ [lindex [lindex $Groups $i] 13]"
-            puts $FileVar "  PERMEABILITY_XY [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  PERMEABILITY_YZ [lindex [lindex $Groups $i] 15]"
-            puts $FileVar "  PERMEABILITY_ZX [lindex [lindex $Groups $i] 16]"
-            puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
-            puts $FileVar "  THICKNESS [lindex [lindex $Groups $i] 18]"
-            puts $FileVar "  DAMAGE_THRESHOLD [lindex [lindex $Groups $i] 19]"
-            puts $FileVar "  STRENGTH_RATIO [lindex [lindex $Groups $i] 20]"
-            puts $FileVar "  FRACTURE_ENERGY [lindex [lindex $Groups $i] 21]"
-            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 24]"
-            puts $FileVar "End Properties"
-            puts $FileVar ""
-        } elseif {([lindex [lindex $Groups $i] 3] eq "SimoJuDamagePlaneStrain2DLaw") || ([lindex [lindex $Groups $i] 3] eq "SimoJuDamagePlaneStress2DLaw")} {
-            incr PropertyId
-            dict set PropertyDict [lindex [lindex $Groups $i] 1] $PropertyId
-            puts $FileVar "Begin Properties $PropertyId"
+        } elseif {[lindex [lindex $Groups $i] 3] eq "SimoJuDamagePlaneStrain2DLaw"} {
             if {[GiD_AccessValue get gendata Non-local_Damage] eq true} {
-                if {[lindex [lindex $Groups $i] 3] eq "SimoJuDamagePlaneStrain2DLaw"} {
-                    puts $FileVar "  CONSTITUTIVE_LAW_NAME SimoJuNonlocalDamagePlaneStrain2DLaw"
-                } else {
-                    puts $FileVar "  CONSTITUTIVE_LAW_NAME SimoJuNonlocalDamagePlaneStress2DLaw"
-                }
+                puts $FileVar "  CONSTITUTIVE_LAW_NAME SimoJuNonlocalDamagePlaneStrain2DLaw"
             } else {
-                if {[lindex [lindex $Groups $i] 3] eq "SimoJuDamagePlaneStrain2DLaw"} {
-                    puts $FileVar "  CONSTITUTIVE_LAW_NAME SimoJuLocalDamagePlaneStrain2DLaw"
-                } else {
-                    puts $FileVar "  CONSTITUTIVE_LAW_NAME SimoJuLocalDamagePlaneStress2DLaw"
-                }
+                puts $FileVar "  CONSTITUTIVE_LAW_NAME SimoJuLocalDamagePlaneStrain2DLaw"
             }
-            puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 4]"
-            puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 5]"
-            puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 6]"
-            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 7]"
-            puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 8]"
-            puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 10]"
-            puts $FileVar "  PERMEABILITY_XX [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  PERMEABILITY_YY [lindex [lindex $Groups $i] 12]"
-            puts $FileVar "  PERMEABILITY_XY [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
-            puts $FileVar "  THICKNESS [lindex [lindex $Groups $i] 18]"
-            puts $FileVar "  DAMAGE_THRESHOLD [lindex [lindex $Groups $i] 19]"
-            puts $FileVar "  STRENGTH_RATIO [lindex [lindex $Groups $i] 20]"
-            puts $FileVar "  FRACTURE_ENERGY [lindex [lindex $Groups $i] 21]"
-            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 24]"
-            puts $FileVar "End Properties"
-            puts $FileVar ""
+        } elseif {[lindex [lindex $Groups $i] 3] eq "SimoJuDamagePlaneStress2DLaw"} {
+            if {[GiD_AccessValue get gendata Non-local_Damage] eq true} {
+                puts $FileVar "  CONSTITUTIVE_LAW_NAME SimoJuNonlocalDamagePlaneStress2DLaw"
+            } else {
+                puts $FileVar "  CONSTITUTIVE_LAW_NAME SimoJuLocalDamagePlaneStress2DLaw"
+            }
         } elseif {[lindex [lindex $Groups $i] 3] eq "ModifiedMisesDamage3DLaw"} {
-            incr PropertyId
-            dict set PropertyDict [lindex [lindex $Groups $i] 1] $PropertyId
-            puts $FileVar "Begin Properties $PropertyId"
             puts $FileVar "  CONSTITUTIVE_LAW_NAME ModifiedMisesNonlocalDamage3DLaw"
-            puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 4]"
-            puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 5]"
-            puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 6]"
-            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 7]"
-            puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 8]"
-            puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 10]"
-            puts $FileVar "  PERMEABILITY_XX [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  PERMEABILITY_YY [lindex [lindex $Groups $i] 12]"
-            puts $FileVar "  PERMEABILITY_ZZ [lindex [lindex $Groups $i] 13]"
-            puts $FileVar "  PERMEABILITY_XY [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  PERMEABILITY_YZ [lindex [lindex $Groups $i] 15]"
-            puts $FileVar "  PERMEABILITY_ZX [lindex [lindex $Groups $i] 16]"
-            puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
-            puts $FileVar "  THICKNESS [lindex [lindex $Groups $i] 18]"
-            puts $FileVar "  DAMAGE_THRESHOLD [lindex [lindex $Groups $i] 19]"
-            puts $FileVar "  STRENGTH_RATIO [lindex [lindex $Groups $i] 20]"
-            puts $FileVar "  RESIDUAL_STRENGTH [lindex [lindex $Groups $i] 22]"
-            puts $FileVar "  SOFTENING_SLOPE [lindex [lindex $Groups $i] 23]"
-            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 24]"
-            puts $FileVar "End Properties"
-            puts $FileVar ""
-        } elseif {[lindex [lindex $Groups $i] 3] eq "ModifiedMisesDamagePlaneStrain2DLaw" || [lindex [lindex $Groups $i] 3] eq "ModifiedMisesDamagePlaneStress2DLaw"} {
-            incr PropertyId
-            dict set PropertyDict [lindex [lindex $Groups $i] 1] $PropertyId
-            puts $FileVar "Begin Properties $PropertyId"
-            if {[lindex [lindex $Groups $i] 3] eq "ModifiedMisesDamagePlaneStrain2DLaw"} {
-                puts $FileVar "  CONSTITUTIVE_LAW_NAME ModifiedMisesNonlocalDamagePlaneStrain2DLaw"
-            } else {
-                puts $FileVar "  CONSTITUTIVE_LAW_NAME ModifiedMisesNonlocalDamagePlaneStress2DLaw"
-            }
-            puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 4]"
-            puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 5]"
-            puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 6]"
-            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 7]"
-            puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 8]"
-            puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 10]"
-            puts $FileVar "  PERMEABILITY_XX [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  PERMEABILITY_YY [lindex [lindex $Groups $i] 12]"
-            puts $FileVar "  PERMEABILITY_XY [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
-            puts $FileVar "  THICKNESS [lindex [lindex $Groups $i] 18]"
-            puts $FileVar "  DAMAGE_THRESHOLD [lindex [lindex $Groups $i] 19]"
-            puts $FileVar "  STRENGTH_RATIO [lindex [lindex $Groups $i] 20]"
-            puts $FileVar "  RESIDUAL_STRENGTH [lindex [lindex $Groups $i] 22]"
-            puts $FileVar "  SOFTENING_SLOPE [lindex [lindex $Groups $i] 23]"
-            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 24]"
-            puts $FileVar "End Properties"
-            puts $FileVar ""
+        } elseif {[lindex [lindex $Groups $i] 3] eq "ModifiedMisesDamagePlaneStrain2DLaw"} {
+            puts $FileVar "  CONSTITUTIVE_LAW_NAME ModifiedMisesNonlocalDamagePlaneStrain2DLaw"
+        } elseif {[lindex [lindex $Groups $i] 3] eq "ModifiedMisesDamagePlaneStress2DLaw"} {
+            puts $FileVar "  CONSTITUTIVE_LAW_NAME ModifiedMisesNonlocalDamagePlaneStress2DLaw"
         }
+        puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 4]"
+        puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 5]"
+        puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 6]"
+        puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 7]"
+        puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 8]"
+        puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 9]"
+        puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 10]"
+        puts $FileVar "  PERMEABILITY_XX [lindex [lindex $Groups $i] 11]"
+        puts $FileVar "  PERMEABILITY_YY [lindex [lindex $Groups $i] 12]"
+        puts $FileVar "  PERMEABILITY_ZZ [lindex [lindex $Groups $i] 13]"
+        puts $FileVar "  PERMEABILITY_XY [lindex [lindex $Groups $i] 14]"
+        puts $FileVar "  PERMEABILITY_YZ [lindex [lindex $Groups $i] 15]"
+        puts $FileVar "  PERMEABILITY_ZX [lindex [lindex $Groups $i] 16]"
+        puts $FileVar "  DYNAMIC_VISCOSITY_LIQUID [lindex [lindex $Groups $i] 17]"
+        puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 18]"
+        puts $FileVar "  THICKNESS [lindex [lindex $Groups $i] 19]"
+        puts $FileVar "  DAMAGE_THRESHOLD [lindex [lindex $Groups $i] 20]"
+        puts $FileVar "  STRENGTH_RATIO [lindex [lindex $Groups $i] 21]"
+        puts $FileVar "  FRACTURE_ENERGY [lindex [lindex $Groups $i] 22]"
+        puts $FileVar "  RESIDUAL_STRENGTH [lindex [lindex $Groups $i] 23]"
+        puts $FileVar "  SOFTENING_SLOPE [lindex [lindex $Groups $i] 24]"
+        puts $FileVar "End Properties"
+        puts $FileVar ""
     }
     # Interface_Part
     set Groups [GiD_Info conditions Interface_Part groups]
     for {set i 0} {$i < [llength $Groups]} {incr i} {
-        if {[lindex [lindex $Groups $i] 4] eq "BilinearCohesive3DLaw"} {
-            incr PropertyId
-            dict set PropertyDict [lindex [lindex $Groups $i] 1] $PropertyId
-            puts $FileVar "Begin Properties $PropertyId"
-            puts $FileVar "  CONSTITUTIVE_LAW_NAME BilinearCohesive3DLaw"
-            puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
-            puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
-            puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
-            puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
-            puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
-            puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
-            puts $FileVar "  DAMAGE_THRESHOLD [lindex [lindex $Groups $i] 19]"
-            puts $FileVar "  INITIAL_JOINT_WIDTH [lindex [lindex $Groups $i] 20]"
-            puts $FileVar "  CRITICAL_DISPLACEMENT [lindex [lindex $Groups $i] 21]"
-            puts $FileVar "  YIELD_STRESS [lindex [lindex $Groups $i] 22]"
-            puts $FileVar "  FRICTION_COEFFICIENT [lindex [lindex $Groups $i] 23]"
-            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 31]"
-            puts $FileVar "End Properties"
-            puts $FileVar ""
+        incr PropertyId
+        dict set PropertyDict [lindex [lindex $Groups $i] 1] $PropertyId
+        puts $FileVar "Begin Properties $PropertyId"
+        if {[lindex [lindex $Groups $i] 4] eq "BilinearCohesive3DLaw" || [lindex [lindex $Groups $i] 4] eq "ExponentialCohesive3DLaw"} {
+            puts $FileVar "  CONSTITUTIVE_LAW_NAME [lindex [lindex $Groups $i] 4]"
         } elseif {[lindex [lindex $Groups $i] 4] eq "BilinearCohesivePlaneStrain2DLaw" || [lindex [lindex $Groups $i] 4] eq "BilinearCohesivePlaneStress2DLaw"} {
-            incr PropertyId
-            dict set PropertyDict [lindex [lindex $Groups $i] 1] $PropertyId
-            puts $FileVar "Begin Properties $PropertyId"
             puts $FileVar "  CONSTITUTIVE_LAW_NAME BilinearCohesive2DLaw"
-            puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
-            puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
-            puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
-            puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
-            puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
-            puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
-            puts $FileVar "  THICKNESS [lindex [lindex $Groups $i] 18]"
-            puts $FileVar "  DAMAGE_THRESHOLD [lindex [lindex $Groups $i] 19]"
-            puts $FileVar "  INITIAL_JOINT_WIDTH [lindex [lindex $Groups $i] 20]"
-            puts $FileVar "  CRITICAL_DISPLACEMENT [lindex [lindex $Groups $i] 21]"
-            puts $FileVar "  YIELD_STRESS [lindex [lindex $Groups $i] 22]"
-            puts $FileVar "  FRICTION_COEFFICIENT [lindex [lindex $Groups $i] 23]"
-            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 31]"
-            puts $FileVar "End Properties"
-            puts $FileVar ""
-        } elseif {[lindex [lindex $Groups $i] 4] eq "ElasticCohesive2DLaw"} {
-            incr PropertyId
-            dict set PropertyDict [lindex [lindex $Groups $i] 1] $PropertyId
-            puts $FileVar "Begin Properties $PropertyId"
-            puts $FileVar "  CONSTITUTIVE_LAW_NAME ElasticCohesive2DLaw"
-            puts $FileVar "  NORMAL_STIFFNESS [lindex [lindex $Groups $i] 6]"
-            puts $FileVar "  SHEAR_STIFFNESS [lindex [lindex $Groups $i] 7]"
-            puts $FileVar "  PENALTY_STIFFNESS [lindex [lindex $Groups $i] 8]"
-            puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
-            puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
-            puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
-            puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
-            puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
-            puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
-            puts $FileVar "  THICKNESS [lindex [lindex $Groups $i] 18]"
-            puts $FileVar "  INITIAL_JOINT_WIDTH [lindex [lindex $Groups $i] 20]"
-            puts $FileVar "  YIELD_STRESS [lindex [lindex $Groups $i] 22]"
-            puts $FileVar "  FRACTURE_ENERGY [lindex [lindex $Groups $i] 26]"
-            puts $FileVar "  SHEAR_FRACTURE_ENERGY [lindex [lindex $Groups $i] 27]"
-            puts $FileVar "  STATE_VARIABLE [lindex [lindex $Groups $i] 30]"
-            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 31]"
-            puts $FileVar "End Properties"
-            puts $FileVar ""
-        } elseif {[lindex [lindex $Groups $i] 4] eq "ElasticCohesive3DLaw"} {
-            incr PropertyId
-            dict set PropertyDict [lindex [lindex $Groups $i] 1] $PropertyId
-            puts $FileVar "Begin Properties $PropertyId"
-            puts $FileVar "  CONSTITUTIVE_LAW_NAME ElasticCohesive3DLaw"
-            puts $FileVar "  NORMAL_STIFFNESS [lindex [lindex $Groups $i] 6]"
-            puts $FileVar "  SHEAR_STIFFNESS [lindex [lindex $Groups $i] 7]"
-            puts $FileVar "  PENALTY_STIFFNESS [lindex [lindex $Groups $i] 8]"
-            puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
-            puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
-            puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
-            puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
-            puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
-            puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
-            puts $FileVar "  INITIAL_JOINT_WIDTH [lindex [lindex $Groups $i] 20]"
-            puts $FileVar "  YIELD_STRESS [lindex [lindex $Groups $i] 22]"
-            puts $FileVar "  FRACTURE_ENERGY [lindex [lindex $Groups $i] 26]"
-            puts $FileVar "  SHEAR_FRACTURE_ENERGY [lindex [lindex $Groups $i] 27]"
-            puts $FileVar "  STATE_VARIABLE [lindex [lindex $Groups $i] 30]"
-            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 31]"
-            puts $FileVar "End Properties"
-            puts $FileVar ""
-        } elseif {[lindex [lindex $Groups $i] 4] eq "IsotropicDamageCohesive2DLaw"} {
-            incr PropertyId
-            dict set PropertyDict [lindex [lindex $Groups $i] 1] $PropertyId
-            puts $FileVar "Begin Properties $PropertyId"
-            puts $FileVar "  CONSTITUTIVE_LAW_NAME IsotropicDamageCohesive2DLaw"
-            if {[lindex [lindex $Groups $i] 5] eq "Linear"} {
-                puts $FileVar "  DAMAGE_EVOLUTION_LAW 1,"
-            } elseif {[lindex [lindex $Groups $i] 5] eq "Exponential"} {
-                puts $FileVar "  DAMAGE_EVOLUTION_LAW 2,"
-            }
-            puts $FileVar "  NORMAL_STIFFNESS [lindex [lindex $Groups $i] 6]"
-            puts $FileVar "  SHEAR_STIFFNESS [lindex [lindex $Groups $i] 7]"
-            puts $FileVar "  PENALTY_STIFFNESS [lindex [lindex $Groups $i] 8]"
-            puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
-            puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
-            puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
-            puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
-            puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
-            puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
-            puts $FileVar "  THICKNESS [lindex [lindex $Groups $i] 18]"
-            puts $FileVar "  INITIAL_JOINT_WIDTH [lindex [lindex $Groups $i] 20]"
-            puts $FileVar "  YIELD_STRESS [lindex [lindex $Groups $i] 22]"
-            puts $FileVar "  FRACTURE_ENERGY [lindex [lindex $Groups $i] 26]"
-            puts $FileVar "  SHEAR_FRACTURE_ENERGY [lindex [lindex $Groups $i] 27]"
-            puts $FileVar "  TENSILE_STRENGTH [lindex [lindex $Groups $i] 28],"
-            puts $FileVar "  BETA_EQSTRAIN_SHEAR_FACTOR [lindex [lindex $Groups $i] 29],"
-            puts $FileVar "  STATE_VARIABLE [lindex [lindex $Groups $i] 30]"
-            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 31]"
-            puts $FileVar "End Properties"
-            puts $FileVar ""
-        } elseif {[lindex [lindex $Groups $i] 4] eq "IsotropicDamageCohesive3DLaw"} {
-            incr PropertyId
-            dict set PropertyDict [lindex [lindex $Groups $i] 1] $PropertyId
-            puts $FileVar "Begin Properties $PropertyId"
-            puts $FileVar "  CONSTITUTIVE_LAW_NAME IsotropicDamageCohesive3DLaw"
-            if {[lindex [lindex $Groups $i] 5] eq "Linear"} {
-                puts $FileVar "  DAMAGE_EVOLUTION_LAW 1,"
-            } elseif {[lindex [lindex $Groups $i] 5] eq "Exponential"} {
-                puts $FileVar "  DAMAGE_EVOLUTION_LAW 2,"
-            }
-            puts $FileVar "  NORMAL_STIFFNESS [lindex [lindex $Groups $i] 6]"
-            puts $FileVar "  SHEAR_STIFFNESS [lindex [lindex $Groups $i] 7]"
-            puts $FileVar "  PENALTY_STIFFNESS [lindex [lindex $Groups $i] 8]"
-            puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
-            puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
-            puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
-            puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
-            puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
-            puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
-            puts $FileVar "  INITIAL_JOINT_WIDTH [lindex [lindex $Groups $i] 20]"
-            puts $FileVar "  YIELD_STRESS [lindex [lindex $Groups $i] 22]"
-            puts $FileVar "  FRACTURE_ENERGY [lindex [lindex $Groups $i] 26]"
-            puts $FileVar "  SHEAR_FRACTURE_ENERGY [lindex [lindex $Groups $i] 27]"
-            puts $FileVar "  TENSILE_STRENGTH [lindex [lindex $Groups $i] 28],"
-            puts $FileVar "  BETA_EQSTRAIN_SHEAR_FACTOR [lindex [lindex $Groups $i] 29],"
-            puts $FileVar "  STATE_VARIABLE [lindex [lindex $Groups $i] 30]"
-            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 31]"
-            puts $FileVar "End Properties"
-            puts $FileVar ""
-        } elseif {[lindex [lindex $Groups $i] 4] eq "ExponentialCohesive3DLaw"} {
-            incr PropertyId
-            dict set PropertyDict [lindex [lindex $Groups $i] 1] $PropertyId
-            puts $FileVar "Begin Properties $PropertyId"
-            puts $FileVar "  CONSTITUTIVE_LAW_NAME ExponentialCohesive3DLaw"
-            puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
-            puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
-            puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
-            puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
-            puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
-            puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
-            puts $FileVar "  INITIAL_JOINT_WIDTH [lindex [lindex $Groups $i] 20]"
-            puts $FileVar "  YIELD_STRESS [lindex [lindex $Groups $i] 22]"
-            puts $FileVar "  FRACTURE_ENERGY [lindex [lindex $Groups $i] 26]"
-            puts $FileVar "  SHEAR_FRACTURE_ENERGY [lindex [lindex $Groups $i] 27]"
-            puts $FileVar "  STATE_VARIABLE [lindex [lindex $Groups $i] 30]"
-            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 31]"
-            puts $FileVar "End Properties"
-            puts $FileVar ""
         } elseif {[lindex [lindex $Groups $i] 4] eq "ExponentialCohesivePlaneStrain2DLaw" || [lindex [lindex $Groups $i] 4] eq "ExponentialCohesivePlaneStress2DLaw"} {
-            incr PropertyId
-            dict set PropertyDict [lindex [lindex $Groups $i] 1] $PropertyId
-            puts $FileVar "Begin Properties $PropertyId"
-            puts $FileVar "  CONSTITUTIVE_LAW_NAME ExponentialCohesive2DLaw"
-            puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
-            puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
-            puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
-            puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
-            puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
-            puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
-            puts $FileVar "  THICKNESS [lindex [lindex $Groups $i] 17]"
-            puts $FileVar "  INITIAL_JOINT_WIDTH [lindex [lindex $Groups $i] 20]"
-            puts $FileVar "  YIELD_STRESS [lindex [lindex $Groups $i] 22]"
-            puts $FileVar "  FRACTURE_ENERGY [lindex [lindex $Groups $i] 26]"
-            puts $FileVar "  SHEAR_FRACTURE_ENERGY [lindex [lindex $Groups $i] 27]"
-            puts $FileVar "  STATE_VARIABLE [lindex [lindex $Groups $i] 30]"
-            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 31]"
-            puts $FileVar "End Properties"
-            puts $FileVar ""
-        } elseif {[lindex [lindex $Groups $i] 4] eq "ElastoPlasticModMohrCoulombCohesive2DLaw"} {
-            incr PropertyId
-            dict set PropertyDict [lindex [lindex $Groups $i] 1] $PropertyId
-            puts $FileVar "Begin Properties $PropertyId"
-            puts $FileVar "  CONSTITUTIVE_LAW_NAME ElastoPlasticModMohrCoulombCohesive2DLaw"
-            puts $FileVar "  NORMAL_STIFFNESS [lindex [lindex $Groups $i] 6]"
-            puts $FileVar "  SHEAR_STIFFNESS [lindex [lindex $Groups $i] 7]"
-            puts $FileVar "  PENALTY_STIFFNESS [lindex [lindex $Groups $i] 8]"
-            puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
-            puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
-            puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
-            puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
-            puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
-            puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
-            puts $FileVar "  INITIAL_JOINT_WIDTH [lindex [lindex $Groups $i] 20]"
-            puts $FileVar "  YIELD_STRESS [lindex [lindex $Groups $i] 22]"
-            puts $FileVar "  FRACTURE_ENERGY [lindex [lindex $Groups $i] 26]"
-            puts $FileVar "  SHEAR_FRACTURE_ENERGY [lindex [lindex $Groups $i] 27]"
-            puts $FileVar "  TENSILE_STRENGTH [lindex [lindex $Groups $i] 28],"
-            puts $FileVar "  FRICTION_ANGLE [lindex [lindex $Groups $i] 28],"
-            puts $FileVar "  DILATANCY_ANGLE [lindex [lindex $Groups $i] 28],"
-            puts $FileVar "  STATE_VARIABLE [lindex [lindex $Groups $i] 30]"
-            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 31]"
-            puts $FileVar "End Properties"
-            puts $FileVar ""
+            puts $FileVar "  ExponentialCohesive2DLaw"
+        } elseif {[lindex [lindex $Groups $i] 4] eq "ElasticCohesive3DLaw"} {
+            puts $FileVar "  ElasticCohesive3DLaw"
+        } elseif {[lindex [lindex $Groups $i] 4] eq "ElasticCohesive2DLaw"} {
+            puts $FileVar "  ElasticCohesive2DLaw"
+        } elseif {[lindex [lindex $Groups $i] 4] eq "IsotropicDamageCohesive2DLaw"} {
+            puts $FileVar "  IsotropicDamageCohesive2DLaw"
+        } elseif {[lindex [lindex $Groups $i] 4] eq "IsotropicDamageCohesive3DLaw"} {
+            puts $FileVar "  IsotropicDamageCohesive3DLaw"
         } elseif {[lindex [lindex $Groups $i] 4] eq "ElastoPlasticModMohrCoulombCohesive3DLaw"} {
-            incr PropertyId
-            dict set PropertyDict [lindex [lindex $Groups $i] 1] $PropertyId
-            puts $FileVar "Begin Properties $PropertyId"
-            puts $FileVar "  CONSTITUTIVE_LAW_NAME ElastoPlasticModMohrCoulombCohesive3DLaw"
-            puts $FileVar "  NORMAL_STIFFNESS [lindex [lindex $Groups $i] 6]"
-            puts $FileVar "  SHEAR_STIFFNESS [lindex [lindex $Groups $i] 7]"
-            puts $FileVar "  PENALTY_STIFFNESS [lindex [lindex $Groups $i] 8]"
-            puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
-            puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
-            puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
-            puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
-            puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
-            puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
-            puts $FileVar "  INITIAL_JOINT_WIDTH [lindex [lindex $Groups $i] 20]"
-            puts $FileVar "  YIELD_STRESS [lindex [lindex $Groups $i] 22]"
-            puts $FileVar "  FRACTURE_ENERGY [lindex [lindex $Groups $i] 26]"
-            puts $FileVar "  SHEAR_FRACTURE_ENERGY [lindex [lindex $Groups $i] 27]"
-            puts $FileVar "  TENSILE_STRENGTH [lindex [lindex $Groups $i] 28],"
-            puts $FileVar "  FRICTION_ANGLE [lindex [lindex $Groups $i] 28],"
-            puts $FileVar "  DILATANCY_ANGLE [lindex [lindex $Groups $i] 28],"
-            puts $FileVar "  STATE_VARIABLE [lindex [lindex $Groups $i] 30]"
-            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 31]"
-            puts $FileVar "End Properties"
-            puts $FileVar ""
+            puts $FileVar "  ElastoPlasticModMohrCoulombCohesive3DLaw"
+        } elseif {[lindex [lindex $Groups $i] 4] eq "ElastoPlasticModMohrCoulombCohesive2DLaw"} {
+            puts $FileVar "  ElastoPlasticModMohrCoulombCohesive2DLaw"
         } elseif {[lindex [lindex $Groups $i] 4] eq "ElastoPlasticMohrCoulombCohesive3DLaw"} {
-            incr PropertyId
-            dict set PropertyDict [lindex [lindex $Groups $i] 1] $PropertyId
-            puts $FileVar "Begin Properties $PropertyId"
-            puts $FileVar "  CONSTITUTIVE_LAW_NAME ElastoPlasticMohrCoulombCohesive3DLaw"
-            puts $FileVar "  NORMAL_STIFFNESS [lindex [lindex $Groups $i] 6]"
-            puts $FileVar "  SHEAR_STIFFNESS [lindex [lindex $Groups $i] 7]"
-            puts $FileVar "  PENALTY_STIFFNESS [lindex [lindex $Groups $i] 8]"
-            puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
-            puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
-            puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
-            puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
-            puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
-            puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
-            puts $FileVar "  INITIAL_JOINT_WIDTH [lindex [lindex $Groups $i] 20]"
-            puts $FileVar "  YIELD_STRESS [lindex [lindex $Groups $i] 22]"
-            puts $FileVar "  FRACTURE_ENERGY [lindex [lindex $Groups $i] 26]"
-            puts $FileVar "  SHEAR_FRACTURE_ENERGY [lindex [lindex $Groups $i] 27]"
-            puts $FileVar "  TENSILE_STRENGTH [lindex [lindex $Groups $i] 28],"
-            puts $FileVar "  FRICTION_ANGLE [lindex [lindex $Groups $i] 28],"
-            puts $FileVar "  DILATANCY_ANGLE [lindex [lindex $Groups $i] 28],"
-            puts $FileVar "  STATE_VARIABLE [lindex [lindex $Groups $i] 30]"
-            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 31]"
-            puts $FileVar "End Properties"
-            puts $FileVar ""
+            puts $FileVar "  ElastoPlasticMohrCoulombCohesive3DLaw"
         } elseif {[lindex [lindex $Groups $i] 4] eq "ElastoPlasticMohrCoulombCohesive2DLaw"} {
-            incr PropertyId
-            dict set PropertyDict [lindex [lindex $Groups $i] 1] $PropertyId
-            puts $FileVar "Begin Properties $PropertyId"
-            puts $FileVar "  CONSTITUTIVE_LAW_NAME ElastoPlasticMohrCoulombCohesive2DLaw"
-            puts $FileVar "  NORMAL_STIFFNESS [lindex [lindex $Groups $i] 6]"
-            puts $FileVar "  SHEAR_STIFFNESS [lindex [lindex $Groups $i] 7]"
-            puts $FileVar "  PENALTY_STIFFNESS [lindex [lindex $Groups $i] 8]"
-            puts $FileVar "  YOUNG_MODULUS [lindex [lindex $Groups $i] 9]"
-            puts $FileVar "  POISSON_RATIO [lindex [lindex $Groups $i] 10]"
-            puts $FileVar "  DENSITY_SOLID [lindex [lindex $Groups $i] 11]"
-            puts $FileVar "  DENSITY_LIQUID [lindex [lindex $Groups $i] 12]"
-            puts $FileVar "  POROSITY [lindex [lindex $Groups $i] 13]"
-            puts $FileVar "  BULK_MODULUS_SOLID [lindex [lindex $Groups $i] 14]"
-            puts $FileVar "  BULK_MODULUS_LIQUID [lindex [lindex $Groups $i] 15]"
-            puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT [lindex [lindex $Groups $i] 16]"
-            puts $FileVar "  DYNAMIC_VISCOSITY [lindex [lindex $Groups $i] 17]"
-            puts $FileVar "  INITIAL_JOINT_WIDTH [lindex [lindex $Groups $i] 20]"
-            puts $FileVar "  YIELD_STRESS [lindex [lindex $Groups $i] 22]"
-            puts $FileVar "  FRACTURE_ENERGY [lindex [lindex $Groups $i] 26]"
-            puts $FileVar "  SHEAR_FRACTURE_ENERGY [lindex [lindex $Groups $i] 27]"
-            puts $FileVar "  TENSILE_STRENGTH [lindex [lindex $Groups $i] 28],"
-            puts $FileVar "  FRICTION_ANGLE [lindex [lindex $Groups $i] 28],"
-            puts $FileVar "  DILATANCY_ANGLE [lindex [lindex $Groups $i] 28],"
-            puts $FileVar "  STATE_VARIABLE [lindex [lindex $Groups $i] 30]"
-            puts $FileVar "  BIOT_COEFFICIENT [lindex [lindex $Groups $i] 31]"
-            puts $FileVar "End Properties"
-            puts $FileVar ""
+            puts $FileVar "  ElastoPlasticMohrCoulombCohesive2DLaw"
         }
+        if {[lindex [lindex $Groups $i] 5] eq "Linear"} {
+            puts $FileVar "  DAMAGE_EVOLUTION_LAW 1"
+        } elseif {[lindex [lindex $Groups $i] 5] eq "Exponential"} {
+            puts $FileVar "  DAMAGE_EVOLUTION_LAW 2"
+        }
+        puts $FileVar "  NORMAL_STIFFNESS [lindex [lindex $Groups $i] 6]"
+        puts $FileVar "  SHEAR_STIFFNESS\": [lindex [lindex $Groups $i] 7]"
+        puts $FileVar "  PENALTY_STIFFNESS\": [lindex [lindex $Groups $i] 8]"
+        puts $FileVar "  YOUNG_MODULUS\": [lindex [lindex $Groups $i] 9]"
+        puts $FileVar "  POISSON_RATIO\": [lindex [lindex $Groups $i] 10]"
+        puts $FileVar "  DENSITY_SOLID\": [lindex [lindex $Groups $i] 11]"
+        puts $FileVar "  DENSITY_LIQUID\": [lindex [lindex $Groups $i] 12]"
+        puts $FileVar "  POROSITY\": [lindex [lindex $Groups $i] 13]"
+        puts $FileVar "  BULK_MODULUS_SOLID\": [lindex [lindex $Groups $i] 14]"
+        puts $FileVar "  BULK_MODULUS_LIQUID\": [lindex [lindex $Groups $i] 15]"
+        puts $FileVar "  TRANSVERSAL_PERMEABILITY_COEFFICIENT\": [lindex [lindex $Groups $i] 16]"
+        puts $FileVar "  DYNAMIC_VISCOSITY_LIQUID\": [lindex [lindex $Groups $i] 17]"
+        puts $FileVar "  BIOT_COEFFICIENT\": [lindex [lindex $Groups $i] 18]"
+        puts $FileVar "  THICKNESS\": [lindex [lindex $Groups $i] 19]"
+        puts $FileVar "  DAMAGE_THRESHOLD\": [lindex [lindex $Groups $i] 20]"
+        puts $FileVar "  INITIAL_JOINT_WIDTH\": [lindex [lindex $Groups $i] 21]"
+        puts $FileVar "  CRITICAL_DISPLACEMENT\": [lindex [lindex $Groups $i] 22]"
+        puts $FileVar "  YIELD_STRESS\": [lindex [lindex $Groups $i] 23]"
+        puts $FileVar "  FRICTION_COEFFICIENT\": [lindex [lindex $Groups $i] 24]"
+        puts $FileVar "  FRACTURE_ENERGY\": [lindex [lindex $Groups $i] 25]"
+        puts $FileVar "  SHEAR_FRACTURE_ENERGY\": [lindex [lindex $Groups $i] 26]"
+        puts $FileVar "  TENSILE_STRENGTH\": [lindex [lindex $Groups $i] 27]"
+        puts $FileVar "  BETA_EQSTRAIN_SHEAR_FACTOR\": [lindex [lindex $Groups $i] 28]"
+        puts $FileVar "  FRICTION_ANGLE\": [lindex [lindex $Groups $i] 29]"
+        puts $FileVar "  COHESION\": [lindex [lindex $Groups $i] 30]"
+        puts $FileVar "  DILATANCY_ANGLE\": [lindex [lindex $Groups $i] 31]"
+        puts $FileVar "  STATE_VARIABLE\": [lindex [lindex $Groups $i] 32]"
+        puts $FileVar "  TAU\": [lindex [lindex $Groups $i] 33]"
+        puts $FileVar "  CURVE_FITTING_ETA\": [lindex [lindex $Groups $i] 34]"
+        puts $FileVar "End Properties"
+        puts $FileVar ""
     }
     puts $FileVar ""
 
