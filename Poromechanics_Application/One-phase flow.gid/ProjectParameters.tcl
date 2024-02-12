@@ -30,11 +30,11 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     ## solver_settings
     puts $FileVar "    \"solver_settings\": \{"
     if {[GiD_AccessValue get gendata Parallel_Configuration] eq "MPI"} {
-        puts $FileVar "        \"solver_type\":    \"poromechanics_MPI_U_Pw_solver\","
+        puts $FileVar "        \"solver_type\":    \"poromechanics_MPI_U_Pl_solver\","
     } elseif {[GiD_AccessValue get gendata Solution_Type] eq "explicit"} {
-        puts $FileVar "        \"solver_type\":    \"poromechanics_U_Pw_explicit_dynamic_solver\","
+        puts $FileVar "        \"solver_type\":    \"poromechanics_U_Pl_explicit_dynamic_solver\","
     } else {
-        puts $FileVar "        \"solver_type\":    \"poromechanics_U_Pw_solver\","
+        puts $FileVar "        \"solver_type\":    \"poromechanics_U_Pl_solver\","
     }
     puts $FileVar "        \"model_part_name\":    \"PorousModelPart\","
     puts $FileVar "        \"domain_size\":    [GiD_AccessValue get gendata Domain_Size],"
