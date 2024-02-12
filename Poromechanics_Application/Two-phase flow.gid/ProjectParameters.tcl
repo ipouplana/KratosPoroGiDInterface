@@ -160,6 +160,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     AppendGroupNames PutStrings Solid_Displacement
     # Liquid_Pressure
     AppendGroupNames PutStrings Liquid_Pressure
+    # Gas_Pressure
+    AppendGroupNames PutStrings Gas_Pressure
     # Force
     AppendGroupNames PutStrings Force
     # Face_Load
@@ -170,6 +172,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     AppendGroupNames PutStrings Normal_Load
     # Normal_Liquid_Flux
     AppendGroupNames PutStrings Normal_Liquid_Flux
+    # Normal_Gas_Flux
+    AppendGroupNames PutStrings Normal_Gas_Flux
     # Body_Acceleration
     AppendGroupNames PutStrings Body_Acceleration
     set PutStrings [string trimright $PutStrings ,]
@@ -193,6 +197,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
         AppendGroupNamesWithNum PutStrings iGroup Normal_Load
         # Normal_Liquid_Flux
         AppendGroupNamesWithNum PutStrings iGroup Normal_Liquid_Flux
+        # Normal_Gas_Flux
+        AppendGroupNamesWithNum PutStrings iGroup Normal_Gas_Flux
         # Body_Acceleration
         AppendGroupNamesWithNum PutStrings iGroup Body_Acceleration
         if {$iGroup > 0} {
@@ -210,6 +216,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
         AppendGroupVariables PutStrings Normal_Load NORMAL_CONTACT_STRESS
         # Normal_Liquid_Flux
         AppendGroupVariables PutStrings Normal_Liquid_Flux NORMAL_LIQUID_FLUX
+        # Normal_Gas_Flux
+        AppendGroupVariables PutStrings Normal_Gas_Flux NORMAL_GAS_FLUX
         # Body_Acceleration
         AppendGroupVariables PutStrings Body_Acceleration VOLUME_ACCELERATION
         if {$iGroup > 0} {
@@ -259,15 +267,17 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     set iGroup 0
     AppendOutputVariables PutStrings iGroup Write_Solid_Displacement DISPLACEMENT
     AppendOutputVariables PutStrings iGroup Write_Liquid_Pressure LIQUID_PRESSURE
+    AppendOutputVariables PutStrings iGroup Write_Gas_Pressure GAS_PRESSURE
     if {[GiD_AccessValue get gendata Write_Reactions] eq true} {
         incr iGroup
-        append PutStrings \" REACTION \" , \" REACTION_LIQUID_PRESSURE \" ,
+        append PutStrings \" REACTION \" , \" REACTION_LIQUID_PRESSURE \" , \" REACTION_GAS_PRESSURE \" ,
     }
     AppendOutputVariables PutStrings iGroup Write_Force FORCE
     AppendOutputVariables PutStrings iGroup Write_Face_Load FACE_LOAD
     AppendOutputVariables PutStrings iGroup Write_Normal_Load NORMAL_CONTACT_STRESS
     AppendOutputVariables PutStrings iGroup Write_Tangential_Load TANGENTIAL_CONTACT_STRESS
     AppendOutputVariables PutStrings iGroup Write_Normal_Liquid_Flux NORMAL_LIQUID_FLUX
+    AppendOutputVariables PutStrings iGroup Write_Normal_Gas_Flux NORMAL_GAS_FLUX
     AppendOutputVariables PutStrings iGroup Write_Body_Acceleration VOLUME_ACCELERATION
     if {[GiD_AccessValue get gendata Parallel_Configuration] eq "MPI"} {
         incr iGroup
@@ -277,6 +287,7 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     if {[GiD_AccessValue get gendata Nodal_Smoothing] eq true} {
         AppendOutputVariables PutStrings iGroup Write_Effective_Stress NODAL_EFFECTIVE_STRESS_TENSOR
         AppendOutputVariables PutStrings iGroup Write_Liquid_Pressure_Gradient NODAL_LIQUID_PRESSURE_GRADIENT
+        AppendOutputVariables PutStrings iGroup Write_Gas_Pressure_Gradient NODAL_GAS_PRESSURE_GRADIENT
         AppendOutputVariables PutStrings iGroup Write_Damage NODAL_DAMAGE_VARIABLE
         AppendOutputVariables PutStrings iGroup Write_Joint_Width NODAL_JOINT_WIDTH
         AppendOutputVariables PutStrings iGroup Write_Damage NODAL_JOINT_DAMAGE
@@ -306,10 +317,12 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     set iGroup 0
     AppendOutputVariables PutStrings iGroup Write_Strain GREEN_LAGRANGE_STRAIN_TENSOR
     AppendOutputVariables PutStrings iGroup Write_Liquid_Pressure_Gradient LIQUID_PRESSURE_GRADIENT
+    AppendOutputVariables PutStrings iGroup Write_Gas_Pressure_Gradient GAS_PRESSURE_GRADIENT
     AppendOutputVariables PutStrings iGroup Write_Effective_Stress EFFECTIVE_STRESS_TENSOR
     AppendOutputVariables PutStrings iGroup Write_Total_Stress TOTAL_STRESS_TENSOR
     AppendOutputVariables PutStrings iGroup Write_Von_Mises_Stress VON_MISES_STRESS
     AppendOutputVariables PutStrings iGroup Write_Liquid_Flux LIQUID_FLUX_VECTOR
+    AppendOutputVariables PutStrings iGroup Write_Gas_Flux GAS_FLUX_VECTOR
     AppendOutputVariables PutStrings iGroup Write_Permeability PERMEABILITY_MATRIX
     AppendOutputVariables PutStrings iGroup Write_Damage DAMAGE_VARIABLE
     AppendOutputVariables PutStrings iGroup Write_Joint_Width JOINT_WIDTH
@@ -317,6 +330,7 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     AppendOutputVariables PutStrings iGroup Write_Local_Stress_Vector LOCAL_STRESS_VECTOR
     AppendOutputVariables PutStrings iGroup Write_Local_Relative_Displacement LOCAL_RELATIVE_DISPLACEMENT_VECTOR
     AppendOutputVariables PutStrings iGroup Write_Local_Liquid_Flux LOCAL_LIQUID_FLUX_VECTOR
+    AppendOutputVariables PutStrings iGroup Write_Local_Gas_Flux LOCAL_GAS_FLUX_VECTOR
     AppendOutputVariables PutStrings iGroup Write_Local_Permeability LOCAL_PERMEABILITY_MATRIX
     if {$iGroup > 0} {
         set PutStrings [string trimright $PutStrings ,]
@@ -336,6 +350,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     set Groups [GiD_Info conditions Solid_Displacement groups]
     set NumGroups [llength $Groups]
     set Groups [GiD_Info conditions Liquid_Pressure groups]
+    incr NumGroups [llength $Groups]
+    set Groups [GiD_Info conditions Gas_Pressure groups]
     incr NumGroups [llength $Groups]
     set Groups [GiD_Info conditions Face_Load_Control_Module groups]
     incr NumGroups [llength $Groups]
@@ -357,6 +373,12 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     WritePressureConstraintProcess FileVar iGroup $Groups surfaces LIQUID_PRESSURE $TableDict $NumGroups
     WritePressureConstraintProcess FileVar iGroup $Groups lines LIQUID_PRESSURE $TableDict $NumGroups
     WritePressureConstraintProcess FileVar iGroup $Groups points LIQUID_PRESSURE $TableDict $NumGroups
+    # Gas_Pressure
+    set Groups [GiD_Info conditions Gas_Pressure groups]
+    WritePressureConstraintProcess FileVar iGroup $Groups volumes GAS_PRESSURE $TableDict $NumGroups
+    WritePressureConstraintProcess FileVar iGroup $Groups surfaces GAS_PRESSURE $TableDict $NumGroups
+    WritePressureConstraintProcess FileVar iGroup $Groups lines GAS_PRESSURE $TableDict $NumGroups
+    WritePressureConstraintProcess FileVar iGroup $Groups points GAS_PRESSURE $TableDict $NumGroups
     ## loads_process_list
     set Groups [GiD_Info conditions Force groups]
     set NumGroups [llength $Groups]
@@ -365,6 +387,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     set Groups [GiD_Info conditions Normal_Load groups]
     incr NumGroups [llength $Groups]
     set Groups [GiD_Info conditions Normal_Liquid_Flux groups]
+    incr NumGroups [llength $Groups]
+    set Groups [GiD_Info conditions Normal_Gas_Flux groups]
     incr NumGroups [llength $Groups]
     set Groups [GiD_Info conditions Body_Acceleration groups]
     incr NumGroups [llength $Groups]
@@ -383,6 +407,9 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
         # Normal_Liquid_Flux
         set Groups [GiD_Info conditions Normal_Liquid_Flux groups]
         WriteLoadScalarProcess FileVar iGroup $Groups NORMAL_LIQUID_FLUX $TableDict $NumGroups
+        # Normal_Gas_Flux
+        set Groups [GiD_Info conditions Normal_Gas_Flux groups]
+        WriteLoadScalarProcess FileVar iGroup $Groups NORMAL_GAS_FLUX $TableDict $NumGroups
         # Body_Acceleration
         set Groups [GiD_Info conditions Body_Acceleration groups]
         WriteLoadVectorProcess FileVar iGroup $Groups VOLUME_ACCELERATION $TableDict $NumGroups

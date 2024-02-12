@@ -178,6 +178,36 @@ VALUE: #N# 2 0.0 0.0
 HELP: If Pressure_Distribution is set to Uniform, Value means Pressure_Value. If Pressure_Distribution is Hydrostatic, Value means Reference_Coordinate.
 END CONDITION
 
+CONDITION: Gas_Pressure
+CONDTYPE: over groups
+CONDMESHTYPE: over nodes
+GROUPALLOW: points lines surfaces volumes nodes
+QUESTION: Pressure_Distribution#CB#(Uniform,Hydrostatic)
+VALUE: Uniform
+DEPENDENCIES: (Uniform,RESTORE,Pressure_Value,#CURRENT#,HIDE,Gravity_Direction,#CURRENT#,HIDE,Reference_Coordinate,#CURRENT#,HIDE,Specific_Weight,#CURRENT#)(Hydrostatic,HIDE,Pressure_Value,#CURRENT#,RESTORE,Gravity_Direction,#CURRENT#,RESTORE,Reference_Coordinate,#CURRENT#,RESTORE,Specific_Weight,#CURRENT#)
+QUESTION: Pressure_Value
+VALUE: 0.0
+HELP: Units in IS: N/m2
+QUESTION: Gravity_Direction#CB#(X,Y,Z)
+VALUE: Z
+QUESTION: Reference_Coordinate
+VALUE: 0.0
+HELP: Coordinate of the chosen direction at which pressure is 0.0
+QUESTION: Specific_Weight
+VALUE: 10000.0
+HELP: Units in IS: N/m3
+QUESTION: Fixed#CB#(true,false)
+VALUE: true
+HELP: Fixed: it is not a DOF, it is an imposed value. Unfixed: it is an initial value for the DOF
+DEPENDENCIES: (false,HIDE,Imposed_Pressure,Constant)(true,RESTORE,Imposed_Pressure,#CURRENT#)
+QUESTION: Imposed_Pressure#CB#(Constant,Table_Interpolation)
+VALUE: Constant
+DEPENDENCIES: (Constant,HIDE,Gas_Pressure_Table,#CURRENT#)(Table_Interpolation,RESTORE,Gas_Pressure_Table,#CURRENT#)
+QUESTION: Gas_Pressure_Table(Time,Value)
+VALUE: #N# 2 0.0 0.0
+HELP: If Pressure_Distribution is set to Uniform, Value means Pressure_Value. If Pressure_Distribution is Hydrostatic, Value means Reference_Coordinate.
+END CONDITION
+
 CONDITION: Face_Load_Control_Module
 CONDTYPE: over groups
 CONDMESHTYPE: over face elements
@@ -372,6 +402,20 @@ QUESTION: Imposed_Normal_Liquid_Flux#CB#(Constant,Table_Interpolation)
 VALUE: Constant
 DEPENDENCIES: (Constant,HIDE,Normal_Liquid_Flux_Table,#CURRENT#)(Table_Interpolation,RESTORE,Normal_Liquid_Flux_Table,#CURRENT#)
 QUESTION: Normal_Liquid_Flux_Table(Time,Normal_Liquid_Flux)
+VALUE: #N# 2 0.0 0.0
+END CONDITION
+
+CONDITION: Normal_Gas_Flux
+CONDTYPE: over groups
+CONDMESHTYPE: over face elements
+GROUPALLOW: lines surfaces nodes faces
+QUESTION: Value
+VALUE: 0.0
+HELP: Units in IS for 2D cases: m2/s. Units in IS for 3D cases: m/s. A positive value corresponds to an outflow.
+QUESTION: Imposed_Normal_Gas_Flux#CB#(Constant,Table_Interpolation)
+VALUE: Constant
+DEPENDENCIES: (Constant,HIDE,Normal_Gas_Flux_Table,#CURRENT#)(Table_Interpolation,RESTORE,Normal_Gas_Flux_Table,#CURRENT#)
+QUESTION: Normal_Gas_Flux_Table(Time,Normal_Gas_Flux)
 VALUE: #N# 2 0.0 0.0
 END CONDITION
 
