@@ -64,9 +64,12 @@ QUESTION: Biot_Coefficient
 VALUE: 0.6
 HELP: Nondimensional parameter relating the volume of the fluid change and the bulk volume change.
 QUESTION: Gas_Diffusion_Coefficient
-VALUE: 1.0
+VALUE: 0.0
 HELP: TODO
 QUESTION: Residual_Liquid_Saturation
+VALUE: 0.0
+HELP: TODO
+QUESTION: Residual_gas_Saturation
 VALUE: 0.0
 HELP: TODO
 QUESTION: Pore_Size_Factor
