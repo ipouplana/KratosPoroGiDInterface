@@ -71,16 +71,16 @@ VALUE: Newmark
 DEPENDENCIES: (Newmark,HIDE,g_factor,#CURRENT#,HIDE,Calculate_xi,#CURRENT#,HIDE,xi_1_factor,#CURRENT#)(Explicit_Central_Differences,RESTORE,g_factor,#CURRENT#,RESTORE,Calculate_xi,#CURRENT#,RESTORE,xi_1_factor,#CURRENT#)(Explicit_Velocity_Verlet,HIDE,g_factor,#CURRENT#,HIDE,Calculate_xi,#CURRENT#,HIDE,xi_1_factor,#CURRENT#)
 QUESTION: Newmark_Beta
 VALUE: 0.25
-HELP: 0: For displacement time integration in dynamic problems (GN22).
+HELP: For displacement time integration in dynamic problems (GN22).
 QUESTION: Newmark_Gamma
 VALUE: 0.5
-HELP: 0: For displacement time integration in dynamic problems (GN22).
+HELP: For displacement time integration in dynamic problems (GN22).
 QUESTION: Newmark_Theta_u
 VALUE: 0.5
-HELP: 0: For displacement time integration in quasi-static problems (GN11). Forward Euler, 1: Backward Euler, 0.5: Crank-Nicolson
+HELP: For displacement time integration in quasi-static problems (GN11). 1: Backward Euler, 0.5: Crank-Nicolson
 QUESTION: Newmark_Theta_p
 VALUE: 0.5
-HELP: 0: For pore-pressure time integration (GN11). Forward Euler, 1: Backward Euler, 0.5: Crank-Nicolson
+HELP: For pore-pressure time integration (GN11). 1: Backward Euler, 0.5: Crank-Nicolson
 QUESTION: g_factor
 VALUE: 0.0
 HELP: For g_factor >= 1.0 the Explicit_Central_Differences scheme with added mass is activated and so the critical time step can be larger than 2/wn.
