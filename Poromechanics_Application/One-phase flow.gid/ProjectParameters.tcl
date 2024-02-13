@@ -79,7 +79,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     puts $FileVar "        \"scheme_type\":    \"[GiD_AccessValue get gendata Scheme_Type]\","
     puts $FileVar "        \"newmark_beta\":    [GiD_AccessValue get gendata Newmark_Beta],"
     puts $FileVar "        \"newmark_gamma\":    [GiD_AccessValue get gendata Newmark_Gamma],"
-    puts $FileVar "        \"newmark_theta\":    [GiD_AccessValue get gendata Newmark_Theta],"
+    puts $FileVar "        \"newmark_theta_u\":    [GiD_AccessValue get gendata Newmark_Theta_u],"
+    puts $FileVar "        \"newmark_theta_p\":    [GiD_AccessValue get gendata Newmark_Theta_p],"
     if {[GiD_AccessValue get gendata Solution_Type] eq "explicit"} {
          puts $FileVar "        \"theta_factor\":    1.0,"
         puts $FileVar "        \"g_factor\":    [GiD_AccessValue get gendata g_factor],"

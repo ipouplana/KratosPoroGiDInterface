@@ -39,18 +39,26 @@ HELP: save: save initial stresses at the end of the calculation, load: load them
 TITLE:Solver_Settings
 QUESTION: Solution_Type#CB#(implicit_quasi_static,implicit_dynamic,explicit)
 VALUE: implicit_quasi_static
-HELP: The quasi-static scheme only makes use of the Newmark_Theta parameter. The explicit scheme can only be used for purely solid mechanics problems and not for coupled solid-pore-fluid interaction problems.
-DEPENDENCIES: (implicit_quasi_static,RESTORE,Max_Iterations,#CURRENT#,RESTORE,Convergence_Criterion,#CURRENT#,RESTORE,Block_Builder,#CURRENT#,RESTORE,Solver_Type,#CURRENT#,RESTORE,Scaling,#CURRENT#,RESTORE,Verbosity,#CURRENT#,RESTORE,Strategy_Type,#CURRENT#,RESTORE,Displacement_Relative_Tolerance,#CURRENT#,RESTORE,Displacement_Absolute_Tolerance,#CURRENT#)(implicit_dynamic,RESTORE,Max_Iterations,#CURRENT#,RESTORE,Convergence_Criterion,#CURRENT#,RESTORE,Block_Builder,#CURRENT#,RESTORE,Solver_Type,#CURRENT#,RESTORE,Scaling,#CURRENT#,RESTORE,Verbosity,#CURRENT#,RESTORE,Strategy_Type,#CURRENT#,RESTORE,Displacement_Relative_Tolerance,#CURRENT#,RESTORE,Displacement_Absolute_Tolerance,#CURRENT#)(explicit,HIDE,Max_Iterations,#CURRENT#,HIDE,Convergence_Criterion,Displacement_criterion,HIDE,Block_Builder,#CURRENT#,HIDE,Solver_Type,#CURRENT#,HIDE,Scaling,#CURRENT#,HIDE,Verbosity,#CURRENT#,HIDE,Strategy_Type,newton_raphson,HIDE,Displacement_Relative_Tolerance,#CURRENT#,HIDE,Displacement_Absolute_Tolerance,#CURRENT#)
+HELP: The explicit scheme can only be used for purely solid mechanics problems and not for coupled solid-pore-fluid interaction problems.
+DEPENDENCIES: (implicit_quasi_static,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,RESTORE,Newmark_Theta_u,#CURRENT#,RESTORE,Newmark_Theta_pl,#CURRENT#,RESTORE,Newmark_Theta_pg,#CURRENT#,RESTORE,Max_Iterations,#CURRENT#,RESTORE,Convergence_Criterion,#CURRENT#,RESTORE,Block_Builder,#CURRENT#,RESTORE,Solver_Type,#CURRENT#,RESTORE,Scaling,#CURRENT#,RESTORE,Verbosity,#CURRENT#,RESTORE,Strategy_Type,#CURRENT#,RESTORE,Displacement_Relative_Tolerance,#CURRENT#,RESTORE,Displacement_Absolute_Tolerance,#CURRENT#)(implicit_dynamic,RESTORE,Newmark_Beta,#CURRENT#,RESTORE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta_u,#CURRENT#,RESTORE,Newmark_Theta_pl,#CURRENT#,RESTORE,Newmark_Theta_pg,#CURRENT#,RESTORE,Max_Iterations,#CURRENT#,RESTORE,Convergence_Criterion,#CURRENT#,RESTORE,Block_Builder,#CURRENT#,RESTORE,Solver_Type,#CURRENT#,RESTORE,Scaling,#CURRENT#,RESTORE,Verbosity,#CURRENT#,RESTORE,Strategy_Type,#CURRENT#,RESTORE,Displacement_Relative_Tolerance,#CURRENT#,RESTORE,Displacement_Absolute_Tolerance,#CURRENT#)(explicit,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta_u,#CURRENT#,HIDE,Newmark_Theta_pl,#CURRENT#,HIDE,Newmark_Theta_pg,#CURRENT#,HIDE,Max_Iterations,#CURRENT#,HIDE,Convergence_Criterion,#CURRENT#,HIDE,Block_Builder,#CURRENT#,HIDE,Solver_Type,#CURRENT#,HIDE,Scaling,#CURRENT#,HIDE,Verbosity,#CURRENT#,HIDE,Strategy_Type,#CURRENT#,HIDE,Displacement_Relative_Tolerance,#CURRENT#,HIDE,Displacement_Absolute_Tolerance,#CURRENT#)
 QUESTION: Scheme_Type#CB#(Newmark,Explicit_Central_Differences,Explicit_Velocity_Verlet)
 VALUE: Newmark
-DEPENDENCIES: (Newmark,RESTORE,Newmark_Beta,#CURRENT#,RESTORE,Newmark_Gamma,#CURRENT#,RESTORE,Newmark_Theta,#CURRENT#,HIDE,g_factor,#CURRENT#,HIDE,Calculate_xi,#CURRENT#,HIDE,xi_1_factor,#CURRENT#)(Explicit_Central_Differences,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,RESTORE,g_factor,#CURRENT#,RESTORE,Calculate_xi,#CURRENT#,RESTORE,xi_1_factor,#CURRENT#)(Explicit_Velocity_Verlet,HIDE,Newmark_Beta,#CURRENT#,HIDE,Newmark_Gamma,#CURRENT#,HIDE,Newmark_Theta,#CURRENT#,HIDE,g_factor,#CURRENT#,HIDE,Calculate_xi,#CURRENT#,HIDE,xi_1_factor,#CURRENT#)
+DEPENDENCIES: (Newmark,HIDE,g_factor,#CURRENT#,HIDE,Calculate_xi,#CURRENT#,HIDE,xi_1_factor,#CURRENT#)(Explicit_Central_Differences,RESTORE,g_factor,#CURRENT#,RESTORE,Calculate_xi,#CURRENT#,RESTORE,xi_1_factor,#CURRENT#)(Explicit_Velocity_Verlet,HIDE,g_factor,#CURRENT#,HIDE,Calculate_xi,#CURRENT#,HIDE,xi_1_factor,#CURRENT#)
 QUESTION: Newmark_Beta
 VALUE: 0.25
+HELP: 0: For displacement time integration in dynamic problems (GN22).
 QUESTION: Newmark_Gamma
 VALUE: 0.5
-QUESTION: Newmark_Theta
+HELP: 0: For displacement time integration in dynamic problems (GN22).
+QUESTION: Newmark_Theta_u
 VALUE: 0.5
-HELP: 0: Forward Euler, 1: Backward Euler, 0.5: Crank-Nicolson
+HELP: 0: For displacement time integration in quasi-static problems (GN11). Forward Euler, 1: Backward Euler, 0.5: Crank-Nicolson
+QUESTION: Newmark_Theta_pl
+VALUE: 0.5
+HELP: 0: For liquid pore-pressure time integration (GN11). Forward Euler, 1: Backward Euler, 0.5: Crank-Nicolson
+QUESTION: Newmark_Theta_pg
+VALUE: 0.5
+HELP: 0: For gas pore-pressure time integration (GN11). Forward Euler, 1: Backward Euler, 0.5: Crank-Nicolson
 QUESTION: g_factor
 VALUE: 0.0
 HELP: For g_factor >= 1.0 the Explicit_Central_Differences scheme with added mass is activated and so the critical time step can be larger than 2/wn.
@@ -111,10 +119,10 @@ VALUE: false
 QUESTION: Move_Mesh#CB#(true,false)
 VALUE: false
 QUESTION: Block_Builder#CB#(true,false)
-VALUE: true
-QUESTION: Solver_Type#CB#(skyline_lu_factorization,LinearSolversApplication.sparse_lu,bicgstab,amgcl,klu,aztec,amgcl,multi_level)
-VALUE: amgcl
-HELP: OpenMP solvers: skyline_lu_factorization (Direct), LinearSolversApplication.sparse_lu (Direct), bicgstab (Iter.) and amgcl (Iter.). MPI solvers: klu,aztec,amgcl,multi_level.
+VALUE: false
+QUESTION: Solver_Type#CB#(skyline_lu_factorization,LinearSolversApplication.sparse_lu,bicgstab,amgcl,klu,aztec,multi_level)
+VALUE: LinearSolversApplication.sparse_lu
+HELP: OpenMP solvers: skyline_lu_factorization (Direct), LinearSolversApplication.sparse_lu (Direct), bicgstab (Iter.) and amgcl (Iter.). MPI solvers: amgcl,klu,aztec,multi_level.
 QUESTION: Scaling#CB#(true,false)
 VALUE: false
 QUESTION: Verbosity
