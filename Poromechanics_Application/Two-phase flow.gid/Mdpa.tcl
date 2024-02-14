@@ -323,8 +323,8 @@ proc WriteMdpa { basename dir problemtypedir } {
                 # UPlPgNormalFaceLoadCondition3D3N
                 WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] tetrahedra UPlPgNormalFaceLoadCondition3D3N $PropertyDict
                 WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] prism UPlPgNormalFaceLoadCondition3D3N $PropertyDict
-                # UpwNormalFaceLoadCondition3D4N
-                WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] hexahedra UpwNormalFaceLoadCondition3D4N $PropertyDict
+                # UPlNormalFaceLoadCondition3D4N
+                WriteTypeFaceConditions FileVar ConditionId MyConditionList [lindex $Groups $i] hexahedra UPlNormalFaceLoadCondition3D4N $PropertyDict
                 dict set ConditionDict [lindex [lindex $Groups $i] 1] $MyConditionList
             }
         } elseif {$IsQuadratic eq 1} {
