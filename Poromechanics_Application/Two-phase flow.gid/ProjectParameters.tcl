@@ -270,6 +270,7 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     AppendOutputVariables PutStrings iGroup Write_Solid_Displacement DISPLACEMENT
     AppendOutputVariables PutStrings iGroup Write_Liquid_Pressure LIQUID_PRESSURE
     AppendOutputVariables PutStrings iGroup Write_Gas_Pressure GAS_PRESSURE
+    AppendOutputVariables PutStrings iGroup Write_Capillary_Pressure CAPILLARY_PRESSURE
     if {[GiD_AccessValue get gendata Write_Reactions] eq true} {
         incr iGroup
         append PutStrings \" REACTION \" , \" REACTION_LIQUID_PRESSURE \" , \" REACTION_GAS_PRESSURE \" ,
@@ -288,9 +289,6 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     # Nodal smoothed variables
     if {[GiD_AccessValue get gendata Nodal_Smoothing] eq true} {
         AppendOutputVariables PutStrings iGroup Write_Effective_Stress NODAL_EFFECTIVE_STRESS_TENSOR
-        AppendOutputVariables PutStrings iGroup Write_Liquid_Pressure_Gradient NODAL_LIQUID_PRESSURE_GRADIENT
-        AppendOutputVariables PutStrings iGroup Write_Gas_Pressure_Gradient NODAL_GAS_PRESSURE_GRADIENT
-        AppendOutputVariables PutStrings iGroup Write_Damage NODAL_DAMAGE_VARIABLE
         AppendOutputVariables PutStrings iGroup Write_Joint_Width NODAL_JOINT_WIDTH
         AppendOutputVariables PutStrings iGroup Write_Damage NODAL_JOINT_DAMAGE
     }
@@ -320,6 +318,10 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     AppendOutputVariables PutStrings iGroup Write_Strain GREEN_LAGRANGE_STRAIN_TENSOR
     AppendOutputVariables PutStrings iGroup Write_Liquid_Pressure_Gradient LIQUID_PRESSURE_GRADIENT
     AppendOutputVariables PutStrings iGroup Write_Gas_Pressure_Gradient GAS_PRESSURE_GRADIENT
+    AppendOutputVariables PutStrings iGroup Write_Liquid_Saturation_Degree LIQUID_SATURATION_DEGREE
+    AppendOutputVariables PutStrings iGroup Write_Gas_Saturation_Degree GAS_SATURATION_DEGREE
+    AppendOutputVariables PutStrings iGroup Write_Liquid_Relative_Permeability LIQUID_RELATIVE_PERMEABILITY
+    AppendOutputVariables PutStrings iGroup Write_Gas_Relative_Permeability GAS_RELATIVE_PERMEABILITY
     AppendOutputVariables PutStrings iGroup Write_Effective_Stress EFFECTIVE_STRESS_TENSOR
     AppendOutputVariables PutStrings iGroup Write_Total_Stress TOTAL_STRESS_TENSOR
     AppendOutputVariables PutStrings iGroup Write_Von_Mises_Stress VON_MISES_STRESS
