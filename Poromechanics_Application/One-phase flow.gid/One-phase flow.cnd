@@ -337,6 +337,45 @@ END CONDITION
 
 BOOK: Loads
 
+CONDITION: Body_Acceleration
+CONDTYPE: over groups
+CONDMESHTYPE: over nodes
+GROUPALLOW: surfaces volumes nodes
+QUESTION: BODY_ACCELERATION_X#CB#(true,false)
+VALUE: false
+DEPENDENCIES: (false,HIDE,X_Value,0.0,HIDE,Imposed_Body_Acceleration_X,Constant)(true,RESTORE,X_Value,#CURRENT#,RESTORE,Imposed_Body_Acceleration_X,#CURRENT#)
+QUESTION: X_Value
+VALUE: 0.0
+HELP: Units in IS: m/s2
+QUESTION: Imposed_Body_Acceleration_X#CB#(Constant,Table_Interpolation)
+VALUE: Constant
+DEPENDENCIES: (Constant,HIDE,Body_Acceleration_X_Table,#CURRENT#)(Table_Interpolation,RESTORE,Body_Acceleration_X_Table,#CURRENT#)
+QUESTION: Body_Acceleration_X_Table(Time,Body_Acceleration_X)
+VALUE: #N# 2 0.0 0.0
+QUESTION: BODY_ACCELERATION_Y#CB#(true,false)
+VALUE: false
+DEPENDENCIES: (false,HIDE,Y_Value,0.0,HIDE,Imposed_Body_Acceleration_Y,Constant)(true,RESTORE,Y_Value,#CURRENT#,RESTORE,Imposed_Body_Acceleration_Y,#CURRENT#)
+QUESTION: Y_Value
+VALUE: 0.0
+HELP: Units in IS: m/s2
+QUESTION: Imposed_Body_Acceleration_Y#CB#(Constant,Table_Interpolation)
+VALUE: Constant
+DEPENDENCIES: (Constant,HIDE,Body_Acceleration_Y_Table,#CURRENT#)(Table_Interpolation,RESTORE,Body_Acceleration_Y_Table,#CURRENT#)
+QUESTION: Body_Acceleration_Y_Table(Time,Body_Acceleration_Y)
+VALUE: #N# 2 0.0 0.0
+QUESTION: BODY_ACCELERATION_Z#CB#(true,false)
+VALUE: true
+DEPENDENCIES: (false,HIDE,Z_Value,0.0,HIDE,Imposed_Body_Acceleration_Z,Constant)(true,RESTORE,Z_Value,#CURRENT#,RESTORE,Imposed_Body_Acceleration_Z,#CURRENT#)
+QUESTION: Z_Value
+VALUE: -10.0
+HELP: Units in IS: m/s2
+QUESTION: Imposed_Body_Acceleration_Z#CB#(Constant,Table_Interpolation)
+VALUE: Constant
+DEPENDENCIES: (Constant,HIDE,Body_Acceleration_Z_Table,#CURRENT#)(Table_Interpolation,RESTORE,Body_Acceleration_Z_Table,#CURRENT#)
+QUESTION: Body_Acceleration_Z_Table(Time,Body_Acceleration_Z)
+VALUE: #N# 2 0.0 0.0
+END CONDITION
+
 CONDITION: Force
 CONDTYPE: over groups
 CONDMESHTYPE: over nodes
@@ -455,13 +494,27 @@ QUESTION: Tangential_Load_Table(Time,Tangential_Load)
 VALUE: #N# 2 0.0 0.0
 END CONDITION
 
+CONDITION: Liquid_Discharge
+CONDTYPE: over groups
+CONDMESHTYPE: over nodes
+GROUPALLOW: points nodes
+QUESTION: Value
+VALUE: 0.0
+HELP: Units in IS m3/s. A positive value corresponds to an inlet. TODO: check this with Xavi
+QUESTION: Imposed_Liquid_Discharge#CB#(Constant,Table_Interpolation)
+VALUE: Constant
+DEPENDENCIES: (Constant,HIDE,Normal_Liquid_Discharge_Table,#CURRENT#)(Table_Interpolation,RESTORE,Normal_Liquid_Discharge_Table,#CURRENT#)
+QUESTION: Normal_Liquid_Discharge_Table(Time,Normal_Liquid_Flux)
+VALUE: #N# 2 0.0 0.0
+END CONDITION
+
 CONDITION: Normal_Liquid_Flux
 CONDTYPE: over groups
 CONDMESHTYPE: over face elements
 GROUPALLOW: lines surfaces nodes faces
 QUESTION: Value
 VALUE: 0.0
-HELP: Units in IS for 2D cases: m2/s. Units in IS for 3D cases: m/s. A positive value corresponds to an outflow.
+HELP: Units in IS for 2D cases: m2/s. Units in IS for 3D cases: m/s. A positive value corresponds to an inlet. TODO: check this with Xavi
 QUESTION: Imposed_Normal_Liquid_Flux#CB#(Constant,Table_Interpolation)
 VALUE: Constant
 DEPENDENCIES: (Constant,HIDE,Normal_Liquid_Flux_Table,#CURRENT#)(Table_Interpolation,RESTORE,Normal_Liquid_Flux_Table,#CURRENT#)
@@ -514,49 +567,10 @@ CONDMESHTYPE: over body elements
 GROUPALLOW: lines surfaces nodes elements
 QUESTION: Value
 VALUE: 0.0
-HELP: Units in IS for 2D cases: m2/s. Units in IS for 3D cases: m/s. A positive value corresponds to an outflow.
+HELP: Units in IS for 2D cases: m2/s. Units in IS for 3D cases: m/s. A positive value corresponds to an inlet. TODO: check this with Xavi
 QUESTION: Imposed_Normal_Liquid_Flux#CB#(Constant,Table_Interpolation)
 VALUE: Constant
 DEPENDENCIES: (Constant,HIDE,Normal_Liquid_Flux_Table,#CURRENT#)(Table_Interpolation,RESTORE,Normal_Liquid_Flux_Table,#CURRENT#)
 QUESTION: Normal_Liquid_Flux_Table(Time,Normal_Liquid_Flux)
-VALUE: #N# 2 0.0 0.0
-END CONDITION
-
-CONDITION: Body_Acceleration
-CONDTYPE: over groups
-CONDMESHTYPE: over nodes
-GROUPALLOW: surfaces volumes nodes
-QUESTION: BODY_ACCELERATION_X#CB#(true,false)
-VALUE: false
-DEPENDENCIES: (false,HIDE,X_Value,0.0,HIDE,Imposed_Body_Acceleration_X,Constant)(true,RESTORE,X_Value,#CURRENT#,RESTORE,Imposed_Body_Acceleration_X,#CURRENT#)
-QUESTION: X_Value
-VALUE: 0.0
-HELP: Units in IS: m/s2
-QUESTION: Imposed_Body_Acceleration_X#CB#(Constant,Table_Interpolation)
-VALUE: Constant
-DEPENDENCIES: (Constant,HIDE,Body_Acceleration_X_Table,#CURRENT#)(Table_Interpolation,RESTORE,Body_Acceleration_X_Table,#CURRENT#)
-QUESTION: Body_Acceleration_X_Table(Time,Body_Acceleration_X)
-VALUE: #N# 2 0.0 0.0
-QUESTION: BODY_ACCELERATION_Y#CB#(true,false)
-VALUE: false
-DEPENDENCIES: (false,HIDE,Y_Value,0.0,HIDE,Imposed_Body_Acceleration_Y,Constant)(true,RESTORE,Y_Value,#CURRENT#,RESTORE,Imposed_Body_Acceleration_Y,#CURRENT#)
-QUESTION: Y_Value
-VALUE: 0.0
-HELP: Units in IS: m/s2
-QUESTION: Imposed_Body_Acceleration_Y#CB#(Constant,Table_Interpolation)
-VALUE: Constant
-DEPENDENCIES: (Constant,HIDE,Body_Acceleration_Y_Table,#CURRENT#)(Table_Interpolation,RESTORE,Body_Acceleration_Y_Table,#CURRENT#)
-QUESTION: Body_Acceleration_Y_Table(Time,Body_Acceleration_Y)
-VALUE: #N# 2 0.0 0.0
-QUESTION: BODY_ACCELERATION_Z#CB#(true,false)
-VALUE: true
-DEPENDENCIES: (false,HIDE,Z_Value,0.0,HIDE,Imposed_Body_Acceleration_Z,Constant)(true,RESTORE,Z_Value,#CURRENT#,RESTORE,Imposed_Body_Acceleration_Z,#CURRENT#)
-QUESTION: Z_Value
-VALUE: -10.0
-HELP: Units in IS: m/s2
-QUESTION: Imposed_Body_Acceleration_Z#CB#(Constant,Table_Interpolation)
-VALUE: Constant
-DEPENDENCIES: (Constant,HIDE,Body_Acceleration_Z_Table,#CURRENT#)(Table_Interpolation,RESTORE,Body_Acceleration_Z_Table,#CURRENT#)
-QUESTION: Body_Acceleration_Z_Table(Time,Body_Acceleration_Z)
 VALUE: #N# 2 0.0 0.0
 END CONDITION
