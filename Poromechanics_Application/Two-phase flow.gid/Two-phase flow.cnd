@@ -69,7 +69,7 @@ HELP: TODO
 QUESTION: Residual_Liquid_Saturation
 VALUE: 0.0
 HELP: TODO
-QUESTION: Residual_gas_Saturation
+QUESTION: Residual_Gas_Saturation
 VALUE: 0.0
 HELP: TODO
 QUESTION: Pore_Size_Factor
@@ -78,6 +78,9 @@ HELP: TODO
 QUESTION: Gas_Entry_Pressure
 VALUE: 1.0e3
 HELP: Units in IS: N/m2
+QUESTION: Minimum_Relative_Permeability
+VALUE: 1.0e-4
+HELP: Small value to avoid quasi-zero relative permeability values.
 QUESTION: Thickness
 VALUE: 1.0
 HELP: Units in IS: m
