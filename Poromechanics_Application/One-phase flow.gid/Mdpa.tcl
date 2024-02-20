@@ -29,6 +29,8 @@ proc WriteMdpa { basename dir problemtypedir } {
     VectorTable FileVar TableId TableDict Face_Load_Control_Module FACE_LOAD
     # Normal_Load
     NormalTangentialTable FileVar TableId TableDict Normal_Load NORMAL_CONTACT_STRESS TANGENTIAL_CONTACT_STRESS
+    # Liquid_Discharge
+    ScalarTable FileVar TableId TableDict Liquid_Discharge LIQUID_DISCHARGE
     # Normal_Liquid_Flux
     ScalarTable FileVar TableId TableDict Normal_Liquid_Flux NORMAL_LIQUID_FLUX
     # Interface_Face_Load
@@ -434,6 +436,16 @@ proc WriteMdpa { basename dir problemtypedir } {
             }
         }
     }
+
+    # Liquid_Discharge
+    set Groups [GiD_Info conditions Liquid_Discharge groups]
+    if {$Dim eq 2} {
+        # UPlDischargeCondition2D1N
+        WriteNodalConditions FileVar ConditionId ConditionDict $Groups UPlDischargeCondition2D1N $BodyElemsProp
+    } else {
+        # UPlDischargeCondition3D1N
+        WriteNodalConditions FileVar ConditionId ConditionDict $Groups UPlDischargeCondition3D1N $BodyElemsProp
+    }
     # Normal_Liquid_Flux
     set Groups [GiD_Info conditions Normal_Liquid_Flux groups]
     if {$Dim eq 2} {
@@ -569,6 +581,8 @@ proc WriteMdpa { basename dir problemtypedir } {
     WriteLoadSubmodelPart FileVar Face_Load_Control_Module $TableDict $ConditionDict
     # Normal_Load
     WriteLoadSubmodelPart FileVar Normal_Load $TableDict $ConditionDict
+    # Liquid_Discharge
+    WriteLoadSubmodelPart FileVar Liquid_Discharge $TableDict $ConditionDict
     # Normal_Liquid_Flux
     WriteLoadSubmodelPart FileVar Normal_Liquid_Flux $TableDict $ConditionDict
     # Interface_Face_Load

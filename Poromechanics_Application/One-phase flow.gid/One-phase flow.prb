@@ -165,6 +165,8 @@ QUESTION: Write_Normal_Load#CB#(true,false)
 VALUE: false
 QUESTION: Write_Tangential_Load#CB#(true,false)
 VALUE: false
+QUESTION: Write_Liquid_Discharge#CB#(true,false)
+VALUE: false
 QUESTION: Write_Normal_Liquid_Flux#CB#(true,false)
 VALUE: false
 QUESTION: Write_Body_Acceleration#CB#(true,false)

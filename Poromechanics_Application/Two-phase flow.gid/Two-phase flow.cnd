@@ -442,11 +442,11 @@ CONDMESHTYPE: over nodes
 GROUPALLOW: points nodes
 QUESTION: Value
 VALUE: 0.0
-HELP: Units in IS m3/s. A positive value corresponds to an inlet. TODO: check this with Xavi
+HELP: Units in IS m3/s. A positive value corresponds to an inflow.
 QUESTION: Imposed_Liquid_Discharge#CB#(Constant,Table_Interpolation)
 VALUE: Constant
-DEPENDENCIES: (Constant,HIDE,Normal_Liquid_Discharge_Table,#CURRENT#)(Table_Interpolation,RESTORE,Normal_Liquid_Discharge_Table,#CURRENT#)
-QUESTION: Normal_Liquid_Discharge_Table(Time,Normal_Liquid_Flux)
+DEPENDENCIES: (Constant,HIDE,Liquid_Discharge_Table,#CURRENT#)(Table_Interpolation,RESTORE,Liquid_Discharge_Table,#CURRENT#)
+QUESTION: Liquid_Discharge_Table(Time,Liquid_Discharge)
 VALUE: #N# 2 0.0 0.0
 END CONDITION
 
@@ -456,11 +456,11 @@ CONDMESHTYPE: over nodes
 GROUPALLOW: points nodes
 QUESTION: Value
 VALUE: 0.0
-HELP: Units in IS m3/s. A positive value corresponds to an inlet. TODO: check this with Xavi
+HELP: Units in IS m3/s. A positive value corresponds to an inflow.
 QUESTION: Imposed_Gas_Discharge#CB#(Constant,Table_Interpolation)
 VALUE: Constant
-DEPENDENCIES: (Constant,HIDE,Normal_Gas_Discharge_Table,#CURRENT#)(Table_Interpolation,RESTORE,Normal_Gas_Discharge_Table,#CURRENT#)
-QUESTION: Normal_Gas_Discharge_Table(Time,Normal_Gas_Flux)
+DEPENDENCIES: (Constant,HIDE,Gas_Discharge_Table,#CURRENT#)(Table_Interpolation,RESTORE,Gas_Discharge_Table,#CURRENT#)
+QUESTION: Gas_Discharge_Table(Time,Gas_Discharge)
 VALUE: #N# 2 0.0 0.0
 END CONDITION
 
@@ -470,7 +470,7 @@ CONDMESHTYPE: over face elements
 GROUPALLOW: lines surfaces nodes faces
 QUESTION: Value
 VALUE: 0.0
-HELP: Units in IS for 2D cases: m2/s. Units in IS for 3D cases: m/s. A positive value corresponds to an inlet. TODO: check this with Xavi
+HELP: Units in IS for 2D cases: m2/s. Units in IS for 3D cases: m/s. A positive value corresponds to an inflow.
 QUESTION: Imposed_Normal_Liquid_Flux#CB#(Constant,Table_Interpolation)
 VALUE: Constant
 DEPENDENCIES: (Constant,HIDE,Normal_Liquid_Flux_Table,#CURRENT#)(Table_Interpolation,RESTORE,Normal_Liquid_Flux_Table,#CURRENT#)
@@ -484,7 +484,7 @@ CONDMESHTYPE: over face elements
 GROUPALLOW: lines surfaces nodes faces
 QUESTION: Value
 VALUE: 0.0
-HELP: Units in IS for 2D cases: m2/s. Units in IS for 3D cases: m/s. A positive value corresponds to an inlet. TODO: check this with Xavi
+HELP: Units in IS for 2D cases: m2/s. Units in IS for 3D cases: m/s. A positive value corresponds to an inflow.
 QUESTION: Imposed_Normal_Gas_Flux#CB#(Constant,Table_Interpolation)
 VALUE: Constant
 DEPENDENCIES: (Constant,HIDE,Normal_Gas_Flux_Table,#CURRENT#)(Table_Interpolation,RESTORE,Normal_Gas_Flux_Table,#CURRENT#)

@@ -183,6 +183,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     AppendGroupNames PutStrings Face_Load_Control_Module
     # Normal_Load
     AppendGroupNames PutStrings Normal_Load
+    # Liquid_Discharge
+    AppendGroupNames PutStrings Liquid_Discharge
     # Normal_Liquid_Flux
     AppendGroupNames PutStrings Normal_Liquid_Flux
     # Interface_Face_Load
@@ -219,6 +221,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
         AppendGroupNamesWithNum PutStrings iGroup Face_Load
         # Normal_Load
         AppendGroupNamesWithNum PutStrings iGroup Normal_Load
+        # Liquid_Discharge
+        AppendGroupNamesWithNum PutStrings iGroup Liquid_Discharge
         # Normal_Liquid_Flux
         AppendGroupNamesWithNum PutStrings iGroup Normal_Liquid_Flux
         # Interface_Face_Load
@@ -240,6 +244,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
         AppendGroupVariables PutStrings Face_Load FACE_LOAD
         # Normal_Load
         AppendGroupVariables PutStrings Normal_Load NORMAL_CONTACT_STRESS
+        # Liquid_Discharge
+        AppendGroupVariables PutStrings Liquid_Discharge LIQUID_DISCHARGE
         # Normal_Liquid_Flux
         AppendGroupVariables PutStrings Normal_Liquid_Flux NORMAL_LIQUID_FLUX
         # Interface_Face_Load
@@ -303,6 +309,7 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     AppendOutputVariables PutStrings iGroup Write_Face_Load FACE_LOAD
     AppendOutputVariables PutStrings iGroup Write_Normal_Load NORMAL_CONTACT_STRESS
     AppendOutputVariables PutStrings iGroup Write_Tangential_Load TANGENTIAL_CONTACT_STRESS
+    AppendOutputVariables PutStrings iGroup Write_Liquid_Discharge LIQUID_DISCHARGE
     AppendOutputVariables PutStrings iGroup Write_Normal_Liquid_Flux NORMAL_LIQUID_FLUX
     AppendOutputVariables PutStrings iGroup Write_Body_Acceleration VOLUME_ACCELERATION
     if {[GiD_AccessValue get gendata Parallel_Configuration] eq "MPI"} {
@@ -398,6 +405,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     incr NumGroups [llength $Groups]
     set Groups [GiD_Info conditions Normal_Load groups]
     incr NumGroups [llength $Groups]
+    set Groups [GiD_Info conditions Liquid_Discharge groups]
+    incr NumGroups [llength $Groups]
     set Groups [GiD_Info conditions Normal_Liquid_Flux groups]
     incr NumGroups [llength $Groups]
     set Groups [GiD_Info conditions Interface_Face_Load groups]
@@ -418,6 +427,9 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
         # Normal_Load
         set Groups [GiD_Info conditions Normal_Load groups]
         WriteNormalLoadProcess FileVar iGroup $Groups NORMAL_CONTACT_STRESS $TableDict $NumGroups
+        # Liquid_Discharge
+        set Groups [GiD_Info conditions Liquid_Discharge groups]
+        WriteLoadScalarProcess FileVar iGroup $Groups LIQUID_DISCHARGE $TableDict $NumGroups
         # Normal_Liquid_Flux
         set Groups [GiD_Info conditions Normal_Liquid_Flux groups]
         WriteLoadScalarProcess FileVar iGroup $Groups NORMAL_LIQUID_FLUX $TableDict $NumGroups
