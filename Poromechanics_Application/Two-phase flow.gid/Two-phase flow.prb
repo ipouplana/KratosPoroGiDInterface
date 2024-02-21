@@ -147,6 +147,10 @@ QUESTION: Write_Normal_Load#CB#(true,false)
 VALUE: false
 QUESTION: Write_Tangential_Load#CB#(true,false)
 VALUE: false
+QUESTION: Write_Liquid_Discharge#CB#(true,false)
+VALUE: false
+QUESTION: Write_Gas_Discharge#CB#(true,false)
+VALUE: false
 QUESTION: Write_Normal_Liquid_Flux#CB#(true,false)
 VALUE: false
 QUESTION: Write_Normal_Gas_Flux#CB#(true,false)

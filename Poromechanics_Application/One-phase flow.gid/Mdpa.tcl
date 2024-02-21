@@ -436,15 +436,14 @@ proc WriteMdpa { basename dir problemtypedir } {
             }
         }
     }
-
     # Liquid_Discharge
     set Groups [GiD_Info conditions Liquid_Discharge groups]
     if {$Dim eq 2} {
-        # UPlDischargeCondition2D1N
-        WriteNodalConditions FileVar ConditionId ConditionDict $Groups UPlDischargeCondition2D1N $BodyElemsProp
+        # UPlLiquidDischargeCondition2D1N
+        WriteNodalConditions FileVar ConditionId ConditionDict $Groups UPlLiquidDischargeCondition2D1N $BodyElemsProp
     } else {
-        # UPlDischargeCondition3D1N
-        WriteNodalConditions FileVar ConditionId ConditionDict $Groups UPlDischargeCondition3D1N $BodyElemsProp
+        # UPlLiquidDischargeCondition3D1N
+        WriteNodalConditions FileVar ConditionId ConditionDict $Groups UPlLiquidDischargeCondition3D1N $BodyElemsProp
     }
     # Normal_Liquid_Flux
     set Groups [GiD_Info conditions Normal_Liquid_Flux groups]
