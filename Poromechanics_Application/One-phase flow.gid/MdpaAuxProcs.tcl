@@ -245,7 +245,7 @@ proc WritePropUnionElements {FileVar PropertyId} {
     set ElementId [GiD_Info Mesh MaxNumElements]
     set PropUnionElementList [list]
     
-    puts $MyFileVar "Begin Elements UPwSmallStrainInterfaceElement3D6N"
+    puts $MyFileVar "Begin Elements UPlSmallStrainInterfaceElement3D6N"
     for {set i 0} {$i < [llength $Groups]} {incr i 6} {
         incr ElementId
         lappend PropUnionElementList $ElementId
