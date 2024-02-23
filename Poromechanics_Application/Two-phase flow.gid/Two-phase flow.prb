@@ -182,6 +182,10 @@ QUESTION: Write_Gas_Pressure_Gradient#CB#(true,false)
 VALUE: false
 QUESTION: Write_Permeability#CB#(true,false)
 VALUE: false
+QUESTION: Write_Liquid_Permeability#CB#(true,false)
+VALUE: false
+QUESTION: Write_Gas_Permeability#CB#(true,false)
+VALUE: false
 QUESTION: Write_Liquid_Relative_Permeability#CB#(true,false)
 VALUE: false
 QUESTION: Write_Gas_Relative_Permeability#CB#(true,false)
