@@ -18,6 +18,9 @@ VALUE: 1
 QUESTION: Parallel_Configuration#CB#(OpenMP,MPI)
 VALUE: OpenMP
 HELP: For the moment, MPI only works in Linux and requires compiling METIS_APPLICATION and TRILINOS_APPLICATION. Non-local_Damage does not work in MPI.
+QUESTION: FIC_Stabilization#CB#(true,false)
+VALUE: false
+HELP: TODO: NOT IMPLEMENTED YET. Only for linear elements with equal order interpolation for displacements and pressures.
 QUESTION: Non-local_Damage#CB#(true,false)
 VALUE: false
 DEPENDENCIES: (true,RESTORE,Characteristic_Length,#CURRENT#)(false,HIDE,Characteristic_Length,#CURRENT#)
