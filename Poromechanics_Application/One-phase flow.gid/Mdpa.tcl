@@ -131,23 +131,23 @@ proc WriteMdpa { basename dir problemtypedir } {
         } elseif {[lindex [lindex $Groups $i] 4] eq "BilinearCohesivePlaneStrain2DLaw" || [lindex [lindex $Groups $i] 4] eq "BilinearCohesivePlaneStress2DLaw"} {
             puts $FileVar "  CONSTITUTIVE_LAW_NAME BilinearCohesive2DLaw"
         } elseif {[lindex [lindex $Groups $i] 4] eq "ExponentialCohesivePlaneStrain2DLaw" || [lindex [lindex $Groups $i] 4] eq "ExponentialCohesivePlaneStress2DLaw"} {
-            puts $FileVar "  ExponentialCohesive2DLaw"
+            puts $FileVar "  CONSTITUTIVE_LAW_NAME ExponentialCohesive2DLaw"
         } elseif {[lindex [lindex $Groups $i] 4] eq "ElasticCohesive3DLaw"} {
-            puts $FileVar "  ElasticCohesive3DLaw"
+            puts $FileVar "  CONSTITUTIVE_LAW_NAME ElasticCohesive3DLaw"
         } elseif {[lindex [lindex $Groups $i] 4] eq "ElasticCohesive2DLaw"} {
-            puts $FileVar "  ElasticCohesive2DLaw"
+            puts $FileVar "  CONSTITUTIVE_LAW_NAME ElasticCohesive2DLaw"
         } elseif {[lindex [lindex $Groups $i] 4] eq "IsotropicDamageCohesive2DLaw"} {
-            puts $FileVar "  IsotropicDamageCohesive2DLaw"
+            puts $FileVar "  CONSTITUTIVE_LAW_NAME IsotropicDamageCohesive2DLaw"
         } elseif {[lindex [lindex $Groups $i] 4] eq "IsotropicDamageCohesive3DLaw"} {
-            puts $FileVar "  IsotropicDamageCohesive3DLaw"
+            puts $FileVar "  CONSTITUTIVE_LAW_NAME IsotropicDamageCohesive3DLaw"
         } elseif {[lindex [lindex $Groups $i] 4] eq "ElastoPlasticModMohrCoulombCohesive3DLaw"} {
-            puts $FileVar "  ElastoPlasticModMohrCoulombCohesive3DLaw"
+            puts $FileVar "  CONSTITUTIVE_LAW_NAME ElastoPlasticModMohrCoulombCohesive3DLaw"
         } elseif {[lindex [lindex $Groups $i] 4] eq "ElastoPlasticModMohrCoulombCohesive2DLaw"} {
-            puts $FileVar "  ElastoPlasticModMohrCoulombCohesive2DLaw"
+            puts $FileVar "  CONSTITUTIVE_LAW_NAME ElastoPlasticModMohrCoulombCohesive2DLaw"
         } elseif {[lindex [lindex $Groups $i] 4] eq "ElastoPlasticMohrCoulombCohesive3DLaw"} {
-            puts $FileVar "  ElastoPlasticMohrCoulombCohesive3DLaw"
+            puts $FileVar "  CONSTITUTIVE_LAW_NAME ElastoPlasticMohrCoulombCohesive3DLaw"
         } elseif {[lindex [lindex $Groups $i] 4] eq "ElastoPlasticMohrCoulombCohesive2DLaw"} {
-            puts $FileVar "  ElastoPlasticMohrCoulombCohesive2DLaw"
+            puts $FileVar "  CONSTITUTIVE_LAW_NAME ElastoPlasticMohrCoulombCohesive2DLaw"
         }
         if {[lindex [lindex $Groups $i] 5] eq "Linear"} {
             puts $FileVar "  DAMAGE_EVOLUTION_LAW 1"
