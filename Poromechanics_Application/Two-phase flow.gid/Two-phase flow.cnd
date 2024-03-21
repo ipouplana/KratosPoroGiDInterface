@@ -78,7 +78,7 @@ VALUE: 1.0e-4
 HELP: Units in IS: m2. Small value to avoid quasi-zero relative permeability values.
 QUESTION: Gas_Henry_Solubility_Coefficient
 VALUE: 0.0
-HELP: Dimensionless Henry solubility constant for the gas species in the liquid phase. If set to 0.0, all gas diffusion terms vanish.
+HELP: TODO. NOT IMPLEMENTED YET. Dimensionless Henry solubility constant for the gas species in the liquid phase. If set to 0.0, all gas diffusion terms vanish.
 QUESTION: Gas_Molar_Weight
 VALUE: 44.01e-3
 HELP: Units in IS: kg/mol. Used in the calculation of some gas diffusion terms. 
