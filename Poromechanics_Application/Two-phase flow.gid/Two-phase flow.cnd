@@ -75,6 +75,7 @@ VALUE: 1.0e3
 HELP: Units in IS: N/m2. Also called Pb.
 QUESTION: Minimum_Relative_Permeability
 VALUE: 1.0e-4
+HELP: Small value to avoid quasi-zero relative permeability values.
 QUESTION: Gas_Henry_Solubility_Coefficient
 VALUE: 0.0
 HELP: Dimensionless Henry solubility constant for the gas species in the liquid phase. If set to 0.0, all gas diffusion terms vanish.
@@ -93,7 +94,6 @@ HELP: Units in IS: m2/s. Used in the calculation of some gas diffusion terms.
 QUESTION: Liquid_Density_Reference_Pressure
 VALUE: 1.0e3
 HELP: Units in IS: kg/m3. Used in the calculation of some gas diffusion terms.
-HELP: Small value to avoid quasi-zero relative permeability values.
 QUESTION: Thickness
 VALUE: 1.0
 HELP: Units in IS: m
