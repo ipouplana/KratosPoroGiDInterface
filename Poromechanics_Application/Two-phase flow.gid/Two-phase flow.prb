@@ -51,13 +51,13 @@ QUESTION: Newmark_Gamma
 VALUE: 0.5
 HELP: For displacement time integration in dynamic problems (GN22).
 QUESTION: Newmark_Theta_u
-VALUE: 0.5
+VALUE: 1.0
 HELP: For displacement time integration in quasi-static problems (GN11). 1: Backward Euler, 0.5: Crank-Nicolson
 QUESTION: Newmark_Theta_pl
-VALUE: 0.5
+VALUE: 1.0
 HELP: For liquid pore-pressure time integration (GN11). 1: Backward Euler, 0.5: Crank-Nicolson
 QUESTION: Newmark_Theta_pg
-VALUE: 0.5
+VALUE: 1.0
 HELP: For gas pore-pressure time integration (GN11). 1: Backward Euler, 0.5: Crank-Nicolson
 QUESTION: g_factor
 VALUE: 0.0
