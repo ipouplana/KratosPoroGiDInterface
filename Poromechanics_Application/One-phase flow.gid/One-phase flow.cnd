@@ -47,7 +47,7 @@ VALUE: 0.0
 HELP: Units in IS: m2
 QUESTION: Dynamic_Viscosity
 VALUE: 1.0e-3
-HELP: Units in IS: N/m2·s
+HELP: Units in IS: N/m2*s
 QUESTION: Biot_Coefficient
 VALUE: 0.6
 HELP: Nondimensional parameter relating the volume of the fluid change and the bulk volume change.
@@ -128,7 +128,7 @@ VALUE: 1.0e-13
 HELP: This is the transversal leak-off coefficient. Units in IS: m2/m
 QUESTION: Dynamic_Viscosity
 VALUE: 1.0e-3
-HELP: Units in IS: N/m2·s
+HELP: Units in IS: N/m2*s
 QUESTION: Biot_Coefficient
 VALUE: 0.6
 HELP: Nondimensional parameter relating the volume of the fluid change and the bulk volume change.
