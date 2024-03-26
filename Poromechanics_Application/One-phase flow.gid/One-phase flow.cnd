@@ -15,10 +15,10 @@ QUESTION: Poisson_Ratio
 VALUE: 0.2
 QUESTION: Solid_Density
 VALUE: 2.0e3
-HELP: Units in IS: Kg/m3
+HELP: Units in IS: kg/m3
 QUESTION: Liquid_Density
 VALUE: 1.0e3
-HELP: Units in IS: Kg/m3
+HELP: Units in IS: kg/m3
 QUESTION: Porosity
 VALUE: 0.3
 QUESTION: Solid_Bulk_Modulus
@@ -47,10 +47,10 @@ VALUE: 0.0
 HELP: Units in IS: m2
 QUESTION: Dynamic_Viscosity
 VALUE: 1.0e-3
-HELP: Units in IS: N/m2·s
+HELP: Units in IS: N/m2*s
 QUESTION: Biot_Coefficient
 VALUE: 0.6
-HELP: Nondimensional parameter relating the volume of the fluid change and the bulk volume change.
+HELP: Dimensionless parameter relating the volume of the fluid change and the bulk volume change.
 QUESTION: Thickness
 VALUE: 1.0
 HELP: Units in IS: m
@@ -111,10 +111,10 @@ QUESTION: Poisson_Ratio
 VALUE: 0.2
 QUESTION: Solid_Density
 VALUE: 2.0e3
-HELP: Units in IS: Kg/m3
+HELP: Units in IS: kg/m3
 QUESTION: Liquid_Density
 VALUE: 1.0e3
-HELP: Units in IS: Kg/m3
+HELP: Units in IS: kg/m3
 QUESTION: Porosity
 VALUE: 0.3
 QUESTION: Solid_Bulk_Modulus
@@ -128,7 +128,7 @@ VALUE: 1.0e-13
 HELP: This is the transversal leak-off coefficient. Units in IS: m2/m
 QUESTION: Dynamic_Viscosity
 VALUE: 1.0e-3
-HELP: Units in IS: N/m2·s
+HELP: Units in IS: N/m2*s
 QUESTION: Biot_Coefficient
 VALUE: 0.6
 HELP: Nondimensional parameter relating the volume of the fluid change and the bulk volume change.

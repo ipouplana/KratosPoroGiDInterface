@@ -10,7 +10,7 @@ HELP: Note that for a 2.5D element, a 3D constitutive law must be defined (a THI
 DEPENDENCIES: (LinearElasticPlaneStrainSolid2DLaw,HIDE,Thickness,1.0,HIDE,Intrinsic_Permeability_ZZ,#CURRENT#,HIDE,Intrinsic_Permeability_YZ,#CURRENT#,HIDE,Intrinsic_Permeability_ZX,#CURRENT#,HIDE,Damage_Threshold,#CURRENT#,HIDE,Fracture_Energy,#CURRENT#,HIDE,Strength_Ratio,#CURRENT#,HIDE,Residual_Strength,#CURRENT#,HIDE,Softening_Slope,#CURRENT#)(LinearElasticPlaneStressSolid2DLaw,RESTORE,Thickness,#CURRENT#,HIDE,Intrinsic_Permeability_ZZ,#CURRENT#,HIDE,Intrinsic_Permeability_YZ,#CURRENT#,HIDE,Intrinsic_Permeability_ZX,#CURRENT#,HIDE,Damage_Threshold,#CURRENT#,HIDE,Fracture_Energy,#CURRENT#,HIDE,Strength_Ratio,#CURRENT#,HIDE,Residual_Strength,#CURRENT#,HIDE,Softening_Slope,#CURRENT#)(LinearElasticSolid3DLaw,HIDE,Thickness,1.0,RESTORE,Intrinsic_Permeability_ZZ,#CURRENT#,RESTORE,Intrinsic_Permeability_YZ,#CURRENT#,RESTORE,Intrinsic_Permeability_ZX,#CURRENT#,HIDE,Damage_Threshold,#CURRENT#,HIDE,Fracture_Energy,#CURRENT#,HIDE,Strength_Ratio,#CURRENT#,HIDE,Residual_Strength,#CURRENT#,HIDE,Softening_Slope,#CURRENT#)(SimoJuDamagePlaneStrain2DLaw,HIDE,Thickness,1.0,HIDE,Intrinsic_Permeability_ZZ,#CURRENT#,HIDE,Intrinsic_Permeability_YZ,#CURRENT#,HIDE,Intrinsic_Permeability_ZX,#CURRENT#,RESTORE,Damage_Threshold,#CURRENT#,RESTORE,Fracture_Energy,#CURRENT#,RESTORE,Strength_Ratio,#CURRENT#,HIDE,Residual_Strength,#CURRENT#,HIDE,Softening_Slope,#CURRENT#)(SimoJuDamagePlaneStress2DLaw,RESTORE,Thickness,#CURRENT#,HIDE,Intrinsic_Permeability_ZZ,#CURRENT#,HIDE,Intrinsic_Permeability_YZ,#CURRENT#,HIDE,Intrinsic_Permeability_ZX,#CURRENT#,RESTORE,Damage_Threshold,#CURRENT#,RESTORE,Fracture_Energy,#CURRENT#,RESTORE,Strength_Ratio,#CURRENT#,HIDE,Residual_Strength,#CURRENT#,HIDE,Softening_Slope,#CURRENT#)(SimoJuDamage3DLaw,HIDE,Thickness,1.0,RESTORE,Intrinsic_Permeability_ZZ,#CURRENT#,RESTORE,Intrinsic_Permeability_YZ,#CURRENT#,RESTORE,Intrinsic_Permeability_ZX,#CURRENT#,RESTORE,Damage_Threshold,#CURRENT#,RESTORE,Fracture_Energy,#CURRENT#,RESTORE,Strength_Ratio,#CURRENT#,HIDE,Residual_Strength,#CURRENT#,HIDE,Softening_Slope,#CURRENT#)(ModifiedMisesDamagePlaneStrain2DLaw,HIDE,Thickness,1.0,HIDE,Intrinsic_Permeability_ZZ,#CURRENT#,HIDE,Intrinsic_Permeability_YZ,#CURRENT#,HIDE,Intrinsic_Permeability_ZX,#CURRENT#,RESTORE,Damage_Threshold,#CURRENT#,HIDE,Fracture_Energy,#CURRENT#,RESTORE,Strength_Ratio,#CURRENT#,RESTORE,Residual_Strength,#CURRENT#,RESTORE,Softening_Slope,#CURRENT#)(ModifiedMisesDamagePlaneStress2DLaw,RESTORE,Thickness,#CURRENT#,HIDE,Intrinsic_Permeability_ZZ,#CURRENT#,HIDE,Intrinsic_Permeability_YZ,#CURRENT#,HIDE,Intrinsic_Permeability_ZX,#CURRENT#,RESTORE,Damage_Threshold,#CURRENT#,HIDE,Fracture_Energy,#CURRENT#,RESTORE,Strength_Ratio,#CURRENT#,RESTORE,Residual_Strength,#CURRENT#,RESTORE,Softening_Slope,#CURRENT#)(ModifiedMisesDamage3DLaw,HIDE,Thickness,1.0,RESTORE,Intrinsic_Permeability_ZZ,#CURRENT#,RESTORE,Intrinsic_Permeability_YZ,#CURRENT#,RESTORE,Intrinsic_Permeability_ZX,#CURRENT#,RESTORE,Damage_Threshold,#CURRENT#,HIDE,Fracture_Energy,#CURRENT#,RESTORE,Strength_Ratio,#CURRENT#,RESTORE,Residual_Strength,#CURRENT#,RESTORE,Softening_Slope,#CURRENT#)
 QUESTION: Saturation_Law#CB#(BrooksAndCoreyLaw,VanGenuchtenLaw)
 VALUE: BrooksAndCoreyLaw
-HELP: TODO
+HELP: This is the saturation law which calculates both the saturation and the relative permeability of the fluid phases.
 QUESTION: Young_Modulus
 VALUE: 3.0e7
 HELP: Units in IS: N/m2
@@ -18,13 +18,13 @@ QUESTION: Poisson_Ratio
 VALUE: 0.2
 QUESTION: Solid_Density
 VALUE: 2.0e3
-HELP: Units in IS: Kg/m3
+HELP: Units in IS: kg/m3
 QUESTION: Liquid_Density
 VALUE: 1.0e3
-HELP: Units in IS: Kg/m3
+HELP: Units in IS: kg/m3
 QUESTION: Gas_Density
 VALUE: 0.832e3
-HELP: Units in IS: Kg/m3
+HELP: Units in IS: kg/m3
 QUESTION: Porosity
 VALUE: 0.3
 QUESTION: Solid_Bulk_Modulus
@@ -56,31 +56,44 @@ VALUE: 0.0
 HELP: Units in IS: m2
 QUESTION: Liquid_Dynamic_Viscosity
 VALUE: 1.0e-3
-HELP: Units in IS: N/m2·s
+HELP: Units in IS: N/m2*s
 QUESTION: Gas_Dynamic_Viscosity
 VALUE: 1.47e-5
-HELP: Units in IS: N/m2·s
+HELP: Units in IS: N/m2*s
 QUESTION: Biot_Coefficient
 VALUE: 0.6
-HELP: Nondimensional parameter relating the volume of the fluid change and the bulk volume change.
-QUESTION: Gas_Diffusion_Coefficient
-VALUE: 0.0
-HELP: TODO
+HELP: Dimensionless parameter relating the volume of the fluid change and the bulk volume change.
 QUESTION: Residual_Liquid_Saturation
 VALUE: 0.0
-HELP: TODO
 QUESTION: Residual_Gas_Saturation
 VALUE: 0.0
-HELP: TODO
 QUESTION: Pore_Size_Factor
 VALUE: 2.0
-HELP: TODO
+HELP: Also called lambda.
 QUESTION: Gas_Entry_Pressure
 VALUE: 1.0e3
-HELP: Units in IS: N/m2
+HELP: Units in IS: N/m2. Also called Pb.
 QUESTION: Minimum_Relative_Permeability
 VALUE: 1.0e-4
-HELP: Small value to avoid quasi-zero relative permeability values.
+HELP: Units in IS: m2. Small value to avoid quasi-zero relative permeability values.
+QUESTION: Gas_Henry_Solubility_Coefficient
+VALUE: 0.0
+HELP: TODO. NOT IMPLEMENTED YET. Dimensionless Henry solubility constant for the gas species in the liquid phase. If set to 0.0, all gas diffusion terms vanish.
+QUESTION: Gas_Molar_Weight
+VALUE: 44.01e-3
+HELP: Units in IS: kg/mol. Used in the calculation of some gas diffusion terms. 
+QUESTION: Temperature
+VALUE: 298.0
+HELP: Units in IS: K. Used in the calculation of some gas diffusion terms.
+QUESTION: Tortuosity_Coefficient
+VALUE: 1.0
+HELP: Dimensionless coefficient accounting for the effect of tortuosity of the pore space. Used in the calculation of some gas diffusion terms.
+QUESTION: Gas_Diffusion_Coefficient
+VALUE: 2.0e-9
+HELP: Units in IS: m2/s. Used in the calculation of some gas diffusion terms.
+QUESTION: Liquid_Density_Reference_Pressure
+VALUE: 1.0e3
+HELP: Units in IS: kg/m3. Used in the calculation of some gas diffusion terms.
 QUESTION: Thickness
 VALUE: 1.0
 HELP: Units in IS: m

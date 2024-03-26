@@ -15,7 +15,6 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     puts $FileVar "        \"start_time\":           [GiD_AccessValue get gendata Start_Time],"
     puts $FileVar "        \"end_time\":             [GiD_AccessValue get gendata End_Time],"
     puts $FileVar "        \"echo_level\":           [GiD_AccessValue get gendata Echo_Level],"
-    puts $FileVar "        \"parallel_type\":        \"[GiD_AccessValue get gendata Parallel_Configuration]\","
     if {[GiD_AccessValue get gendata Initial_Stresses] eq false} {
         puts $FileVar "        \"parallel_type\":        \"[GiD_AccessValue get gendata Parallel_Configuration]\""
     } else {
@@ -259,17 +258,10 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     puts $FileVar "                        \"gidpost_flags\":       \{"
     puts $FileVar "                            \"WriteDeformedMeshFlag\": \"[GiD_AccessValue get gendata Write_deformed_mesh]\","
     puts $FileVar "                            \"WriteConditionsFlag\":   \"[GiD_AccessValue get gendata Write_conditions]\","
-    if { ($IsPeriodic eq true) } {
-        puts $FileVar "                            \"GiDPostMode\":           \"GiD_PostAscii\","
-        puts $FileVar "                            \"MultiFileFlag\":         \"MultipleFiles\""
-        puts $FileVar "                        \},"
-        puts $FileVar "                        \"file_label\":          \"time\","
-    } else {
-        puts $FileVar "                            \"GiDPostMode\":           \"[GiD_AccessValue get gendata GiD_post_mode]\","
-        puts $FileVar "                            \"MultiFileFlag\":         \"[GiD_AccessValue get gendata Multi_file_flag]\""
-        puts $FileVar "                        \},"
-        puts $FileVar "                        \"file_label\":          \"[GiD_AccessValue get gendata File_label]\","
-    }
+    puts $FileVar "                            \"GiDPostMode\":           \"[GiD_AccessValue get gendata GiD_post_mode]\","
+    puts $FileVar "                            \"MultiFileFlag\":         \"[GiD_AccessValue get gendata Multi_file_flag]\""
+    puts $FileVar "                        \},"
+    puts $FileVar "                        \"file_label\":          \"[GiD_AccessValue get gendata File_label]\","
     puts $FileVar "                        \"output_control_type\": \"[GiD_AccessValue get gendata Output_control_type]\","
     puts $FileVar "                        \"output_interval\":    [GiD_AccessValue get gendata Output_interval],"
     puts $FileVar "                        \"body_output\":         [GiD_AccessValue get gendata Body_output],"
