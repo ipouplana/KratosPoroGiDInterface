@@ -48,6 +48,8 @@ proc AddBodyVolumeToFracturesDict {FracturesDict FractureId BodyVolumesDict} {
     dict for {Id BodyVolume} $BodyVolumesDict {
         if {[GiD_Info IsPointInside Volume $Id $TipCoordinates] eq 1} {
             lappend BodyVolumes $Id
+        } elseif {[GiD_Info IsPointInside -tolerance 1.0e-20 Volume $Id $TipCoordinates] eq 1} {
+            lappend BodyVolumes $Id
         }
     }
     dict set MyFracturesDict $FractureId BodyVolumes $BodyVolumes

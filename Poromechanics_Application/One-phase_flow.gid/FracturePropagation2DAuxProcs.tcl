@@ -34,6 +34,8 @@ proc AddBodySurfaceToFracturesDict {FracturesDict FractureId BodySurfacesDict} {
     dict for {Id BodySurface} $BodySurfacesDict {
         if {[GiD_Info IsPointInside Surface $Id $TipCoordinates] eq 1} {
             lappend BodySurfaces $Id
+        } elseif {[GiD_Info IsPointInside -tolerance 1.0e-20 Surface $Id $TipCoordinates] eq 1} {
+            lappend BodySurfaces $Id
         }
     }
     dict set MyFracturesDict $FractureId BodySurfaces $BodySurfaces
