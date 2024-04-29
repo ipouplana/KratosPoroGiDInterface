@@ -62,6 +62,10 @@ HELP: save: save initial stresses at the end of the calculation, load: load them
 QUESTION: Constant_Discretization#CB#(true,false)
 VALUE: true
 HELP: true: the mesh is the same in both save and load phases, false: the mesh in the load phase is different from the one in the save phase.
+<<<<<<< HEAD:Poromechanics_Application/One-phase_flow.gid/One-phase_flow.prb
+=======
+
+>>>>>>> feature-add-initial-stress-bool:Poromechanics_Application.gid/Poromechanics_Application.prb
 
 TITLE:Solver_Settings
 QUESTION: Solution_Type#CB#(implicit_quasi_static,implicit_dynamic,explicit)
