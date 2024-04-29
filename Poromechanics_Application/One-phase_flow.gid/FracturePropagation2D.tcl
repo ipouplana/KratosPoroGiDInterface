@@ -436,6 +436,8 @@ proc GenerateNewFractures { dir problemtypedir PropagationData } {
         dict for {BodyId BodySurface} $BodySurfacesDict {
             if {[GiD_Info IsPointInside Surface $BodyId [dict get $Fracture TipPoint Coordinates]] eq 1} {
                 lappend BodySurfaces $BodyId
+            } elseif {[GiD_Info IsPointInside -tolerance 1.0e-20 Surface $BodyId [dict get $Fracture TipPoint Coordinates]] eq 1} {
+                lappend BodySurfaces $BodyId
             }
         }
         dict set FracturesDict $Id BodySurfaces $BodySurfaces
