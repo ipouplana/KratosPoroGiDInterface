@@ -34,7 +34,9 @@ DEPENDENCIES: (true,RESTORE,Mode,#CURRENT#)(false,HIDE,Mode,#CURRENT#)
 QUESTION: Mode#CB#(save,load,external)
 VALUE: save
 HELP: save: save initial stresses at the end of the calculation, load: load them at the beginning, external: INITIAL_STRESS_TENSOR must be externally set
-
+QUESTION: Constant_Discretization#CB#(true,false)
+VALUE: true
+HELP: true: the mesh is the same in both save and load phases, false: the mesh in the load phase is different from the one in the save phase.
 
 TITLE:Solver_Settings
 QUESTION: Solution_Type#CB#(implicit_quasi_static,implicit_dynamic,explicit)
