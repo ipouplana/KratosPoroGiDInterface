@@ -21,8 +21,9 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     } else {
         puts $FileVar "        \"fracture_utility\":     [GiD_AccessValue get gendata Fracture_Propagation],"
         puts $FileVar "        \"initial_stress_utility_settings\":   \{"
-        puts $FileVar "            \"mode\":       \"[GiD_AccessValue get gendata Mode]\","
-        puts $FileVar "            \"initial_input_filename\":   \"initial_$basename\""
+        puts $FileVar "            \"mode\":                    \"[GiD_AccessValue get gendata Mode]\","
+        puts $FileVar "            \"constant_discretization\": [GiD_AccessValue get gendata Constant_Discretization],"
+        puts $FileVar "            \"initial_input_filename\":  \"initial_$basename\""
         puts $FileVar "        \}"
     }
     puts $FileVar "    \},"
