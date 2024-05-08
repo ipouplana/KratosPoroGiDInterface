@@ -74,7 +74,7 @@ END CONDITION
 CONDITION: Interface_Part
 CONDTYPE: over groups
 CONDMESHTYPE: over body elements
-GROUPALLOW: surfaces volumes nodes elements
+GROUPALLOW: lines surfaces volumes nodes elements
 QUESTION: Link#CB#(true,false)
 VALUE: false
 QUESTION: Constitutive_Law#CB#(ElasticCohesive2DLaw,ElasticCohesive3DLaw,IsotropicDamageCohesive2DLaw,IsotropicDamageCohesive3DLaw,ElastoPlasticMohrCoulombCohesive2DLaw,ElastoPlasticMohrCoulombCohesive3DLaw,ElastoPlasticModMohrCoulombCohesive2DLaw,ElastoPlasticModMohrCoulombCohesive3DLaw,BilinearCohesivePlaneStrain2DLaw,BilinearCohesivePlaneStress2DLaw,BilinearCohesive3DLaw,ExponentialCohesivePlaneStrain2DLaw,ExponentialCohesivePlaneStress2DLaw,ExponentialCohesive3DLaw)
