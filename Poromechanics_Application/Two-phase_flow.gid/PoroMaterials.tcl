@@ -22,25 +22,7 @@ proc WritePoroMaterials { basename dir problemtypedir PropertyId } {
         puts $FileVar "        \"properties_id\": $MyPropertyId,"
         puts $FileVar "        \"Material\": \{"
         puts $FileVar "            \"constitutive_law\": \{"
-        if {[lindex [lindex $Groups $i] 3] eq "LinearElasticSolid3DLaw"} {
-            if { ([GiD_AccessValue get gendata Initial_Stresses] eq false) || (([GiD_AccessValue get gendata Initial_Stresses] eq true) && ([GiD_AccessValue get gendata Mode] eq "save")) } {
-                puts $FileVar "                \"name\": \"[lindex [lindex $Groups $i] 3]\""
-            } else {
-                puts $FileVar "                \"name\": \"HistoryLinearElastic3DLaw\""
-            }
-        } elseif {[lindex [lindex $Groups $i] 3] eq "LinearElasticPlaneStrainSolid2DLaw"} {
-            if { ([GiD_AccessValue get gendata Initial_Stresses] eq false) || (([GiD_AccessValue get gendata Initial_Stresses] eq true) && ([GiD_AccessValue get gendata Mode] eq "save")) } {
-                puts $FileVar "                \"name\": \"[lindex [lindex $Groups $i] 3]\""
-            } else {
-                puts $FileVar "                \"name\": \"HistoryLinearElasticPlaneStrain2DLaw\""
-            }
-        } elseif {[lindex [lindex $Groups $i] 3] eq "LinearElasticPlaneStressSolid2DLaw"} {
-            if { ([GiD_AccessValue get gendata Initial_Stresses] eq false) || (([GiD_AccessValue get gendata Initial_Stresses] eq true) && ([GiD_AccessValue get gendata Mode] eq "save")) } {
-                puts $FileVar "                \"name\": \"[lindex [lindex $Groups $i] 3]\""
-            } else {
-                puts $FileVar "                \"name\": \"HistoryLinearElasticPlaneStress2DLaw\""
-            }
-        } elseif {[lindex [lindex $Groups $i] 3] eq "SimoJuDamage3DLaw"} {
+        if {[lindex [lindex $Groups $i] 3] eq "SimoJuDamage3DLaw"} {
             if {[GiD_AccessValue get gendata Non-local_Damage] eq true} {
                 puts $FileVar "                \"name\": \"SimoJuNonlocalDamage3DLaw\""
             } else {
@@ -64,7 +46,13 @@ proc WritePoroMaterials { basename dir problemtypedir PropertyId } {
             puts $FileVar "                \"name\": \"ModifiedMisesNonlocalDamagePlaneStrain2DLaw\""
         } elseif {[lindex [lindex $Groups $i] 3] eq "ModifiedMisesDamagePlaneStress2DLaw"} {
             puts $FileVar "                \"name\": \"ModifiedMisesNonlocalDamagePlaneStress2DLaw\""
-        }
+        } elseif {[lindex [lindex $Groups $i] 3] eq "LinearElasticSolid3DLaw"} {
+            puts $FileVar "                \"name\": \"LinearElasticSolid3DLaw\""
+        } elseif {[lindex [lindex $Groups $i] 3] eq "LinearElasticPlaneStrainSolid2DLaw"} {
+            puts $FileVar "                \"name\": \"LinearElasticPlaneStrainSolid2DLaw\""
+        } elseif {[lindex [lindex $Groups $i] 3] eq "LinearElasticPlaneStressSolid2DLaw"} {
+            puts $FileVar "                \"name\": \"LinearElasticPlaneStressSolid2DLaw\""
+        } 
         puts $FileVar "            \},"
         puts $FileVar "            \"Variables\": \{"
         puts $FileVar "                \"SATURATION_LAW_NAME\": \"[lindex [lindex $Groups $i] 4]\","

@@ -21,6 +21,7 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
         puts $FileVar "        \"parallel_type\":        \"[GiD_AccessValue get gendata Parallel_Configuration]\","
         puts $FileVar "        \"initial_stress_utility_settings\":   \{"
         puts $FileVar "            \"mode\":       \"[GiD_AccessValue get gendata Mode]\","
+        puts $FileVar "            \"constant_discretization\": [GiD_AccessValue get gendata Constant_Discretization],"
         puts $FileVar "            \"initial_input_filename\":   \"initial_$basename\""
         puts $FileVar "        \}"
     }
