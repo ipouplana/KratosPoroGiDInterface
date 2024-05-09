@@ -355,6 +355,7 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     AppendOutputVariables PutStrings iGroup Write_Permeability PERMEABILITY_MATRIX
     AppendOutputVariables PutStrings iGroup Write_Damage DAMAGE_VARIABLE
     AppendOutputVariables PutStrings iGroup Write_Joint_Width JOINT_WIDTH
+    AppendOutputVariables PutStrings iGroup Write_Mid_Plane_Fluid_Pressure MID_PLANE_FLUID_PRESSURE
     AppendOutputVariables PutStrings iGroup Write_Contact_Stress_Vector CONTACT_STRESS_VECTOR
     AppendOutputVariables PutStrings iGroup Write_Local_Stress_Vector LOCAL_STRESS_VECTOR
     AppendOutputVariables PutStrings iGroup Write_Local_Relative_Displacement LOCAL_RELATIVE_DISPLACEMENT_VECTOR

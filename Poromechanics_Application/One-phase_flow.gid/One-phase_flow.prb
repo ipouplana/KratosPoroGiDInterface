@@ -195,6 +195,8 @@ QUESTION: Write_Damage#CB#(true,false)
 VALUE: false
 QUESTION: Write_Joint_Width#CB#(true,false)
 VALUE: false
+QUESTION: Write_Mid_Plane_Fluid_Pressure#CB#(true,false)
+VALUE: false
 QUESTION: Write_Contact_Stress_Vector#CB#(true,false)
 VALUE: false
 QUESTION: Write_Local_Stress_Vector#CB#(true,false)
