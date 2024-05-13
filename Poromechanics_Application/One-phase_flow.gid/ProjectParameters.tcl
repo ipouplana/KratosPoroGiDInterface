@@ -322,6 +322,7 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
         AppendOutputVariables PutStrings iGroup Write_Effective_Stress NODAL_EFFECTIVE_STRESS_TENSOR
         AppendOutputVariables PutStrings iGroup Write_Joint_Width NODAL_JOINT_WIDTH
         AppendOutputVariables PutStrings iGroup Write_Damage NODAL_JOINT_DAMAGE
+        AppendOutputVariables PutStrings iGroup Write_Mid_Plane_Liquid_Pressure NODAL_MID_PLANE_LIQUID_PRESSURE
     }
     AppendOutputVariables PutStrings iGroup Write_Initial_Stress INITIAL_STRESS_TENSOR
     if {$iGroup > 0} {
