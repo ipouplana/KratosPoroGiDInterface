@@ -322,6 +322,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
         AppendOutputVariables PutStrings iGroup Write_Effective_Stress NODAL_EFFECTIVE_STRESS_TENSOR
         AppendOutputVariables PutStrings iGroup Write_Joint_Width NODAL_JOINT_WIDTH
         AppendOutputVariables PutStrings iGroup Write_Damage NODAL_JOINT_DAMAGE
+        AppendOutputVariables PutStrings iGroup Write_Mid_Plane_Liquid_Pressure NODAL_MID_PLANE_LIQUID_PRESSURE
+        AppendOutputVariables PutStrings iGroup Write_Slip_Tendency NODAL_SLIP_TENDENCY
     }
     AppendOutputVariables PutStrings iGroup Write_Initial_Stress INITIAL_STRESS_TENSOR
     if {$iGroup > 0} {
@@ -355,6 +357,8 @@ proc WriteProjectParameters { basename dir problemtypedir TableDict} {
     AppendOutputVariables PutStrings iGroup Write_Permeability PERMEABILITY_MATRIX
     AppendOutputVariables PutStrings iGroup Write_Damage DAMAGE_VARIABLE
     AppendOutputVariables PutStrings iGroup Write_Joint_Width JOINT_WIDTH
+    AppendOutputVariables PutStrings iGroup Write_Mid_Plane_Liquid_Pressure MID_PLANE_LIQUID_PRESSURE
+    AppendOutputVariables PutStrings iGroup Write_Slip_Tendency SLIP_TENDENCY
     AppendOutputVariables PutStrings iGroup Write_Contact_Stress_Vector CONTACT_STRESS_VECTOR
     AppendOutputVariables PutStrings iGroup Write_Local_Stress_Vector LOCAL_STRESS_VECTOR
     AppendOutputVariables PutStrings iGroup Write_Local_Relative_Displacement LOCAL_RELATIVE_DISPLACEMENT_VECTOR
