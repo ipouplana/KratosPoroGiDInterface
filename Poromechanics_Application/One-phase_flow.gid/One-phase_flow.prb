@@ -55,7 +55,7 @@ HELP: Number of steps after which the fracture propagation will be checked. Set 
 QUESTION: Initial_Stresses#CB#(true,false)
 VALUE: false
 HELP: Take into account initial stresses (only for linear elasticity for the moment).
-DEPENDENCIES: (true,RESTORE,Mode,#CURRENT#)(false,HIDE,Mode,#CURRENT#)
+DEPENDENCIES: (true,RESTORE,Mode,#CURRENT#,RESTORE,Constant_Discretization,#CURRENT#)(false,HIDE,Mode,#CURRENT#,HIDE,Constant_Discretization,#CURRENT#)
 QUESTION: Mode#CB#(save,load,external)
 VALUE: save
 HELP: save: save initial stresses at the end of the calculation, load: load them at the beginning, external: INITIAL_STRESS_TENSOR must be externally set
